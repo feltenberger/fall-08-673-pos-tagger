@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project name="PartOfSpeechTagger" default="compile" basedir=".">
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+  <property name="dist"  location="dist"/>
+  <property name="lib" value="lib" />
+  <property name="dist-name" value="pos-tagger.jar" />
+
+  <target name="setup">
+    <mkdir dir="${bin}"/>
+    <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="clean" description="remove intermediate files">
+    <delete dir="${bin}/"/>
+    <delete dir="${dist}/"/>
+  </target>
+
+  <target name="compile" depends="setup" description="compile the java classes">
+
+    <path id="classpath">
+      <fileset dir="${lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+
+    <javac srcdir="${src}" destdir="${bin}">
+      <classpath refid="classpath" />
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile" description="create a Jar file for the application">
+    <jar destfile="${dist}/${dist-name}">
+      <fileset dir="${bin}" includes="**/*.class"/>
+      <fileset dir="${bin}" includes="**/*.properties"/>
+      <fileset dir="${bin}" includes="**/*.txt"/>
+      <manifest>
+        <attribute name="Main-Class" value="edu.umbc.nlp.postagger.Tagger"/>
+      </manifest>
+    </jar>
+  </target>
+</project>
+
