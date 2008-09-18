@@ -4,6 +4,7 @@
   <property name="bin" location="bin"/>
   <property name="dist"  location="dist"/>
   <property name="lib" value="lib" />
+  <property name="resources" value="resources" />
   <property name="dist-name" value="pos-tagger.jar" />
   <path id="classpath">
     <fileset dir="${lib}">
@@ -23,10 +24,13 @@
   </target>
 
   <target name="compile" depends="setup" description="compile the java classes">
-
     <javac srcdir="${src}" destdir="${bin}">
       <classpath refid="classpath" />
     </javac>
+  	<copy todir="${bin}">
+  		<fileset dir="${resources}" includes="**/*.txt" />
+  		<fileset dir="${resources}" includes="**/*.properties" />
+  	</copy>
   </target>
 
   <target name="jar" depends="compile" description="create a Jar file for the application">
