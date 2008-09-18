@@ -1,3 +1,4 @@
+NGram size: 2
 <s>	VB	.019
 <s>	TO	.0043
 <s>	NN	.041
