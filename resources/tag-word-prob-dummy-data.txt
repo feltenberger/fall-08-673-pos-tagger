@@ -1,0 +1,16 @@
+VB	I	.0
+VB	want	.0093
+VB	to	.0
+VB	race	.00012
+TO	I	.0
+TO	want	.0
+TO	to	.99
+TO	race	.0
+NN	I	.0
+NN	want	.000054
+NN	to	.0
+NN	race	.00057
+PPSS	I	.37
+PPSS	want	.0
+PPSS	to	.0
+PPSS	race	.0
