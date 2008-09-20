@@ -158,7 +158,7 @@ public class Tagger {
 			tw.setPos(this.getPartOfSpeech(partOfSpeechStr));
 			tw.setWord(firstWord);
 			viterbi[s][0] = tw;
-			backpointer[s][0] = -999;
+			backpointer[s][0] = -999; // should never reference this, but it indicates a pointer to <s>
 		}
 
 		// for each word after the first one (since we calculated likelihood probs for first word above)
