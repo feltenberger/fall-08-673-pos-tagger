@@ -71,13 +71,25 @@ public class TaggerTest extends TestCase {
 	}
 
 	public void testViterbi() throws Exception {
-		Tagger pos = TaggerHelper.readMatrices(aFileMatrix, bFileMatrix);
+		Tagger tagger = TaggerHelper.readMatrices(aFileMatrix, bFileMatrix);
+		List<PartOfSpeech>expected = new ArrayList<PartOfSpeech>();
+		expected.add(tagger.getPartOfSpeech("PPSS"));
+		expected.add(tagger.getPartOfSpeech("VB"));
+		expected.add(tagger.getPartOfSpeech("TO"));
+		expected.add(tagger.getPartOfSpeech("VB"));
 		List<String> sentence = new ArrayList<String>();
 		sentence.add("I");
 		sentence.add("want");
 		sentence.add("to");
 		sentence.add("race");
-		pos.viterbi(sentence);
+		List<TaggedWord>tagged = tagger.tagPartsOfSpeech(sentence);
+		assertEquals("Tagged word sequence same size as expected", expected.size(), tagged.size());
+		for(int i = 0; i < expected.size(); i++) {
+			TaggedWord actualTW = tagged.get(i);
+			PartOfSpeech actualTag = actualTW.getPos();
+			PartOfSpeech expectedTag = expected.get(i);
+			assertEquals("Expected: " + expectedTag + ", actual: " + actualTag, expectedTag, actualTag);
+		}
 	}
 
 	/**

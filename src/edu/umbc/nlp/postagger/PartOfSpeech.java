@@ -86,7 +86,10 @@ public class PartOfSpeech {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		return this.partOfSpeech.equals(obj);
+		if(obj == this) return true;
+		if(obj instanceof PartOfSpeech)
+			return this.partOfSpeech.equals(((PartOfSpeech)obj).getPartOfSpeech());
+		return false;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

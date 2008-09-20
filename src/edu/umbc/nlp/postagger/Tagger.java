@@ -128,15 +128,15 @@ public class Tagger {
 	}
 
 	/**
-	 * Implementation of Viterbi algorithm.
+	 * Implementation of Viterbi algorithm. Equivalent to the pseudo code on page 147 of the book.
 	 * @param sentenceOfWords
 	 * @return
 	 */
-	public List<PartOfSpeech> viterbi(List<String> sentenceOfWords) {
-		List<PartOfSpeech> tagged = new ArrayList<PartOfSpeech>();
+	public List<TaggedWord> tagPartsOfSpeech(List<String> sentenceOfWords) {
+		List<TaggedWord> tagged = new ArrayList<TaggedWord>();
 		List<String>sortedPartsOfSpeech = sortSet(this.allPartsOfSpeech.keySet());
 
-		Viterbi[][] viterbi = new Viterbi[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
+		TaggedWord[][] viterbi = new TaggedWord[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
 		int[][] backpointer = new int[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
 		for(int i = 0; i < backpointer.length; i++)
 			for(int j = 0; j < backpointer[i].length; j++)
@@ -151,16 +151,16 @@ public class Tagger {
 		for(int s = 1; s < sortedPartsOfSpeech.size(); s++) {
 			String partOfSpeechStr = sortedPartsOfSpeech.get(s);
 			//log.info("Part of speech: " + partOfSpeechStr);
-			Viterbi v = new Viterbi();
+			TaggedWord tw = new TaggedWord();
 			Probability likelihood = this.getLikelihoodProbability(firstWord, partOfSpeechStr);
 			//log.info("Likelihood: P(" + firstWord + "|" + partOfSpeechStr + ") = " + likelihood.doubleValue());
 
 			Probability prior = this.getPriorProbability(partOfSpeechStr, new String[] {startStateStr});
 			//log.info("Prior: P(" + partOfSpeechStr + "|" + startStateStr + ") = " + prior.doubleValue());
-			v.setProb(new Probability(likelihood.doubleValue() * prior.doubleValue()));
-			v.setPos(this.getPartOfSpeech(partOfSpeechStr));
-			v.setWord(firstWord);
-			viterbi[s][0] = v;
+			tw.setProb(new Probability(likelihood.doubleValue() * prior.doubleValue()));
+			tw.setPos(this.getPartOfSpeech(partOfSpeechStr));
+			tw.setWord(firstWord);
+			viterbi[s][0] = tw;
 			backpointer[s][0] = -999;
 		}
 
@@ -178,7 +178,7 @@ public class Tagger {
 				// find the max value from the prior column transitioning to this column.
 				// i.e. max (viterbi[s'][t-1] * P(s|s'))
 				for(int sp = 1; sp < viterbi.length; sp++) {
-					Viterbi tmpVit = viterbi[sp][priorCol];
+					TaggedWord tmpVit = viterbi[sp][priorCol];
 					//log.info("Transitioning from " + tmpVit.getPos().getPartOfSpeech() + " to " + state);
 					//log.info("viterbi[" + sp + "][" + priorCol + "]: " + tmpVit);
 					NGram transToThisColNgram = this.getNGram(state, new String[] { tmpVit.getPos().getPartOfSpeech() } );
@@ -191,7 +191,7 @@ public class Tagger {
 					}
 				}
 				Probability maxProbability = new Probability(maxPriorProb.doubleValue() * likelihood.doubleValue());
-				viterbi[s][t] = new Viterbi(maxProbability, word, this.getPartOfSpeech(state));
+				viterbi[s][t] = new TaggedWord(maxProbability, word, this.getPartOfSpeech(state));
 				backpointer[s][t] = backpointerRow;
 				log.info("max1-N( viterbi[s'][" + s + "] * P(" + state + "|" + "s') ) * P(" + word + "|" + state + ") = " + viterbi[s][t].getProb().doubleValue());
 				//log.info("Max Transition Probability P(s|s') == " + viterbi[s][t] + "\n\n");
@@ -205,7 +205,7 @@ public class Tagger {
 		int bpRowFromFinalState = -1;
 		// transition from last state to "end" state
 		for(int s = 1; s < sortedPartsOfSpeech.size(); s++) {
-			Viterbi tmpVit = viterbi[s][sentenceOfWords.size()-1];
+			TaggedWord tmpVit = viterbi[s][sentenceOfWords.size()-1];
 			Probability prior = this.getPriorProbability(this.endState.getPartOfSpeech(), new String[] { tmpVit.getPos().getPartOfSpeech() }, 0.0);
 			double tmp = prior.doubleValue() * tmpVit.getProb().doubleValue();
 			if(tmp > maxEndStateProb.doubleValue()) {
@@ -216,15 +216,14 @@ public class Tagger {
 
 		log.info("Backpointer to last row in viterbi: " + bpRowFromFinalState);
 		int currBpRow = bpRowFromFinalState;
-		List<Viterbi>solution = new ArrayList<Viterbi>();
 		//solution.add(viterbi[currBpRow][viterbi[0].length-1]);
 		for(int col = backpointer[0].length-1; col > 0; col--) {
-			solution.add(viterbi[currBpRow][col]);
+			tagged.add(viterbi[currBpRow][col]);
 			currBpRow = backpointer[currBpRow][col];
 		}
-		solution.add(viterbi[currBpRow][0]);
-		Collections.reverse(solution);
-		log.info(solution);
+		tagged.add(viterbi[currBpRow][0]);
+		Collections.reverse(tagged);
+		log.info(tagged);
 		return tagged;
 	}
 
@@ -246,10 +245,10 @@ public class Tagger {
 	 * @param sortedPartsOfSpeech
 	 * @param viterbi
 	 */
-	private void dumpViterbiMatrix(List<String> sortedPartsOfSpeech, Viterbi[][] viterbi) {
-		for(Viterbi[] row : viterbi) {
+	private void dumpViterbiMatrix(List<String> sortedPartsOfSpeech, TaggedWord[][] viterbi) {
+		for(TaggedWord[] row : viterbi) {
 			String rs = "";
-			for(Viterbi cell : row) {
+			for(TaggedWord cell : row) {
 				rs += "	" + cell;
 			}
 			rs += "";
