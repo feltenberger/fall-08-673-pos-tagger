@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package edu.umbc.nlp.postagger;
 
@@ -91,5 +91,47 @@ public class NGram {
 	 */
 	public void setNGramPartsOfSpeech(List<PartOfSpeech> gramPartsOfSpeech) {
 		nGramPartsOfSpeech = gramPartsOfSpeech;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		String tmp = "P(" + this.getNGramHypothesis().getPartOfSpeech() + "|";
+		String hist = "";
+		for(PartOfSpeech pos : this.getNGramHistory()) {
+			if(hist.equals(""))
+				hist += pos.getPartOfSpeech();
+			else
+				hist += "-" + pos.getPartOfSpeech();
+		}
+		return tmp + hist + ") = " + this.getProbability().doubleValue();
+	}
+
+	public String asDashedString() {
+		String str = "";
+		for(PartOfSpeech pos : this.nGramPartsOfSpeech) {
+			if(str.equals(""))
+				str += pos.getPartOfSpeech();
+			else
+				str += "-" + pos.getPartOfSpeech();
+		}
+		return str;
+	}
+
+	/**
+	 * The string to use to hash ngrams into a Set or Map.
+	 * @param partsOfSpeech
+	 * @return
+	 */
+	public static String getHashCodeFromStringArray(String[] partsOfSpeech) {
+		String hashString = "";
+		for(int i = 0; i < partsOfSpeech.length; i++) {
+			if(i == 0)
+				hashString += partsOfSpeech[i];
+			else
+				hashString += ("-" + partsOfSpeech[i]);
+		}
+		return hashString;
 	}
 }

@@ -3,6 +3,10 @@ NGram size: 2
 <s>	TO	.0043
 <s>	NN	.041
 <s>	PPSS	.067
+VB	<e>	.001
+TO	<e>	.001
+NN	<e>	.001
+PPSS	<e>	.001
 VB	VB	.0038
 VB	TO	.035
 VB	NN	.047
