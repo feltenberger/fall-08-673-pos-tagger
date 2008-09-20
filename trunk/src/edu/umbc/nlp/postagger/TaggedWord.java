@@ -1,13 +1,12 @@
 package edu.umbc.nlp.postagger;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 /**
  * @author dave
  *
  */
-public class Viterbi {
+public class TaggedWord {
 	private Probability prob = null;
 	private String word;
 	private PartOfSpeech pos;
@@ -16,7 +15,7 @@ public class Viterbi {
 	 * @param word
 	 * @param partOfSpeech
 	 */
-	public Viterbi(Probability prob, String word, PartOfSpeech partOfSpeech) {
+	public TaggedWord(Probability prob, String word, PartOfSpeech partOfSpeech) {
 		this.prob = prob;
 		this.word = word;
 		this.pos = partOfSpeech;
@@ -24,7 +23,7 @@ public class Viterbi {
 	/**
 	 *
 	 */
-	public Viterbi() { }
+	public TaggedWord() { }
 	/**
 	 * @return the prob
 	 */
