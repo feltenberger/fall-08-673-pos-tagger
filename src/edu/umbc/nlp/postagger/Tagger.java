@@ -20,9 +20,6 @@ public class Tagger {
 	 * This map combined with the PartOfSpeech's word probabilities makes the bMatrix.
 	 */
 	private Map<String, PartOfSpeech> allPartsOfSpeech = new HashMap<String, PartOfSpeech>();
-	//private PartOfSpeech[] startStates = null;
-	//private PartOfSpeech[] endStates = null;
-	//private PartOfSpeech startState = new PartOfSpeech("<s>");
 	private PartOfSpeech endState = new PartOfSpeech("<e>");
 	/**
 	 * This is the aMatrix.
