@@ -15,8 +15,14 @@ public class Probability {
 	/**
 	 * @return the probability
 	 */
-	public double getProbability() {
+	public double doubleValue() {
 		return probability;
+	}
+	/**
+	 * @return
+	 */
+	public double logValue() {
+		return Math.log(this.probability);
 	}
 	/**
 	 * @param probability the probability to set

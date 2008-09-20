@@ -1,0 +1,72 @@
+package edu.umbc.nlp.postagger;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+/**
+ * @author dave
+ *
+ */
+public class Viterbi {
+	private Probability prob = null;
+	private String word;
+	private PartOfSpeech pos;
+	/**
+	 * @param prob
+	 * @param word
+	 * @param partOfSpeech
+	 */
+	public Viterbi(Probability prob, String word, PartOfSpeech partOfSpeech) {
+		this.prob = prob;
+		this.word = word;
+		this.pos = partOfSpeech;
+	}
+	/**
+	 *
+	 */
+	public Viterbi() { }
+	/**
+	 * @return the prob
+	 */
+	public Probability getProb() {
+		return prob;
+	}
+	/**
+	 * @param prob the prob to set
+	 */
+	public void setProb(Probability prob) {
+		this.prob = prob;
+	}
+	/**
+	 * @return the word
+	 */
+	public String getWord() {
+		return word;
+	}
+	/**
+	 * @param word the word to set
+	 */
+	public void setWord(String word) {
+		this.word = word;
+	}
+	/**
+	 * @return the pos
+	 */
+	public PartOfSpeech getPos() {
+		return pos;
+	}
+	/**
+	 * @param pos the pos to set
+	 */
+	public void setPos(PartOfSpeech pos) {
+		this.pos = pos;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		DecimalFormat df = new DecimalFormat("0.0000000000000");
+		return "viterbi[" + this.pos.getPartOfSpeech() + "][" + this.getWord() + "] = " + df.format(this.getProb().doubleValue());
+	}
+}
