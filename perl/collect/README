@@ -1,0 +1,27 @@
+================================================================================
+ To merge
+================================================================================
+    
+run:
+    ./merge.sh
+    
+There is a ROOT_DIR variable inside the script. 
+Check to be sure that your corpus dir-tree is the same. [PATH]
+    
+
+================================================================================
+ To collect data
+================================================================================
+
+run:
+    ./collect.pl < merged.list
+
+It will create for files. Please look inside collect.pl and modify it as you need.
+This script should be a good staring place. I tried to comment everything so that 
+it's easy to understand what I've coded there. Perl is somewhat cryptic :), That's
+why I tried to write it in a non-cryptic manner. 
+
+Send me email if you have any questions or corrections.  [sandria1@umbc.edu]
+
+
+
