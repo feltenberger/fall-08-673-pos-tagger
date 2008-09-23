@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use Statistics::LineFit;
 
-open( INFILE, "../resources/tagWordProb.txt" );
+open( INFILE, "../resources/start_tags_count.dat" );
 
 sub log2 {
 	my $num = $_[0];
@@ -13,14 +13,15 @@ while ( $line = <INFILE> ) {
 	@words = split( /\s/, $line );
 	$tag = $words[0];
 	$count{$tag}{ $words[2] }++;
-	$count{$tag}{'total'}++;
+	$count{$tag}{'total'} += $words[2];
 }
 close (INFILE);
 
 foreach $tag ( sort keys %count ) {
 	foreach $wordCount (sort keys %{$count{$tag}})
 	{
-		$prob{$tag}[$wordCount] = $count{$tag}{$wordCount} / $count{$tag}{'total'};
+		print "TAG $tag WORD: $wordCount\n";
+		$prob{$tag}[$wordCount] = $wordCount / $count{$tag}{'total'};
 	}
 	@y = (
 		$count{$tag}{'1'}, $count{$tag}{'2'}, $count{$tag}{'3'},
@@ -70,8 +71,8 @@ foreach $tag ( sort keys %count ) {
 	print "$tag Default: $count{$tag}{'0'}\n";
 }
 
-open( INFILE, "../resources/tagWordProb.txt" );
-open( PROBS, " > ../resources/tagWordProbs.txt");
+open( INFILE, "../resources/start_tags_count.dat");
+open( PROBS, " > ../resources/start_tags_prob.txt");
 
 while ( $line = <INFILE> ) {
 	@words = split( /\s/, $line );

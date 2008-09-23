@@ -68,7 +68,7 @@ printf(OUTF_GENERAL_STATS "Elements\t%d\n", $elements);
 
 ##### number of occurances of tags that start a sentence #####
 for $tag (keys %start_tags_hash) {
-  printf(OUTF_START_TAGS_COUNT "%s\t%s\n", $tag, $start_tags_hash{$tag});
+  printf(OUTF_START_TAGS_COUNT "<s>\t%s\t%s\n", $tag, $start_tags_hash{$tag});
 }
 
 ##### the number of occurances of $previous_tag followed by $tag C(Tj,Tk) #####
