@@ -23,8 +23,8 @@ public class TaggerHelper {
 	 */
 	@SuppressWarnings("unchecked")
 	public static Tagger readMatrices(File aMatrixFile, File bMatrixFile) throws IOException {
-		log.info("Reading file " + aMatrixFile.getAbsolutePath());
-		log.info("Reading file " + bMatrixFile.getAbsolutePath());
+		log.info("Reading a-matrix file " + aMatrixFile.getAbsolutePath());
+		log.info("Reading b-matrix file " + bMatrixFile.getAbsolutePath());
 		Tagger tagger = new Tagger();
 		parseObservationProbabilitiesForBMatrix(tagger, bMatrixFile);
 		parseNGramsForAMatrix(tagger, aMatrixFile);
@@ -100,13 +100,13 @@ public class TaggerHelper {
 
 			i++; //if(i > 100) break;
 		}
-		String startState = "<s>";
+
+		// TODO why did i add this?
+		// shouldn't need it - now we have <DEFAULT>; keep here temporarily, however.
+		PartOfSpeech startState = tagger.getStartState();
 		for(String word : allWords) {
-			PartOfSpeech partOfSpeech = tagger.getPartOfSpeech(startState);
-			if(partOfSpeech == null)
-				partOfSpeech = new PartOfSpeech(startState);
-			partOfSpeech.addWordAndProbabilityToBMatrix(word, new Probability(TaggerGlobals.DEFAULT_PROBABILITY));
-			tagger.addPartOfSpeech(partOfSpeech);
+			startState.addWordAndProbabilityToBMatrix(word, new Probability(0.0));
+			//tagger.addPartOfSpeech(partOfSpeech);
 		}
 	}
 

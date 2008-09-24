@@ -10,7 +10,7 @@ NN	I	.0
 NN	want	.000054
 NN	to	.0
 NN	race	.00057
-PPSS	I	.37
-PPSS	want	.0
-PPSS	to	.0
-PPSS	race	.0
+PRP	I	.37
+PRP	want	.0
+PRP	to	.0
+PRP	race	.0

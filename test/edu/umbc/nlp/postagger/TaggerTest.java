@@ -1,6 +1,3 @@
-/**
- *
- */
 package edu.umbc.nlp.postagger;
 
 import java.io.File;
@@ -19,9 +16,11 @@ import org.apache.log4j.Logger;
 public class TaggerTest extends TestCase {
 	private static final Logger log = Logger.getLogger(TaggerTest.class);
 	private String aMatrixFilename = "/bigram-dummy-data.txt";
+	// private String aMatrixFilename = "/prev_tag_prob.txt";
 	private String bMatrixFilename = "/tag-word-prob-dummy-data.txt";
-	private File bFileMatrix = null;
-	private File aFileMatrix = null;
+	// private String bMatrixFilename = "/tagWordProbs.txt";
+	private File bMatrixFile = null;
+	private File aMatrixFile = null;
 	private List<String> linesOfFile = null;
 	private String[][] splitLinesOfFile = null;
 
@@ -31,9 +30,9 @@ public class TaggerTest extends TestCase {
 	@SuppressWarnings("unchecked")
 	protected void setUp() throws Exception {
 		super.setUp();
-		bFileMatrix = new File(getClass().getResource(bMatrixFilename).getFile());
-		aFileMatrix = new File(getClass().getResource(aMatrixFilename).getFile());
-		linesOfFile = FileUtils.readLines(bFileMatrix);
+		bMatrixFile = new File(getClass().getResource(bMatrixFilename).getFile());
+		aMatrixFile = new File(getClass().getResource(aMatrixFilename).getFile());
+		linesOfFile = FileUtils.readLines(bMatrixFile);
 		splitLinesOfFile = new String[linesOfFile.size()][];
 		int i = 0;
 		for(String line : linesOfFile) {
@@ -55,7 +54,7 @@ public class TaggerTest extends TestCase {
 	 */
 	@SuppressWarnings("unchecked")
 	public void testReadObservationProbabilityFromFile() throws Exception {
-		Tagger pos = TaggerHelper.readMatrices(aFileMatrix, bFileMatrix);
+		Tagger pos = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
 		String testWord = "to";
 		String testPos = "TO";
 		String testHypothesis = "TO";
@@ -71,9 +70,10 @@ public class TaggerTest extends TestCase {
 	}
 
 	public void testViterbi() throws Exception {
-		Tagger tagger = TaggerHelper.readMatrices(aFileMatrix, bFileMatrix);
+		Tagger tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
 		List<PartOfSpeech>expected = new ArrayList<PartOfSpeech>();
-		expected.add(tagger.getPartOfSpeech("PPSS"));
+		// expected.add(tagger.getPartOfSpeech("PPSS"));
+		expected.add(tagger.getPartOfSpeech("PRP"));
 		expected.add(tagger.getPartOfSpeech("VB"));
 		expected.add(tagger.getPartOfSpeech("TO"));
 		expected.add(tagger.getPartOfSpeech("VB"));
