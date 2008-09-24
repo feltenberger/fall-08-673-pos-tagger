@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use Statistics::LineFit;
 
-open( INFILE, "../resources/start_tags_count.dat" );
+open( INFILE, "../resources/tag_word_count.dat" );
 
 sub log2 {
 	my $num = $_[0];
@@ -20,25 +20,51 @@ close (INFILE);
 foreach $tag ( sort keys %count ) {
 	foreach $wordCount (sort keys %{$count{$tag}})
 	{
-		print "TAG $tag WORD: $wordCount\n";
 		$prob{$tag}[$wordCount] = $wordCount / $count{$tag}{'total'};
 	}
+	
 	@y = (
 		$count{$tag}{'1'}, $count{$tag}{'2'}, $count{$tag}{'3'},
 		$count{$tag}{'4'}, $count{$tag}{'5'}, $count{$tag}{'6'}
 	);
 	@x = ( 1 ... 6 );
-
-	if (   $y[0] == 0
-		&& $y[1] == 0
-		&& $y[2] == 0
-		&& $y[3] == 0
-		&& $y[4] == 0
-		&& $y[5] == 0 )
+	$yCount = 0;
+	$checkTwoPoints = 1;
+	foreach $ys (@y)
 	{
-		$prob{$tag}[0] = 0;
+		if (ord $ys != 0)
+		{
+		$yCount++;
+		}
 	}
-	else {
+	
+	if ($yCount < 2)
+	{
+		@keyCounts = sort {$a <=> $b} keys %{$count{$tag}};
+		if (defined $keyCounts[2])
+		{
+			push @y, $count{$tag}{$keyCounts[2]};
+			push @x, $keyCounts[2];
+		}
+		else
+		{
+			print "$tag $keyCounts[1] $count{$tag}{'total'}\n";
+			if ($keyCounts[1] < 5)
+			{
+				$checkTwoPoints = 0;
+				$prob{$tag}[$keyCounts[1]] = $keyCounts[1] / ($count{$tag}{'total'} + 1);
+				$prob{$tag}[0] = $prob{$tag}[$keyCounts[1]];
+				print "HERE $tag $prob{$tag}[0] \n";
+			}
+			else
+			{
+				$prob{$tag}[0] = 0;
+			}
+
+		} 
+	}
+	if ( $checkTwoPoints != 0)
+	 {
 		@yVal = map {log2($_)} @y;
 		
 		@xVal = map {log2($_)} @x;
@@ -52,27 +78,20 @@ foreach $tag ( sort keys %count ) {
 		{
 			$newNc[$j] = 2 ** $predictedYs[$j];
 		}
-		$t = 2 ** (11.74);
 		
 		foreach $i ( 0 ... 4 ) {
 			$prob{$tag}[ $i + 1 ] =
 			  ( ( $i + 1 ) * ( $newNc[ $i + 1 ] / $newNc[$i] ) ) /
 			  $count{$tag}{'total'};
-			print "$tag $i " . $prob{$tag}[ $i + 1 ] . "\n";
 
 		}
-	}
-	if ( $newNc[0] > 1 ) {
 		$prob{$tag}[0] = $count{$tag}{'1'} / $count{$tag}{'total'};
 	}
-	else {
-		$prob{$tag}[0] = 0;
-	}
-	print "$tag Default: $count{$tag}{'0'}\n";
+
 }
 
-open( INFILE, "../resources/start_tags_count.dat");
-open( PROBS, " > ../resources/start_tags_prob.txt");
+open( INFILE, "../resources/tag_word_count.dat");
+open( PROBS, " > ../resources/tag_word_prob.dat");
 
 while ( $line = <INFILE> ) {
 	@words = split( /\s/, $line );
