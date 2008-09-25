@@ -29,6 +29,58 @@ $	US$	79
 :	...	260
 :	:	1922
 :	;	1657
+BD	operated	1
+BD	read	1
+BG	advertising	1
+BG	being	1
+BG	borrowing	1
+BG	closing	1
+BG	competing	1
+BG	cutting	1
+BG	dividing	1
+BG	hedging	1
+BG	investing	1
+BG	leasing	1
+BG	pending	10
+BG	polishing	1
+BG	printing	1
+BG	purchasing	1
+BG	refunding	1
+BG	resulting	1
+BG	sagging	1
+BG	sitting	1
+BG	spending	1
+BG	spotting	1
+BG	targeting	1
+BG	testing	1
+BG	trading	3
+BG	walking	1
+BG	warming	1
+BG	working	1
+BN	canceled	1
+BN	captured	1
+BN	closed	2
+BN	convinced	1
+BN	deprived	1
+BN	diluted	1
+BN	foreclosed	2
+BN	gone	1
+BN	imported	1
+BN	increased	1
+BN	needed	1
+BN	obliged	1
+BN	paid	1
+BN	rid	1
+BN	satisfied	1
+BN	surrounded	1
+BN	traded	1
+BP	put	1
+BP	read	1
+BR	Worse	2
+BR	better	1
+BR	less	2
+BR	more	7
+BS	most	2
 CC	&	1410
 CC	'N	1
 CC	'n'	5
@@ -5843,6 +5895,7 @@ CD	twelve	1
 CD	twenty	2
 CD	two	1422
 CD	zero	15
+CD	zillion	1
 DT	A	1150
 DT	AN	7
 DT	All	117
@@ -5868,7 +5921,7 @@ DT	These	192
 DT	This	542
 DT	Those	96
 DT	a	25820
-DT	all	1157
+DT	all	1158
 DT	an	4210
 DT	another	495
 DT	any	1058
@@ -6035,8 +6088,9 @@ IN	AMONG	1
 IN	AS	1
 IN	About	44
 IN	Above	4
+IN	Absent	1
 IN	Across	3
-IN	After	228
+IN	After	229
 IN	Against	7
 IN	Along	17
 IN	Alongside	2
@@ -6151,7 +6205,7 @@ IN	by	6034
 IN	complicated	1
 IN	de	37
 IN	despite	184
-IN	down	306
+IN	down	307
 IN	during	528
 IN	en	5
 IN	except	63
@@ -6165,6 +6219,7 @@ IN	in	20564
 IN	including	1
 IN	inside	24
 IN	into	1217
+IN	ketchup	1
 IN	lest	2
 IN	like	533
 IN	minus	2
@@ -6174,7 +6229,7 @@ IN	nearest	1
 IN	next	101
 IN	notwithstanding	6
 IN	of	30999
-IN	off	294
+IN	off	295
 IN	on	6874
 IN	once	40
 IN	onto	33
@@ -6192,7 +6247,7 @@ IN	post	1
 IN	save	1
 IN	since	628
 IN	so	160
-IN	than	2212
+IN	than	2216
 IN	that	6646
 IN	then	1
 IN	though	263
@@ -6208,7 +6263,7 @@ IN	unless	90
 IN	unlike	43
 IN	until	384
 IN	unto	1
-IN	up	706
+IN	up	707
 IN	upon	54
 IN	v.	2
 IN	versus	3
@@ -6223,10 +6278,6 @@ IN	within	241
 IN	withing	1
 IN	without	338
 IN	worth	10
-IN|JJ	After	1
-IN|RB	down	1
-IN|RB	than	4
-IN|RB	up	1
 JJ	%	15
 JJ	1%-a-year	1
 JJ	1,000-ship	1
@@ -6866,6 +6917,7 @@ JJ	AT&T-sponsored	1
 JJ	Aaa	1
 JJ	Abrupt	1
 JJ	Abscam-indicted	1
+JJ	Absent	1
 JJ	Absolute	1
 JJ	Accepted	6
 JJ	Active	1
@@ -6878,6 +6930,7 @@ JJ	Afghan	8
 JJ	African	29
 JJ	African-controlled	1
 JJ	Afrikaner	3
+JJ	After	1
 JJ	After-the-fact	1
 JJ	Agnelli-related	1
 JJ	Air-raid	1
@@ -7012,7 +7065,7 @@ JJ	Bulgarian	3
 JJ	Bullish	1
 JJ	Buy	1
 JJ	Byzantine	1
-JJ	CALL	6
+JJ	CALL	7
 JJ	CANADIAN	1
 JJ	CB-radio-style	1
 JJ	CBS-owned	1
@@ -8096,6 +8149,7 @@ JJ	Working	1
 JJ	World-Wide	1
 JJ	World-wide	5
 JJ	Worried	1
+JJ	Worse	2
 JJ	Worth	1
 JJ	Would-be	1
 JJ	Wrong	2
@@ -8227,7 +8281,7 @@ JJ	aerodynamic	1
 JJ	aerospace	8
 JJ	aesthetic	5
 JJ	affable	1
-JJ	affected	15
+JJ	affected	16
 JJ	affectionate	1
 JJ	affiliated	4
 JJ	affirmative	5
@@ -8691,7 +8745,7 @@ JJ	behind-schedule	1
 JJ	behind-the-scenes	4
 JJ	beholden	1
 JJ	beige	1
-JJ	being	3
+JJ	being	4
 JJ	belated	1
 JJ	beleaguered	7
 JJ	believable	1
@@ -8716,7 +8770,7 @@ JJ	best-performing	3
 JJ	best-pitcher	1
 JJ	best-selling	2
 JJ	beta	3
-JJ	better	1
+JJ	better	2
 JJ	better-known	2
 JJ	better-off	1
 JJ	better-safe-than	1
@@ -8781,6 +8835,7 @@ JJ	blacked-out	1
 JJ	bland	1
 JJ	blank	9
 JJ	blank-faced	1
+JJ	blanket	1
 JJ	blase	1
 JJ	blasphemous	1
 JJ	blatant	3
@@ -8872,7 +8927,7 @@ JJ	broader-based	1
 JJ	broke	1
 JJ	broken	12
 JJ	broken-down	1
-JJ	broker-dealer	8
+JJ	broker-dealer	11
 JJ	broker-sold	2
 JJ	brokered	2
 JJ	brotherly	1
@@ -8896,7 +8951,7 @@ JJ	building-society	1
 JJ	built-from-kit	1
 JJ	built-in	6
 JJ	bulk	8
-JJ	bulk-chemical	1
+JJ	bulk-chemical	2
 JJ	bulked-up	1
 JJ	bulky	1
 JJ	bullet-proof	1
@@ -8953,7 +9008,7 @@ JJ	callable	4
 JJ	calm	8
 JJ	calming	1
 JJ	canary-colored	1
-JJ	canceled	1
+JJ	canceled	2
 JJ	cancer-causing	2
 JJ	cancer-gene	1
 JJ	cancer-related	1
@@ -8984,6 +9039,7 @@ JJ	capped	5
 JJ	capricious	1
 JJ	captivating	1
 JJ	captive	1
+JJ	captured	1
 JJ	car-care	1
 JJ	car-crash	1
 JJ	car-happy	1
@@ -9268,7 +9324,7 @@ JJ	compatible	9
 JJ	compelling	8
 JJ	compensatory	3
 JJ	competent	8
-JJ	competing	2
+JJ	competing	3
 JJ	competitive	82
 JJ	competitve	1
 JJ	complacent	2
@@ -9409,7 +9465,7 @@ JJ	conventional	61
 JJ	conventional-arms	2
 JJ	converted	2
 JJ	convertible	111
-JJ	convinced	10
+JJ	convinced	11
 JJ	convincing	5
 JJ	convoluted	1
 JJ	cooking	1
@@ -9698,11 +9754,12 @@ JJ	department-store	2
 JJ	dependent	15
 JJ	deplorable	3
 JJ	deployable	1
-JJ	depositary	8
+JJ	depositary	9
 JJ	depository	6
 JJ	depreciable	1
 JJ	depressed	14
 JJ	depressing	2
+JJ	deprived	1
 JJ	deputy	25
 JJ	derivative	20
 JJ	dermatological	1
@@ -9753,7 +9810,7 @@ JJ	difficult	133
 JJ	digital	8
 JJ	dignified	1
 JJ	dilapidated	1
-JJ	diluted	6
+JJ	diluted	7
 JJ	dilutive	5
 JJ	diminished	4
 JJ	diminutive	2
@@ -9855,6 +9912,7 @@ JJ	divested	1
 JJ	divestiture-related	1
 JJ	divided	1
 JJ	dividend-related	1
+JJ	dividing	1
 JJ	diving	2
 JJ	divisional	2
 JJ	divisive	8
@@ -10146,7 +10204,7 @@ JJ	eternal	4
 JJ	ethical	12
 JJ	ethnic	16
 JJ	evangelical	1
-JJ	even	14
+JJ	even	15
 JJ	evenhanded	2
 JJ	event-driven	1
 JJ	eventual	15
@@ -10539,7 +10597,7 @@ JJ	forbidding-looking	1
 JJ	forced	5
 JJ	forceful	2
 JJ	forcing	1
-JJ	foreclosed	1
+JJ	foreclosed	3
 JJ	foregone	1
 JJ	foreign	431
 JJ	foreign-bank	1
@@ -10627,7 +10685,7 @@ JJ	frank	3
 JJ	frantic	4
 JJ	fraudulent	14
 JJ	fraught	2
-JJ	free	147
+JJ	free	148
 JJ	free-choice	1
 JJ	free-fall	1
 JJ	free-lance	9
@@ -10766,7 +10824,7 @@ JJ	gifted	2
 JJ	gigantic	1
 JJ	gigue-like	1
 JJ	gilded	2
-JJ	gilt	1
+JJ	gilt	2
 JJ	gimmick-ridden	1
 JJ	giveaway	2
 JJ	given	2
@@ -10796,6 +10854,7 @@ JJ	gold-based	1
 JJ	gold-leaf	1
 JJ	gold-mining	2
 JJ	golden	26
+JJ	gone	1
 JJ	good	459
 JJ	good-hearted	1
 JJ	good-humored	1
@@ -11015,6 +11074,7 @@ JJ	heavy-tracked	1
 JJ	heavyweight	2
 JJ	hectic	9
 JJ	hedge	2
+JJ	hedging	1
 JJ	hefty	28
 JJ	heightened	4
 JJ	heinous	1
@@ -11275,7 +11335,7 @@ JJ	implicit	8
 JJ	implied	1
 JJ	import-export	1
 JJ	important	233
-JJ	imported	3
+JJ	imported	4
 JJ	imposing	1
 JJ	impossible	46
 JJ	impoverished	1
@@ -11335,7 +11395,7 @@ JJ	inconsistent	4
 JJ	inconvenient	1
 JJ	incorporated	2
 JJ	incorrect	8
-JJ	increased	31
+JJ	increased	32
 JJ	increasing	6
 JJ	incredible	9
 JJ	incremental	1
@@ -11742,6 +11802,8 @@ JJ	lendable	1
 JJ	lending	2
 JJ	lengthy	14
 JJ	lenient	1
+JJ	less	2
+JJ	less-advanced	2
 JJ	less-binding	1
 JJ	less-conservative	1
 JJ	less-creditworthy	1
@@ -11993,7 +12055,7 @@ JJ	majority	1
 JJ	majority-owned	3
 JJ	majority-party	1
 JJ	makeshift	1
-JJ	male	11
+JJ	male	12
 JJ	male-dominated	2
 JJ	male-fertile	2
 JJ	male-only	1
@@ -12196,11 +12258,12 @@ JJ	mini-component	3
 JJ	miniature	2
 JJ	minimal	18
 JJ	minimalist	3
-JJ	minimum	65
+JJ	minimum	66
 JJ	minimum-fee	1
 JJ	miniscule	1
 JJ	ministerial	1
 JJ	minor	59
+JJ	minority	2
 JJ	minority-owned	3
 JJ	minuscule	3
 JJ	minute	4
@@ -12265,7 +12328,7 @@ JJ	moot	1
 JJ	moral	19
 JJ	morale-damaging	1
 JJ	moralistic	1
-JJ	more	4
+JJ	more	11
 JJ	more-advanced	1
 JJ	more-affordable	1
 JJ	more-attractive	1
@@ -12283,7 +12346,7 @@ JJ	mortgage-interest	2
 JJ	mortgage-securities	1
 JJ	mortgagebacked	1
 JJ	mortgaged-backed	1
-JJ	most	1
+JJ	most	3
 JJ	most-active	2
 JJ	most-favored-nation	1
 JJ	most-jingoistic	1
@@ -12395,7 +12458,7 @@ JJ	nearby	15
 JJ	nearly-30	1
 JJ	neat	6
 JJ	necessary	91
-JJ	needed	9
+JJ	needed	10
 JJ	needle-like	1
 JJ	needy	2
 JJ	negative	87
@@ -12669,7 +12732,7 @@ JJ	objectionable	4
 JJ	objective	5
 JJ	obligated	1
 JJ	obligatory	2
-JJ	obliged	1
+JJ	obliged	2
 JJ	oblique	1
 JJ	oblivious	2
 JJ	obnoxious	3
@@ -12943,7 +13006,7 @@ JJ	packaged-goods	2
 JJ	packed	1
 JJ	padded	1
 JJ	page-one	6
-JJ	paid	3
+JJ	paid	4
 JJ	paid-up	3
 JJ	pained	1
 JJ	painful	16
@@ -13026,7 +13089,7 @@ JJ	peerless	1
 JJ	pejorative	1
 JJ	pelvic	2
 JJ	pen-and-pencil	1
-JJ	pending	6
+JJ	pending	16
 JJ	penny-ante	1
 JJ	penny-brokerage	1
 JJ	penny-pinching	1
@@ -13296,7 +13359,7 @@ JJ	premature	6
 JJ	premediated	1
 JJ	premier	4
 JJ	premiere	1
-JJ	premium	6
+JJ	premium	7
 JJ	premium-brand	2
 JJ	premium-priced	2
 JJ	preoccupied	2
@@ -13354,7 +13417,7 @@ JJ	prime-time	9
 JJ	primitive	5
 JJ	primordial	2
 JJ	princely	1
-JJ	principal	46
+JJ	principal	48
 JJ	principal-only	4
 JJ	printed	2
 JJ	prior	24
@@ -13539,7 +13602,7 @@ JJ	quake-relief	1
 JJ	quake-shocked	1
 JJ	quake-torn	1
 JJ	qualified	2
-JJ	quality	2
+JJ	quality	3
 JJ	quality-conscious	1
 JJ	quantitative	6
 JJ	quantitive	1
@@ -13778,7 +13841,7 @@ JJ	restricted-entry	1
 JJ	restrictive	11
 JJ	restyled	1
 JJ	resultant	1
-JJ	resulting	2
+JJ	resulting	3
 JJ	results-oriented	1
 JJ	resurgent	4
 JJ	retail	152
@@ -13816,7 +13879,7 @@ JJ	rice-processing	1
 JJ	rich	36
 JJ	riche	1
 JJ	rickety	1
-JJ	rid	9
+JJ	rid	10
 JJ	riddled	1
 JJ	ridiculous	12
 JJ	rife	3
@@ -13899,6 +13962,7 @@ JJ	sadistic	1
 JJ	safe	58
 JJ	safe-deposit	1
 JJ	saga-like	1
+JJ	sagging	1
 JJ	saintly	1
 JJ	salable	1
 JJ	salaried	3
@@ -13923,7 +13987,7 @@ JJ	satellite-TV	3
 JJ	satellite-delivered	1
 JJ	satirical	3
 JJ	satisfactory	9
-JJ	satisfied	5
+JJ	satisfied	6
 JJ	satisfying	2
 JJ	saucy	1
 JJ	save-the-earth	2
@@ -14067,6 +14131,7 @@ JJ	semiannual	11
 JJ	semicircular	1
 JJ	semiconductor-depreciation	1
 JJ	semiliterate	1
+JJ	semimonthly	1
 JJ	senatorial	2
 JJ	senior	318
 JJ	sensational	6
@@ -14222,6 +14287,7 @@ JJ	single-premium	2
 JJ	single-store	1
 JJ	sinister	2
 JJ	sister	4
+JJ	sitting	1
 JJ	six-bottle	1
 JJ	six-cent	2
 JJ	six-county	1
@@ -14337,7 +14403,7 @@ JJ	solicitous	2
 JJ	solid	32
 JJ	solid-state	1
 JJ	solitary	2
-JJ	solo	1
+JJ	solo	2
 JJ	soluble	4
 JJ	solvent	5
 JJ	somber	2
@@ -14696,6 +14762,7 @@ JJ	surprised	13
 JJ	surprising	41
 JJ	surreal	3
 JJ	surrogate	1
+JJ	surrounded	1
 JJ	surrounding	2
 JJ	survivable	1
 JJ	susceptible	8
@@ -14840,6 +14907,7 @@ JJ	thematic	1
 JJ	then	1
 JJ	then-21	1
 JJ	then-52	1
+JJ	then-Air	1
 JJ	then-City	1
 JJ	then-Speaker	1
 JJ	then-Treasury	1
@@ -15650,7 +15718,7 @@ JJ	weather-related	1
 JJ	weatherbeaten	1
 JJ	weed-killing	1
 JJ	weeklong	3
-JJ	weekly	53
+JJ	weekly	54
 JJ	weekly-average	3
 JJ	weighted	6
 JJ	weighty	1
@@ -15825,6 +15893,7 @@ JJ	yttrium-containing	1
 JJ	zealous	1
 JJ	zero-coupon	23
 JJ	zero-sum	1
+JJ	zilch	1
 JJ	zinc-strip	1
 JJR	BIGGER	1
 JJR	Better	1
@@ -16005,7 +16074,6 @@ JJR	wiser	2
 JJR	worse	48
 JJR	worthier	1
 JJR	younger	31
-JJR|RBR	more	4
 JJS	Best	2
 JJS	Biggest	1
 JJS	Budapest	1
@@ -16138,15 +16206,7 @@ JJS	widest	2
 JJS	winningest	1
 JJS	worst	61
 JJS	youngest	8
-JJ|IN	Absent	1
-JJ|JJR	less-advanced	1
-JJ|NN	male	1
-JJ|NN	minimum	1
-JJ|NN	premium	1
-JJ|NN	quality	1
-JJ|NNP	then-Air	1
-JJ|RB	free	1
-JJ|VBN	affected	1
+JR	more	4
 LS	1	13
 LS	2	13
 LS	3	12
@@ -16188,6 +16248,7 @@ MD	could	1477
 MD	dare	1
 MD	may	1058
 MD	might	459
+MD	mighta	1
 MD	must	330
 MD	need	10
 MD	ought	45
@@ -16196,7 +16257,6 @@ MD	should	581
 MD	will	4046
 MD	wo	326
 MD	would	2961
-MD|VB	mighta	1
 NN	%	6631
 NN	1-for-17	1
 NN	12-pack	1
@@ -16414,7 +16474,7 @@ NN	C-17	1
 NN	C-5B	1
 NN	C-90	1
 NN	C-word	2
-NN	CALL	4
+NN	CALL	5
 NN	CAPITAL	1
 NN	CASE	1
 NN	CD	20
@@ -16686,6 +16746,7 @@ NN	EMPLOYEE	1
 NN	ENERGY	2
 NN	EST	2
 NN	ESTATE	1
+NN	EURODOLLARS	1
 NN	EVERYONE	1
 NN	EXCHANGE	1
 NN	Ear	1
@@ -17087,6 +17148,7 @@ NN	MONEY	10
 NN	MURDER	1
 NN	MX-missile	1
 NN	Machine	4
+NN	Machinists	1
 NN	Macmillan\/McGraw	1
 NN	Magazine	2
 NN	Mail-order	1
@@ -17941,7 +18003,7 @@ NN	adversary	7
 NN	advert	1
 NN	advertisement	6
 NN	advertiser	5
-NN	advertising	178
+NN	advertising	179
 NN	advice	45
 NN	adviser	73
 NN	advising	1
@@ -18615,7 +18677,7 @@ NN	blade	1
 NN	blame	14
 NN	blandness	1
 NN	blank	1
-NN	blanket	4
+NN	blanket	5
 NN	blarney	1
 NN	blase	1
 NN	blast	8
@@ -18689,6 +18751,7 @@ NN	booking	2
 NN	bookkeeper	1
 NN	bookkeeping	2
 NN	booklet	1
+NN	books	1
 NN	bookstore	2
 NN	boom	40
 NN	boon	4
@@ -18703,7 +18766,7 @@ NN	borer	1
 NN	boring	1
 NN	borough	13
 NN	borrower	4
-NN	borrowing	33
+NN	borrowing	34
 NN	bosom	1
 NN	boss	16
 NN	botany	1
@@ -18797,7 +18860,7 @@ NN	broadcasting	24
 NN	broadside	1
 NN	brochure	2
 NN	broker	64
-NN	broker-dealer	1
+NN	broker-dealer	4
 NN	brokerage	181
 NN	brokerage-house	1
 NN	brokering	1
@@ -18839,6 +18902,7 @@ NN	buildup	12
 NN	built-in	1
 NN	bulb	1
 NN	bulk	29
+NN	bulk-chemical	1
 NN	bulk-mail	1
 NN	bull	15
 NN	bull-market	1
@@ -18894,7 +18958,7 @@ NN	butter	6
 NN	butterfat	3
 NN	butterfly	2
 NN	button	4
-NN	buy	36
+NN	buy	37
 NN	buy-back	32
 NN	buy-out	252
 NN	buyback	1
@@ -19275,7 +19339,7 @@ NN	close-up	2
 NN	closedown	1
 NN	closeness	2
 NN	closet	5
-NN	closing	68
+NN	closing	69
 NN	closure	6
 NN	cloth	3
 NN	clothier	1
@@ -19771,6 +19835,7 @@ NN	credibility	36
 NN	credit	293
 NN	credit-backing	1
 NN	credit-card	25
+NN	credit-data	2
 NN	credit-easing	2
 NN	credit-information	1
 NN	credit-rating	2
@@ -19880,7 +19945,7 @@ NN	customs-clearance	1
 NN	cut	100
 NN	cutback	2
 NN	cutoff	1
-NN	cutting	6
+NN	cutting	7
 NN	cycle	37
 NN	cycling	3
 NN	cyclist	2
@@ -19909,7 +19974,7 @@ NN	dart-throwing	1
 NN	darts	1
 NN	dash	3
 NN	dashboard	2
-NN	data	24
+NN	data	48
 NN	data-processing	4
 NN	data-storage	1
 NN	data-transmission	1
@@ -20006,6 +20071,7 @@ NN	degradation	1
 NN	degree	33
 NN	deja	2
 NN	delay	31
+NN	delaying	1
 NN	delegate	5
 NN	delegation	16
 NN	deletion	1
@@ -20056,7 +20122,7 @@ NN	depletion	8
 NN	deployment	2
 NN	deportation	2
 NN	deposit	34
-NN	depositary	8
+NN	depositary	9
 NN	depository	11
 NN	depot	1
 NN	depreciation	17
@@ -20304,6 +20370,7 @@ NN	diversity	7
 NN	divestiture	13
 NN	divide	2
 NN	dividend	187
+NN	dividing	1
 NN	diving	1
 NN	division	232
 NN	divisiveness	2
@@ -20531,6 +20598,7 @@ NN	electricity	27
 NN	electrocardiogram	1
 NN	electroluminescence	1
 NN	electrolysis	2
+NN	electronic-data	2
 NN	electronic-warfare	1
 NN	electronics	17
 NN	electronics-product	1
@@ -21310,7 +21378,7 @@ NN	gig	1
 NN	giggle	1
 NN	gigolo	2
 NN	gilding	1
-NN	gilt	1
+NN	gilt	2
 NN	gimmick	1
 NN	gimmickry	4
 NN	gin	10
@@ -21698,7 +21766,7 @@ NN	hock	1
 NN	hodgepodge	1
 NN	hog	5
 NN	hoisting	1
-NN	hold	20
+NN	hold	21
 NN	holder	36
 NN	holding	55
 NN	hole	12
@@ -22148,7 +22216,7 @@ NN	inverse	2
 NN	investigation	88
 NN	investigative-reporting	1
 NN	investigator	11
-NN	investing	15
+NN	investing	16
 NN	investment	654
 NN	investment-banking	7
 NN	investment-house	1
@@ -22390,7 +22458,7 @@ NN	leap	7
 NN	learning	2
 NN	lease	14
 NN	leash	2
-NN	leasing	19
+NN	leasing	20
 NN	leather	10
 NN	leatherbound	1
 NN	leave	6
@@ -22674,7 +22742,7 @@ NN	making	19
 NN	malaise	2
 NN	malaria	1
 NN	malcontent	1
-NN	male	7
+NN	male	8
 NN	malfunction	1
 NN	malice	4
 NN	malignancy	2
@@ -22957,7 +23025,7 @@ NN	minicrash	2
 NN	minimalism	2
 NN	minimalist	1
 NN	minimill	3
-NN	minimum	50
+NN	minimum	51
 NN	minimum-wage	6
 NN	minimun	1
 NN	mining	37
@@ -22971,7 +23039,7 @@ NN	mink	6
 NN	minor	1
 NN	minor-leaguer	1
 NN	minor-sport	1
-NN	minority	76
+NN	minority	78
 NN	minstrel	1
 NN	mint	5
 NN	minus	3
@@ -23959,7 +24027,7 @@ NN	policy-making	3
 NN	policyholder	1
 NN	policymaker	1
 NN	polish	1
-NN	polishing	1
+NN	polishing	2
 NN	political-corruption	2
 NN	politician	9
 NN	politicking	2
@@ -24089,7 +24157,7 @@ NN	premier	6
 NN	premiere	8
 NN	premise	2
 NN	premises	1
-NN	premium	93
+NN	premium	94
 NN	premium-beer	1
 NN	preoccupation	4
 NN	preparation	11
@@ -24142,12 +24210,12 @@ NN	primary-election	1
 NN	prime-time	8
 NN	prince	3
 NN	princess	1
-NN	principal	37
+NN	principal	39
 NN	principle	36
 NN	print	17
 NN	print-shop	1
 NN	printer	12
-NN	printing	26
+NN	printing	27
 NN	printing-press	1
 NN	priority	37
 NN	prison	48
@@ -24329,7 +24397,7 @@ NN	pupil	1
 NN	puppet	1
 NN	purchase	205
 NN	purchaser	3
-NN	purchasing	23
+NN	purchasing	24
 NN	purhasing	1
 NN	purpose	39
 NN	purse	5
@@ -24345,7 +24413,7 @@ NN	puzzle	3
 NN	puzzlement	1
 NN	quadrupling	1
 NN	quake	102
-NN	quality	113
+NN	quality	114
 NN	quandary	1
 NN	quantification	1
 NN	quantity	10
@@ -24581,7 +24649,7 @@ NN	refuge	8
 NN	refugee	4
 NN	refugee-assistance	1
 NN	refund	17
-NN	refunding	8
+NN	refunding	9
 NN	refurbishing	2
 NN	refurbishment	2
 NN	refusal	12
@@ -24730,7 +24798,7 @@ NN	respondent	2
 NN	response	120
 NN	responsibility	60
 NN	responsiblilty	1
-NN	rest	119
+NN	rest	120
 NN	restatement	4
 NN	restaurant	47
 NN	restitution	6
@@ -25540,7 +25608,7 @@ NN	speedway	1
 NN	spell	1
 NN	spelling	2
 NN	spender	2
-NN	spending	217
+NN	spending	218
 NN	sperm	1
 NN	sphere	3
 NN	spice	1
@@ -25576,6 +25644,7 @@ NN	sporting	3
 NN	sportswear	2
 NN	spot	49
 NN	spotlight	2
+NN	spotting	1
 NN	spouse	8
 NN	sprawl	1
 NN	spray	3
@@ -26009,6 +26078,7 @@ NN	tapestry	2
 NN	taping	4
 NN	tar	2
 NN	target	81
+NN	targeting	1
 NN	tariff	8
 NN	tartan	1
 NN	task	56
@@ -26048,7 +26118,7 @@ NN	teen-ager	2
 NN	teenager	1
 NN	telecast	1
 NN	telecommunication	1
-NN	telecommunications	19
+NN	telecommunications	21
 NN	telegram	1
 NN	telegraph	1
 NN	telemarketing	4
@@ -26098,7 +26168,7 @@ NN	test-marketing	1
 NN	test-tube	1
 NN	testimonial	1
 NN	testimony	35
-NN	testing	26
+NN	testing	27
 NN	tetanus	1
 NN	tete-a-tete	1
 NN	text	17
@@ -26114,6 +26184,7 @@ NN	theatrical	2
 NN	theft	14
 NN	theme	27
 NN	theme-park	1
+NN	then-Air	1
 NN	then-chairman	1
 NN	then-client	1
 NN	then-husband	1
@@ -26289,7 +26360,7 @@ NN	trade-offs	1
 NN	trademark	9
 NN	tradeoff	1
 NN	trader	133
-NN	trading	1391
+NN	trading	1394
 NN	trading-company	1
 NN	trading-room	1
 NN	tradition	19
@@ -26703,7 +26774,7 @@ NN	waiver	9
 NN	wake	63
 NN	walk	4
 NN	walkie-talkie	1
-NN	walking	2
+NN	walking	3
 NN	walkout	4
 NN	walkway	1
 NN	wall	24
@@ -26721,7 +26792,7 @@ NN	warehousing	1
 NN	warfare	3
 NN	warm-up	2
 NN	warmheartedness	1
-NN	warming	13
+NN	warming	14
 NN	warmth	1
 NN	warmup	1
 NN	warning	27
@@ -26756,7 +26827,7 @@ NN	waterfall	1
 NN	waterfront	2
 NN	watering	2
 NN	watershed	1
-NN	waterworks	6
+NN	waterworks	8
 NN	watt	3
 NN	wave	41
 NN	wavering	1
@@ -26905,7 +26976,7 @@ NN	worker-compensation	1
 NN	worker-safety	1
 NN	workforce	2
 NN	workhorse	1
-NN	working	14
+NN	working	15
 NN	working-girl	1
 NN	workman	1
 NN	workout	7
@@ -26976,6 +27047,8 @@ NN	zenith	1
 NN	zero	2
 NN	zero-coupon	5
 NN	zero-inflation	1
+NN	zilch	1
+NN	zillion	1
 NN	zinc	5
 NN	zip	4
 NN	zippo	1
@@ -41442,7 +41515,6 @@ NNPS	Years	1
 NNPS	Yippies	1
 NNPS	Yorkers	3
 NNPS	blacks	2
-NNPS|NNS	EURODOLLARS	1
 NNS	'30s	1
 NNS	'40s	1
 NNS	'50s	2
@@ -47127,26 +47199,10 @@ NNS	zigzags	1
 NNS	zlotys	1
 NNS	zombies	1
 NNS	zones	4
-NNS|NN	data	6
-NNS|NN	telecommunications	2
-NNS|NNPS	Machinists	1
-NNS|VBZ	Matters	1
-NN|CD	zillion	1
-NN|JJ	CALL	1
-NN|JJ	blanket	1
-NN|JJ	broker-dealer	3
-NN|JJ	bulk-chemical	1
-NN|JJ	depositary	1
-NN|JJ	gilt	1
-NN|JJ	minority	2
-NN|JJ	principal	2
-NN|JJ	zilch	1
-NN|NNS	credit-data	1
-NN|NNS	data	9
-NN|NNS	electronic-data	1
-NN|NNS	waterworks	1
-NN|POS	books	1
-NN|VBG	delaying	1
+NS	Machinists	1
+NS	Matters	1
+NS	data	6
+NS	telecommunications	2
 PDT	All	29
 PDT	Both	2
 PDT	Half	1
@@ -47160,6 +47216,7 @@ PDT	many	1
 PDT	nary	1
 PDT	quite	6
 PDT	such	103
+PO	books	1
 POS	'	864
 POS	'S	8
 POS	's	11024
@@ -47230,6 +47287,7 @@ PRP$	my	272
 PRP$	our	450
 PRP$	their	2301
 PRP$	your	228
+PS	EURODOLLARS	1
 RB	'til	1
 RB	12-2	1
 RB	338-44	1
@@ -47547,14 +47605,14 @@ RB	aimlessly	1
 RB	alfresco	1
 RB	alike	13
 RB	alive	1
-RB	all	57
+RB	all	58
 RB	all-in-all	1
 RB	allegedly	37
 RB	allgedly	1
 RB	almost	257
 RB	aloft	3
 RB	alone	99
-RB	along	25
+RB	along	26
 RB	aloud	1
 RB	already	422
 RB	also	1937
@@ -47592,7 +47650,7 @@ RB	arbitrarily	4
 RB	architecturally	1
 RB	ardently	1
 RB	arguably	2
-RB	around	57
+RB	around	58
 RB	artificially	8
 RB	as	1001
 RB	as-yet	1
@@ -47781,7 +47839,7 @@ RB	double	18
 RB	doubly	2
 RB	doubt	1
 RB	doubtless	1
-RB	down	518
+RB	down	519
 RB	downhill	1
 RB	downright	5
 RB	downward	13
@@ -47836,7 +47894,7 @@ RB	erroneously	1
 RB	especially	184
 RB	essentially	35
 RB	ethnically	1
-RB	even	787
+RB	even	788
 RB	evenly	9
 RB	eventually	77
 RB	ever	171
@@ -47912,7 +47970,7 @@ RB	frankly	6
 RB	frantically	9
 RB	fraudulently	2
 RB	freakishly	1
-RB	free	4
+RB	free	5
 RB	freely	13
 RB	frequently	45
 RB	freshly	1
@@ -48108,7 +48166,7 @@ RB	logically	2
 RB	long	158
 RB	long-term	1
 RB	longer	57
-RB	loose	5
+RB	loose	6
 RB	loosely	4
 RB	lot	7
 RB	loud	1
@@ -48160,6 +48218,7 @@ RB	molecularly	1
 RB	momentarily	1
 RB	monthly	7
 RB	morally	6
+RB	more	4
 RB	moreover	7
 RB	most	1
 RB	mostly	91
@@ -48224,7 +48283,7 @@ RB	obviously	20
 RB	occasionally	18
 RB	oddly	5
 RB	of	2
-RB	off	122
+RB	off	123
 RB	offhandedly	1
 RB	officially	27
 RB	offshore	6
@@ -48429,6 +48488,7 @@ RB	seldom	6
 RB	selectively	4
 RB	semi-annually	2
 RB	semiannually	6
+RB	semimonthly	1
 RB	sensibly	1
 RB	separately	30
 RB	seriously	28
@@ -48475,6 +48535,7 @@ RB	solely	17
 RB	solemnly	1
 RB	solid	1
 RB	solidly	4
+RB	solo	1
 RB	some	15
 RB	someday	9
 RB	somehow	15
@@ -48563,7 +48624,7 @@ RB	tenaciously	1
 RB	tenfold	6
 RB	tentatively	33
 RB	terribly	4
-RB	than	2
+RB	than	6
 RB	thankfully	1
 RB	that	28
 RB	then	464
@@ -48652,7 +48713,7 @@ RB	unsuccessfully	11
 RB	unusually	23
 RB	unvaryingly	1
 RB	unwittingly	1
-RB	up	790
+RB	up	791
 RB	uphill	1
 RB	upon	1
 RB	upside	6
@@ -48687,7 +48748,7 @@ RB	waggishly	1
 RB	warily	1
 RB	warmly	1
 RB	way	5
-RB	weekly	3
+RB	weekly	4
 RB	well	566
 RB	west	1
 RB	westward	2
@@ -48769,10 +48830,6 @@ RBR	tougher	2
 RBR	trimmed	1
 RBR	wider	1
 RBR	worse	7
-RBR|JJR	Worse	2
-RBR|JJR	better	1
-RBR|JJR	less	2
-RBR|JJR	more	7
 RBS	Best	1
 RBS	Hardest	1
 RBS	Most	30
@@ -48783,16 +48840,6 @@ RBS	hardest	7
 RBS	highest	1
 RBS	least	9
 RBS	most	519
-RBS|JJS	most	2
-RB|DT	all	1
-RB|IN	off	1
-RB|JJ	even	1
-RB|JJ	semimonthly	1
-RB|JJ	solo	1
-RB|JJ	weekly	1
-RB|RP	along	1
-RB|RP	around	1
-RB|RP	loose	1
 RP	Howard	1
 RP	ON	1
 RP	Off	2
@@ -48800,9 +48847,9 @@ RP	UP	1
 RP	Up	2
 RP	about	13
 RP	across	4
-RP	along	11
+RP	along	12
 RP	apart	1
-RP	around	46
+RP	around	47
 RP	aside	8
 RP	at	1
 RP	away	25
@@ -48813,6 +48860,7 @@ RP	by	6
 RP	down	209
 RP	for	4
 RP	in	124
+RP	loose	1
 RP	of	2
 RP	off	299
 RP	on	80
@@ -48999,6 +49047,7 @@ VB	Live	1
 VB	Look	12
 VB	MAKE	1
 VB	Make	6
+VB	Matters	1
 VB	McDonald	1
 VB	Mean	1
 VB	Meet	2
@@ -49131,6 +49180,7 @@ VB	advertise	4
 VB	advise	13
 VB	advocate	1
 VB	affect	61
+VB	affected	1
 VB	afflict	1
 VB	afford	34
 VB	aggravate	3
@@ -49323,7 +49373,7 @@ VB	burn	4
 VB	bury	1
 VB	butt	1
 VB	buttress	3
-VB	buy	549
+VB	buy	550
 VB	buy-back	1
 VB	buzz	1
 VB	bypass	2
@@ -49391,6 +49441,7 @@ VB	cling	1
 VB	clip	1
 VB	clobber	1
 VB	close	165
+VB	closed	2
 VB	cloud	1
 VB	clutter	1
 VB	co-exist	1
@@ -49560,6 +49611,7 @@ VB	defunct	1
 VB	defuse	3
 VB	degenerate	1
 VB	delay	30
+VB	delaying	1
 VB	delegate	2
 VB	delete	1
 VB	deliberate	1
@@ -50008,7 +50060,7 @@ VB	hinge	1
 VB	hint	1
 VB	hire	24
 VB	hit	30
-VB	hold	98
+VB	hold	99
 VB	holler	1
 VB	homer	1
 VB	hone	1
@@ -50123,6 +50175,7 @@ VB	junk	2
 VB	justify	25
 VB	keen	1
 VB	keep	235
+VB	ketchup	1
 VB	key	1
 VB	kick	3
 VB	kidnap	1
@@ -50228,6 +50281,7 @@ VB	merge	30
 VB	merit	2
 VB	mesh	1
 VB	mess	1
+VB	mighta	1
 VB	migrate	2
 VB	militate	1
 VB	milk	5
@@ -50298,6 +50352,7 @@ VB	omit	4
 VB	ooze	1
 VB	open	68
 VB	operate	53
+VB	operated	1
 VB	oppose	14
 VB	opt	1
 VB	order	14
@@ -50497,7 +50552,7 @@ VB	purchase	78
 VB	purge	1
 VB	pursue	53
 VB	push	52
-VB	put	163
+VB	put	164
 VB	puzzle	1
 VB	qualify	17
 VB	quantify	4
@@ -50530,7 +50585,7 @@ VB	re-evaluate	2
 VB	re-examine	4
 VB	reach	77
 VB	react	10
-VB	read	42
+VB	read	44
 VB	readmit	1
 VB	reaffirm	1
 VB	realestate	1
@@ -50692,7 +50747,7 @@ VB	resonate	1
 VB	resort	2
 VB	respect	4
 VB	respond	37
-VB	rest	5
+VB	rest	6
 VB	restart	2
 VB	restate	1
 VB	restore	31
@@ -51087,6 +51142,7 @@ VB	tower	1
 VB	trace	1
 VB	track	8
 VB	trade	60
+VB	traded	1
 VB	traduce	1
 VB	trail	6
 VB	train	8
@@ -53042,8 +53098,6 @@ VBD	yelled	3
 VBD	yelped	1
 VBD	yielded	7
 VBD	zoomed	1
-VBD|VBN	operated	1
-VBD|VBP	read	1
 VBG	Abandoning	1
 VBG	Accomplishing	1
 VBG	According	133
@@ -55329,32 +55383,6 @@ VBG	yielding	18
 VBG	zapping	1
 VBG	zeroing	2
 VBG	zoning	2
-VBG|JJ	being	1
-VBG|JJ	competing	1
-VBG|JJ	hedging	1
-VBG|JJ	pending	10
-VBG|JJ	resulting	1
-VBG|JJ	sagging	1
-VBG|JJ	sitting	1
-VBG|NN	advertising	1
-VBG|NN	borrowing	1
-VBG|NN	closing	1
-VBG|NN	cutting	1
-VBG|NN	investing	1
-VBG|NN	leasing	1
-VBG|NN	polishing	1
-VBG|NN	printing	1
-VBG|NN	purchasing	1
-VBG|NN	refunding	1
-VBG|NN	spending	1
-VBG|NN	spotting	1
-VBG|NN	targeting	1
-VBG|NN	testing	1
-VBG|NN	trading	3
-VBG|NN	walking	1
-VBG|NN	warming	1
-VBG|NN	working	1
-VBG|NN|JJ	dividing	1
 VBN	15	1
 VBN	Absorbed	1
 VBN	Accrued	1
@@ -57742,23 +57770,6 @@ VBN	wronged	1
 VBN	yanked	2
 VBN	yielded	1
 VBN	zoomed	3
-VBN|JJ	canceled	1
-VBN|JJ	captured	1
-VBN|JJ	convinced	1
-VBN|JJ	deprived	1
-VBN|JJ	diluted	1
-VBN|JJ	foreclosed	2
-VBN|JJ	gone	1
-VBN|JJ	imported	1
-VBN|JJ	increased	1
-VBN|JJ	needed	1
-VBN|JJ	obliged	1
-VBN|JJ	paid	1
-VBN|JJ	rid	1
-VBN|JJ	satisfied	1
-VBN|JJ	surrounded	1
-VBN|VBD	closed	2
-VBN|VBD	traded	1
 VBP	'm	162
 VBP	're	460
 VBP	've	227
@@ -58875,8 +58886,6 @@ VBP	yield	7
 VBP	zero	1
 VBP	zig-zag	1
 VBP	zip	1
-VBP|VB	put	1
-VBP|VBD	read	1
 VBZ	'S	9
 VBZ	's	1614
 VBZ	AGREES	1
@@ -60164,10 +60173,6 @@ VBZ	wrestles	1
 VBZ	writes	19
 VBZ	yells	1
 VBZ	yields	5
-VB|IN	ketchup	1
-VB|NN	buy	1
-VB|NN	hold	1
-VB|NN	rest	1
 WDT	.what	1
 WDT	THAT	1
 WDT	That	15

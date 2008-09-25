@@ -1,18 +1,35 @@
 #!/usr/bin/perl
 
 open(INFILE,"../resources/wsj/combined.pos");
-open(OUTFILE, "> ../resources/tagWordProb.txt");
-open(COUNTFILE, "> ../resources/tagWordCounts.txt");
+open(OUTFILE, "> ../resources/tag_word_count.dat");
 
 while($line = <INFILE>){
   next if /^\*x\*/;
   foreach $w (split(' ',$line)) {
     if ($w =~ /(.*)\/([^\/]+)$/) {
-      	++$frequencies{$2}{$1};
-      	if (!defined $words{$1})
+      	$word = $1;
+      	$tag = $2;
+      	if($tag =~ /(\w{2})\|(\w{2})\|(\w{2})/)
       	{
-      		$words{$1} = 1;
+      		$frequencies{$1}{$word}++;
+      		$frequencies{$2}{$word}++;
+      		$frequencies{$3}{$word}++;
+      		print "THREE: $1 $2 $3\n";
       	}
+      	elsif($tag =~ /(\w{2})\|(\w{2})/)
+      	{
+      		$frequencies{$1}{$word}++;
+      		$frequencies{$2}{$word}++;
+      	}
+      	else
+      	{
+      		$frequencies{$tag}{$word}++;
+      	}
+      	if (!defined $words{$word})
+      	{
+      		$words{$word} = 1;
+      	}
+      
     }
   }
 }
@@ -29,7 +46,8 @@ foreach $tag (sort keys %frequencies) {
  		{
 	 		$prob = $frequencies{$tag}{$word} / $total;
  			print OUTFILE "$tag\t$word\t$frequencies{$tag}{$word}\n";
- 			print COUNTFILE "$word\n";
  		}
  	} 
 }
+
+close(OUTFILE);
