@@ -8,12 +8,13 @@ $secStart = Time::HiRes::time;
 #===================================================================
 
 $end = -1;  # -1 means:  1. just started parsing no ./. found
-$previous_tag = "";
+$previous_tag[0] = "<s>";
 $pp_tag = "";
 $p_tag  = "";
 
 while (<>)
 {
+  $previous_tag[1] = "<s>";
   foreach $w (split(' ')) {
 
     if ($w =~ /(.*)\/(.*)/) {
@@ -28,13 +29,48 @@ while (<>)
 
       
       ##### the number of occurances of $previous_tag followed by $tag C(Tj,Tk) #####
-      if ($previous_tag ne "") 
-      {
-      	
-        $tags_matrix{$previous_tag}{$2}++;
-      }
-      $previous_tag = $2;
-      
+      $tag = $2;
+      if($tag =~ /(\w{2,3})\|(\w{2,3})\|(\w{2,3})/)
+      	{
+      		foreach $p_tag (@previous_tag)
+      		{
+      			if($p_tag ne "")
+      			{
+      			$tags_matrix{$p_tag}{$1}++;
+      			$tags_matrix{$p_tag}{$2}++;
+      			$tags_matrix{$p_tag}{$3}++;
+      			}
+      			else
+      			{
+      				print "$p_tag $1 $2 $3\n";
+      			}
+      		}
+      		@previous_tag = ();
+      		$previous_tag[0] = $1;	
+      		$previous_tag[1] = $2;	
+      		$previous_tag[2] = $3;	
+      		print "THREE: $1 $2 $3\n";
+      	}
+      	elsif($tag =~ /(\w{2,3})\|(\w{2,3})/)
+      	{
+      		foreach $p_tag (@previous_tag)
+      		{
+      			$tags_matrix{$p_tag}{$1}++;
+      			$tags_matrix{$p_tag}{$2}++;
+      		}
+      		@previous_tag = ();
+      		$previous_tag[0] = $1;	
+      		$previous_tag[1] = $2;	
+      	}
+      	else
+      	{
+      		foreach $p_tag (@previous_tag)
+      		{
+      			$tags_matrix{$p_tag}{$tag}++;
+      		}
+      		@previous_tag = ();
+            $previous_tag[0] = $tag;
+      	}
 
       ##### the number of occurances of $previous_tag followed by $tag C(Tj,Tk-1, Tk-2) #####
       if ($pp_tag ne "") {
@@ -113,7 +149,7 @@ for my $tag_prev_prev ( keys %$ref_to_pptm ) {
 ##### the number of occurances of $words that are tagged as $tag #####
 for $word ( keys %words ) {
   for $tag ( keys %{ $words{$word} } ) {
-    printf(OUTF_WORD_TAG_COUNT "%s\t%s\t%d\n", $word, $tag, $words{$word}{$tag});
+    printf(OUTF_WORD_TAG_COUNT "%s\t%s\t%d\n" , $tag, $word, $words{$word}{$tag});
   }
 }
 
