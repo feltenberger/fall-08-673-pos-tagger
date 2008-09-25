@@ -1,7 +1,12 @@
 #!/usr/bin/perl
 use Statistics::LineFit;
 
-open( INFILE, "../resources/start_tag_prevtag.dat" );
+#open( INFILE, "../resources/start_tag_prevtag.dat" );
+open( INFILE, "../resources/tag_word_count.dat" );
+
+#Total number of words or tags
+$numSpecies = 51457;
+#numSpecies = 81;
 
 sub log2 {
 	my $num = $_[0];
@@ -14,6 +19,12 @@ while ( $line = <INFILE> ) {
 	$tag = $words[0];
 	$count{$tag}{ $words[2] }++;
 	$count{$tag}{'total'} += $words[2];
+	
+	if(!exists $isSeen{$tag}{$words[1]})
+	{
+		$isSeen{$tag}{$words[1]} = 1;
+		$count{$tag}{'seen'}++;
+	}
 }
 close (INFILE);
 
@@ -79,17 +90,22 @@ foreach $tag ( sort keys %count ) {
 		
 		foreach $i ( 0 ... 4 ) {
 			$prob{$tag}[ $i + 1 ] =
-			  ( ( $i + 1 ) * ( $newNc[ $i + 1 ] / $newNc[$i] ) ) /
+			  ( ( $i + 2 ) * ( $newNc[ $i + 1 ] / $newNc[$i] ) ) /
 			  $count{$tag}{'total'};
 
 		}
-		$prob{$tag}[0] = $count{$tag}{'1'} / $count{$tag}{'total'};
+		$probTotalUnseen = $count{$tag}{'1'} / $count{$tag}{'total'};
+		$estimateUnseen = $numSpecies - $count{$tag}{'seen'}; 
+		$prob{$tag}[0] = (1 / $estimateUnseen) * $probTotalUnseen;
+		
 	}
 
 }
 
-open( INFILE, "../resources/start_tag_prevtag.dat");
-open( PROBS, " > ../resources/prev_tag_prob.dat");
+#open( INFILE, "../resources/start_tag_prevtag.dat");
+#open( PROBS, " > ../resources/prev_tag_prob.dat");
+open( INFILE, "../resources/tag_word_count.dat" );
+open( PROBS, " > ../resources/tag_word_prob.dat");
 
 while ( $line = <INFILE> ) {
 	@words = split( /\s/, $line );
