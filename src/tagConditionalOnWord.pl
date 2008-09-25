@@ -9,14 +9,14 @@ while($line = <INFILE>){
     if ($w =~ /(.*)\/([^\/]+)$/) {
       	$word = $1;
       	$tag = $2;
-      	if($tag =~ /(\w{2})\|(\w{2})\|(\w{2})/)
+      	if($tag =~ /(\w{2,3})\|(\w{2,3})\|(\w{2,3})/)
       	{
       		$frequencies{$1}{$word}++;
       		$frequencies{$2}{$word}++;
       		$frequencies{$3}{$word}++;
       		print "THREE: $1 $2 $3\n";
       	}
-      	elsif($tag =~ /(\w{2})\|(\w{2})/)
+      	elsif($tag =~ /(\w{2,3})\|(\w{2,3})/)
       	{
       		$frequencies{$1}{$word}++;
       		$frequencies{$2}{$word}++;
