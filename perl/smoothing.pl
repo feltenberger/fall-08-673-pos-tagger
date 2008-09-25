@@ -48,13 +48,11 @@ foreach $tag ( sort keys %count ) {
 		}
 		else
 		{
-			print "$tag $keyCounts[1] $count{$tag}{'total'}\n";
 			if ($keyCounts[1] < 5)
 			{
 				$checkTwoPoints = 0;
 				$prob{$tag}[$keyCounts[1]] = $keyCounts[1] / ($count{$tag}{'total'} + 1);
 				$prob{$tag}[0] = $prob{$tag}[$keyCounts[1]];
-				print "HERE $tag $prob{$tag}[0] \n";
 			}
 			else
 			{
