@@ -86,7 +86,7 @@ while (<>)
       }
         
       ##### the number of occurances of $tag in corpus C(Tj) #####
-      $tags{$2}++;
+      $tags{$tag}++;
 
 
       ##### the number of occurances of $words that are tagged as $tag #####
@@ -121,7 +121,7 @@ open OUTF_PPTAG_PTAG_TAG_COUNT, ">$outf5" or die "ERROR: could not open file $ou
 
 ##### number of occurances of elements in corpus #####
 printf(OUTF_GENERAL_STATS "Elements\t%d\n", $elements);
-
+printf(OUTF_GENERAL_STATS "Tags\t%d\n", (scalar keys %tags));
 ##### number of occurances of tags that start a sentence #####
 for $tag (keys %start_tags_hash) {
   printf(OUTF_START_TAGS_COUNT "<s>\t%s\t%s\n", $tag, $start_tags_hash{$tag});

@@ -3,6 +3,7 @@
 open(INFILE,"../resources/wsj/combined.pos");
 open(OUTFILE, "> ../resources/tag_word_count.dat");
 
+$totalWords= 0; 
 while($line = <INFILE>){
   next if /^\*x\*/;
   foreach $w (split(' ',$line)) {
@@ -28,12 +29,15 @@ while($line = <INFILE>){
       	if (!defined $words{$word})
       	{
       		$words{$word} = 1;
+      		$totalWords++;
       	}
       
     }
   }
 }
 
+print scalar keys %words;
+print "\n$totalWords \n";
 foreach $tag (sort keys %frequencies) {
 	
 	$total = 0;
