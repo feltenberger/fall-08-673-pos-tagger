@@ -30,6 +30,7 @@ while (<>)
       ##### the number of occurances of $previous_tag followed by $tag C(Tj,Tk) #####
       if ($previous_tag ne "") 
       {
+      	
         $tags_matrix{$previous_tag}{$2}++;
       }
       $previous_tag = $2;

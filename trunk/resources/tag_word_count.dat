@@ -29,58 +29,6 @@ $	US$	79
 :	...	260
 :	:	1922
 :	;	1657
-BD	operated	1
-BD	read	1
-BG	advertising	1
-BG	being	1
-BG	borrowing	1
-BG	closing	1
-BG	competing	1
-BG	cutting	1
-BG	dividing	1
-BG	hedging	1
-BG	investing	1
-BG	leasing	1
-BG	pending	10
-BG	polishing	1
-BG	printing	1
-BG	purchasing	1
-BG	refunding	1
-BG	resulting	1
-BG	sagging	1
-BG	sitting	1
-BG	spending	1
-BG	spotting	1
-BG	targeting	1
-BG	testing	1
-BG	trading	3
-BG	walking	1
-BG	warming	1
-BG	working	1
-BN	canceled	1
-BN	captured	1
-BN	closed	2
-BN	convinced	1
-BN	deprived	1
-BN	diluted	1
-BN	foreclosed	2
-BN	gone	1
-BN	imported	1
-BN	increased	1
-BN	needed	1
-BN	obliged	1
-BN	paid	1
-BN	rid	1
-BN	satisfied	1
-BN	surrounded	1
-BN	traded	1
-BP	put	1
-BP	read	1
-BR	Worse	2
-BR	better	1
-BR	less	2
-BR	more	7
-BS	most	2
 CC	&	1410
 CC	'N	1
 CC	'n'	5
@@ -8149,7 +8097,6 @@ JJ	Working	1
 JJ	World-Wide	1
 JJ	World-wide	5
 JJ	Worried	1
-JJ	Worse	2
 JJ	Worth	1
 JJ	Would-be	1
 JJ	Wrong	2
@@ -8770,7 +8717,7 @@ JJ	best-performing	3
 JJ	best-pitcher	1
 JJ	best-selling	2
 JJ	beta	3
-JJ	better	2
+JJ	better	1
 JJ	better-known	2
 JJ	better-off	1
 JJ	better-safe-than	1
@@ -11802,8 +11749,7 @@ JJ	lendable	1
 JJ	lending	2
 JJ	lengthy	14
 JJ	lenient	1
-JJ	less	2
-JJ	less-advanced	2
+JJ	less-advanced	1
 JJ	less-binding	1
 JJ	less-conservative	1
 JJ	less-creditworthy	1
@@ -12328,7 +12274,7 @@ JJ	moot	1
 JJ	moral	19
 JJ	morale-damaging	1
 JJ	moralistic	1
-JJ	more	11
+JJ	more	4
 JJ	more-advanced	1
 JJ	more-affordable	1
 JJ	more-attractive	1
@@ -12346,7 +12292,7 @@ JJ	mortgage-interest	2
 JJ	mortgage-securities	1
 JJ	mortgagebacked	1
 JJ	mortgaged-backed	1
-JJ	most	3
+JJ	most	1
 JJ	most-active	2
 JJ	most-favored-nation	1
 JJ	most-jingoistic	1
@@ -15922,10 +15868,10 @@ JJR	Slower	1
 JJR	Smaller	3
 JJR	Smaller-stock	1
 JJR	Stronger	2
-JJR	Worse	5
+JJR	Worse	7
 JJR	airconditioner	1
 JJR	beeper	1
-JJR	better	157
+JJR	better	158
 JJR	bigger	70
 JJR	bolder	2
 JJR	breezier	1
@@ -15984,7 +15930,8 @@ JJR	kinder	2
 JJR	larger	93
 JJR	later	1
 JJR	leaner	2
-JJR	less	284
+JJR	less	286
+JJR	less-advanced	1
 JJR	less-ambitious	1
 JJR	less-developed	1
 JJR	less-junky	1
@@ -16004,7 +15951,7 @@ JJR	meaner	1
 JJR	microcomputer	1
 JJR	milder	1
 JJR	minincomputer	1
-JJR	more	1445
+JJR	more	1456
 JJR	more-distinctive	1
 JJR	more-established	1
 JJR	more-powerful	1
@@ -16153,7 +16100,7 @@ JJS	loveliest	1
 JJS	lowest	31
 JJS	lowest-cost	1
 JJS	meanest	1
-JJS	most	549
+JJS	most	551
 JJS	most-contentious	1
 JJS	most-livable	2
 JJS	most-recent	1
@@ -16206,7 +16153,6 @@ JJS	widest	2
 JJS	winningest	1
 JJS	worst	61
 JJS	youngest	8
-JR	more	4
 LS	1	13
 LS	2	13
 LS	3	12
@@ -16746,7 +16692,6 @@ NN	EMPLOYEE	1
 NN	ENERGY	2
 NN	EST	2
 NN	ESTATE	1
-NN	EURODOLLARS	1
 NN	EVERYONE	1
 NN	EXCHANGE	1
 NN	Ear	1
@@ -17148,7 +17093,6 @@ NN	MONEY	10
 NN	MURDER	1
 NN	MX-missile	1
 NN	Machine	4
-NN	Machinists	1
 NN	Macmillan\/McGraw	1
 NN	Magazine	2
 NN	Mail-order	1
@@ -19835,7 +19779,7 @@ NN	credibility	36
 NN	credit	293
 NN	credit-backing	1
 NN	credit-card	25
-NN	credit-data	2
+NN	credit-data	1
 NN	credit-easing	2
 NN	credit-information	1
 NN	credit-rating	2
@@ -19974,7 +19918,7 @@ NN	dart-throwing	1
 NN	darts	1
 NN	dash	3
 NN	dashboard	2
-NN	data	48
+NN	data	39
 NN	data-processing	4
 NN	data-storage	1
 NN	data-transmission	1
@@ -20598,7 +20542,7 @@ NN	electricity	27
 NN	electrocardiogram	1
 NN	electroluminescence	1
 NN	electrolysis	2
-NN	electronic-data	2
+NN	electronic-data	1
 NN	electronic-warfare	1
 NN	electronics	17
 NN	electronics-product	1
@@ -26184,7 +26128,6 @@ NN	theatrical	2
 NN	theft	14
 NN	theme	27
 NN	theme-park	1
-NN	then-Air	1
 NN	then-chairman	1
 NN	then-client	1
 NN	then-husband	1
@@ -26827,7 +26770,7 @@ NN	waterfall	1
 NN	waterfront	2
 NN	watering	2
 NN	watershed	1
-NN	waterworks	8
+NN	waterworks	7
 NN	watt	3
 NN	wave	41
 NN	wavering	1
@@ -34699,7 +34642,7 @@ NNP	Machiguenga	5
 NNP	Machine	1
 NNP	Machinery	6
 NNP	Machines	26
-NNP	Machinists	3
+NNP	Machinists	4
 NNP	Machold	1
 NNP	Machon	1
 NNP	Macintosh	9
@@ -40844,6 +40787,7 @@ NNP	single-A	1
 NNP	slid	1
 NNP	streptokinase	2
 NNP	the	6
+NNP	then-Air	1
 NNP	then-Vice	1
 NNP	thirtysomething	1
 NNP	triple-A	1
@@ -41855,7 +41799,7 @@ NNS	EAST	2
 NNS	ELECTIONS	1
 NNS	EMPLOYEES	1
 NNS	ESPs	1
-NNS	EURODOLLARS	11
+NNS	EURODOLLARS	12
 NNS	EXECUTIVES	1
 NNS	Earnings	27
 NNS	East	8
@@ -42082,7 +42026,7 @@ NNS	MIPs	1
 NNS	MUNICIPALS	1
 NNS	Machiguengas	1
 NNS	Machines	2
-NNS	Machinists	15
+NNS	Machinists	16
 NNS	Magazines	4
 NNS	Magnolias	1
 NNS	Makers	1
@@ -42094,6 +42038,7 @@ NNS	Marketers	4
 NNS	Markets	17
 NNS	Marks	1
 NNS	Materials	1
+NNS	Matters	1
 NNS	Maturities	1
 NNS	Means	1
 NNS	Measures	2
@@ -43576,6 +43521,7 @@ NNS	creations	2
 NNS	creators	5
 NNS	creatures	8
 NNS	credentials	11
+NNS	credit-data	1
 NNS	credit-ratings	1
 NNS	creditors	119
 NNS	credits	33
@@ -43636,7 +43582,7 @@ NNS	dances	2
 NNS	dangers	8
 NNS	darlings	1
 NNS	dashes	1
-NNS	data	146
+NNS	data	161
 NNS	databases	1
 NNS	dates	8
 NNS	daughters	12
@@ -43936,6 +43882,7 @@ NNS	electro-optics	1
 NNS	electrochemicals	2
 NNS	electrodes	3
 NNS	electromagnets	1
+NNS	electronic-data	1
 NNS	electronic-systems	1
 NNS	electronics	54
 NNS	elements	12
@@ -46744,7 +46691,7 @@ NNS	teenagers	1
 NNS	teens	1
 NNS	teeth	8
 NNS	telecines	1
-NNS	telecommunications	31
+NNS	telecommunications	33
 NNS	telemarketers	4
 NNS	telephones	12
 NNS	telesystems	1
@@ -47091,6 +47038,7 @@ NNS	watchers	12
 NNS	watches	10
 NNS	waterfalls	1
 NNS	waters	15
+NNS	waterworks	1
 NNS	watts	3
 NNS	wavelengths	1
 NNS	waves	22
@@ -47199,10 +47147,7 @@ NNS	zigzags	1
 NNS	zlotys	1
 NNS	zombies	1
 NNS	zones	4
-NS	Machinists	1
-NS	Matters	1
-NS	data	6
-NS	telecommunications	2
+NPS	EURODOLLARS	1
 PDT	All	29
 PDT	Both	2
 PDT	Half	1
@@ -47216,10 +47161,10 @@ PDT	many	1
 PDT	nary	1
 PDT	quite	6
 PDT	such	103
-PO	books	1
 POS	'	864
 POS	'S	8
 POS	's	11024
+POS	books	1
 PRP	'T-	1
 PRP	'em	4
 PRP	's	11
@@ -47287,7 +47232,6 @@ PRP$	my	272
 PRP$	our	450
 PRP$	their	2301
 PRP$	your	228
-PS	EURODOLLARS	1
 RB	'til	1
 RB	12-2	1
 RB	338-44	1
@@ -48218,7 +48162,6 @@ RB	molecularly	1
 RB	momentarily	1
 RB	monthly	7
 RB	morally	6
-RB	more	4
 RB	moreover	7
 RB	most	1
 RB	mostly	91
@@ -48785,8 +48728,9 @@ RBR	In	1
 RBR	Later	2
 RBR	Less	3
 RBR	More	41
+RBR	Worse	2
 RBR	about	1
-RBR	better	72
+RBR	better	73
 RBR	bigger	1
 RBR	cheaper	1
 RBR	closer	19
@@ -48809,12 +48753,12 @@ RBR	higher	65
 RBR	in	1
 RBR	later	51
 RBR	leaner	1
-RBR	less	189
+RBR	less	191
 RBR	less-perfectly	1
 RBR	longer	57
 RBR	louder	2
 RBR	lower	82
-RBR	more	1080
+RBR	more	1091
 RBR	never	1
 RBR	poorer	1
 RBR	quicker	2
@@ -48839,7 +48783,7 @@ RBS	earliest	1
 RBS	hardest	7
 RBS	highest	1
 RBS	least	9
-RBS	most	519
+RBS	most	521
 RP	Howard	1
 RP	ON	1
 RP	Off	2
@@ -49047,7 +48991,6 @@ VB	Live	1
 VB	Look	12
 VB	MAKE	1
 VB	Make	6
-VB	Matters	1
 VB	McDonald	1
 VB	Mean	1
 VB	Meet	2
@@ -49180,7 +49123,6 @@ VB	advertise	4
 VB	advise	13
 VB	advocate	1
 VB	affect	61
-VB	affected	1
 VB	afflict	1
 VB	afford	34
 VB	aggravate	3
@@ -49441,7 +49383,6 @@ VB	cling	1
 VB	clip	1
 VB	clobber	1
 VB	close	165
-VB	closed	2
 VB	cloud	1
 VB	clutter	1
 VB	co-exist	1
@@ -49611,7 +49552,6 @@ VB	defunct	1
 VB	defuse	3
 VB	degenerate	1
 VB	delay	30
-VB	delaying	1
 VB	delegate	2
 VB	delete	1
 VB	deliberate	1
@@ -50352,7 +50292,6 @@ VB	omit	4
 VB	ooze	1
 VB	open	68
 VB	operate	53
-VB	operated	1
 VB	oppose	14
 VB	opt	1
 VB	order	14
@@ -50585,7 +50524,7 @@ VB	re-evaluate	2
 VB	re-examine	4
 VB	reach	77
 VB	react	10
-VB	read	44
+VB	read	42
 VB	readmit	1
 VB	reaffirm	1
 VB	realestate	1
@@ -51142,7 +51081,6 @@ VB	tower	1
 VB	trace	1
 VB	track	8
 VB	trade	60
-VB	traded	1
 VB	traduce	1
 VB	trail	6
 VB	train	8
@@ -51621,7 +51559,7 @@ VBD	climbed	90
 VBD	clinched	1
 VBD	clipped	1
 VBD	clobbered	1
-VBD	closed	392
+VBD	closed	394
 VBD	clubbed	1
 VBD	co-founded	4
 VBD	coasted	1
@@ -52330,7 +52268,7 @@ VBD	offered	98
 VBD	offset	7
 VBD	omitted	2
 VBD	opened	98
-VBD	operated	11
+VBD	operated	12
 VBD	opposed	21
 VBD	opted	5
 VBD	orchestrated	1
@@ -52513,7 +52451,7 @@ VBD	re-entered	2
 VBD	reached	63
 VBD	reacted	20
 VBD	reactivated	1
-VBD	read	13
+VBD	read	15
 VBD	readied	1
 VBD	reaffirmed	2
 VBD	realigned	1
@@ -52971,7 +52909,7 @@ VBD	toured	2
 VBD	touted	5
 VBD	traced	2
 VBD	tracked	2
-VBD	traded	44
+VBD	traded	45
 VBD	trailed	6
 VBD	transferred	7
 VBD	transformed	2
@@ -53430,7 +53368,7 @@ VBG	admitting	12
 VBG	admonishing	1
 VBG	adopting	11
 VBG	advancing	15
-VBG	advertising	20
+VBG	advertising	21
 VBG	advising	17
 VBG	advocating	6
 VBG	affecting	22
@@ -53532,7 +53470,7 @@ VBG	beeping	1
 VBG	begging	2
 VBG	beginning	90
 VBG	behaving	5
-VBG	being	538
+VBG	being	539
 VBG	believing	6
 VBG	belonging	5
 VBG	belting	1
@@ -53573,7 +53511,7 @@ VBG	boosting	24
 VBG	boozing	1
 VBG	bordering	2
 VBG	boring	3
-VBG	borrowing	10
+VBG	borrowing	11
 VBG	bothering	1
 VBG	bottling	5
 VBG	bottoming	3
@@ -53679,7 +53617,7 @@ VBG	clearing	12
 VBG	climbing	17
 VBG	clinching	1
 VBG	clogging	2
-VBG	closing	57
+VBG	closing	58
 VBG	clutching	3
 VBG	co-managing	1
 VBG	coaxing	1
@@ -53701,7 +53639,7 @@ VBG	committing	9
 VBG	communicating	1
 VBG	commuting	2
 VBG	comparing	3
-VBG	competing	35
+VBG	competing	36
 VBG	compiling	3
 VBG	complaining	12
 VBG	completing	14
@@ -53795,7 +53733,7 @@ VBG	curbing	9
 VBG	curing	1
 VBG	curtailing	1
 VBG	cushioning	1
-VBG	cutting	55
+VBG	cutting	56
 VBG	cycling	1
 VBG	dabbling	1
 VBG	damaging	5
@@ -53828,7 +53766,7 @@ VBG	defining	1
 VBG	deflecting	1
 VBG	defrauding	5
 VBG	defying	3
-VBG	delaying	9
+VBG	delaying	10
 VBG	delegating	1
 VBG	deleting	1
 VBG	deliberating	1
@@ -53914,7 +53852,7 @@ VBG	diverging	1
 VBG	diversifying	9
 VBG	diverting	3
 VBG	divesting	2
-VBG	dividing	2
+VBG	dividing	3
 VBG	diving	1
 VBG	divvying	1
 VBG	dizzying	2
@@ -54209,7 +54147,7 @@ VBG	healing	1
 VBG	heaping	1
 VBG	hearing	13
 VBG	heating	6
-VBG	hedging	9
+VBG	hedging	10
 VBG	helping	47
 VBG	hemorrhaging	3
 VBG	herding	1
@@ -54303,7 +54241,7 @@ VBG	introducing	15
 VBG	invading	1
 VBG	inventing	1
 VBG	investigating	25
-VBG	investing	32
+VBG	investing	33
 VBG	inviting	6
 VBG	invoking	2
 VBG	involving	76
@@ -54349,7 +54287,7 @@ VBG	leaking	5
 VBG	leaning	4
 VBG	leaping	5
 VBG	learning	17
-VBG	leasing	5
+VBG	leasing	6
 VBG	leaving	72
 VBG	legalizing	3
 VBG	lending	17
@@ -54555,7 +54493,7 @@ VBG	pedaling	1
 VBG	peddling	5
 VBG	peering	1
 VBG	pegging	2
-VBG	pending	67
+VBG	pending	77
 VBG	penetrating	1
 VBG	peppering	1
 VBG	performing	20
@@ -54599,6 +54537,7 @@ VBG	pointing	10
 VBG	poking	2
 VBG	policing	1
 VBG	policy-making	1
+VBG	polishing	1
 VBG	pollen-producing	1
 VBG	pollinating	1
 VBG	polluting	1
@@ -54640,7 +54579,7 @@ VBG	prevailing	7
 VBG	preventing	14
 VBG	previewing	1
 VBG	pricing	6
-VBG	printing	4
+VBG	printing	5
 VBG	privatizing	1
 VBG	probing	4
 VBG	proceeding	9
@@ -54676,7 +54615,7 @@ VBG	pulverizing	1
 VBG	pumping	8
 VBG	punching	1
 VBG	punishing	3
-VBG	purchasing	29
+VBG	purchasing	30
 VBG	purging	1
 VBG	pursuing	22
 VBG	pushing	51
@@ -54769,7 +54708,7 @@ VBG	refocusing	1
 VBG	reforming	5
 VBG	refreshing	1
 VBG	refueling	1
-VBG	refunding	4
+VBG	refunding	5
 VBG	refurbishing	2
 VBG	refusing	8
 VBG	regaining	1
@@ -54843,7 +54782,7 @@ VBG	restoring	8
 VBG	restraining	1
 VBG	restricting	8
 VBG	restructuring	33
-VBG	resulting	46
+VBG	resulting	47
 VBG	resuming	7
 VBG	resurging	1
 VBG	resuscitating	1
@@ -54899,7 +54838,7 @@ VBG	rushing	13
 VBG	sacking	2
 VBG	sacrificing	6
 VBG	safeguarding	1
-VBG	sagging	9
+VBG	sagging	10
 VBG	sailing	1
 VBG	saluting	1
 VBG	sanctioning	1
@@ -54997,7 +54936,7 @@ VBG	singling	3
 VBG	sinking	6
 VBG	siphoning	1
 VBG	sipping	1
-VBG	sitting	29
+VBG	sitting	30
 VBG	sizzling	1
 VBG	sketching	1
 VBG	skidding	1
@@ -55052,13 +54991,13 @@ VBG	specifying	3
 VBG	speculating	4
 VBG	speeding	5
 VBG	spelling	2
-VBG	spending	57
+VBG	spending	58
 VBG	spewing	3
 VBG	spinning	1
 VBG	spiraling	3
 VBG	sponsoring	6
 VBG	sporting	3
-VBG	spotting	2
+VBG	spotting	3
 VBG	sprawling	4
 VBG	spraying	3
 VBG	spreading	13
@@ -55181,7 +55120,7 @@ VBG	tantalizing	1
 VBG	tapering	1
 VBG	taping	3
 VBG	tapping	3
-VBG	targeting	13
+VBG	targeting	14
 VBG	tax-reducing	1
 VBG	teaching	3
 VBG	teaming	3
@@ -55194,7 +55133,7 @@ VBG	tendering	5
 VBG	tending	5
 VBG	terminating	1
 VBG	testifying	2
-VBG	testing	11
+VBG	testing	12
 VBG	thanking	1
 VBG	theory-teaching	1
 VBG	thinking	24
@@ -55224,7 +55163,7 @@ VBG	touting	10
 VBG	toying	3
 VBG	tracing	3
 VBG	tracking	8
-VBG	trading	159
+VBG	trading	162
 VBG	trailing	2
 VBG	training	5
 VBG	tramping	1
@@ -55319,12 +55258,12 @@ VBG	wailing	1
 VBG	waiting	69
 VBG	waiving	3
 VBG	waking	1
-VBG	walking	11
+VBG	walking	12
 VBG	wallowing	2
 VBG	wandering	2
 VBG	waning	3
 VBG	wanting	9
-VBG	warming	2
+VBG	warming	3
 VBG	warning	20
 VBG	warring	1
 VBG	washing	2
@@ -55365,7 +55304,7 @@ VBG	witnessing	5
 VBG	womanizing	2
 VBG	wondering	14
 VBG	wooing	8
-VBG	working	148
+VBG	working	149
 VBG	worrying	9
 VBG	worsening	8
 VBG	wrangling	4
@@ -55617,7 +55556,7 @@ VBN	advanced	15
 VBN	advertised	3
 VBN	advised	15
 VBN	advocated	2
-VBN	affected	57
+VBN	affected	58
 VBN	affiliated	7
 VBN	afflicted	2
 VBN	afforded	4
@@ -55823,12 +55762,12 @@ VBN	called	199
 VBN	calmed	1
 VBN	camouflaged	1
 VBN	campaigned	2
-VBN	canceled	25
+VBN	canceled	26
 VBN	canned	2
 VBN	canvassed	1
 VBN	capitalized	6
 VBN	capped	11
-VBN	captured	12
+VBN	captured	13
 VBN	cared	1
 VBN	carried	20
 VBN	carved	2
@@ -55885,7 +55824,7 @@ VBN	clobbered	6
 VBN	clocked	1
 VBN	clogged	2
 VBN	cloned	1
-VBN	closed	74
+VBN	closed	76
 VBN	clothed	1
 VBN	clouded	1
 VBN	clustered	2
@@ -55975,7 +55914,7 @@ VBN	controlled	56
 VBN	convened	2
 VBN	converted	19
 VBN	convicted	32
-VBN	convinced	15
+VBN	convinced	16
 VBN	convoluted	1
 VBN	cooked	3
 VBN	cooled	7
@@ -56090,7 +56029,7 @@ VBN	deployed	6
 VBN	deposed	2
 VBN	deposited	1
 VBN	depressed	15
-VBN	deprived	5
+VBN	deprived	6
 VBN	derailed	1
 VBN	deregulated	1
 VBN	derided	1
@@ -56120,7 +56059,7 @@ VBN	diagnosed	2
 VBN	dictated	2
 VBN	died	11
 VBN	digested	1
-VBN	diluted	18
+VBN	diluted	19
 VBN	diminished	15
 VBN	dined	1
 VBN	dipped	1
@@ -56405,7 +56344,7 @@ VBN	footnoted	1
 VBN	forbidden	1
 VBN	forced	95
 VBN	forecast	17
-VBN	foreclosed	3
+VBN	foreclosed	5
 VBN	foreseen	3
 VBN	foreshadowed	2
 VBN	forged	3
@@ -56455,7 +56394,7 @@ VBN	glued	3
 VBN	glutted	1
 VBN	gobbled	1
 VBN	goldbanded	1
-VBN	gone	71
+VBN	gone	72
 VBN	gored	1
 VBN	got	36
 VBN	gotten	29
@@ -56566,7 +56505,7 @@ VBN	implanted	2
 VBN	implemented	11
 VBN	implicated	5
 VBN	implied	4
-VBN	imported	26
+VBN	imported	27
 VBN	imposed	21
 VBN	impounded	1
 VBN	impoverished	1
@@ -56579,7 +56518,7 @@ VBN	inched	1
 VBN	inclined	10
 VBN	included	49
 VBN	incorporated	9
-VBN	increased	160
+VBN	increased	161
 VBN	incurred	19
 VBN	indexed	1
 VBN	indicated	31
@@ -56814,7 +56753,7 @@ VBN	named	228
 VBN	narrowed	9
 VBN	nationalized	2
 VBN	necessitated	1
-VBN	needed	96
+VBN	needed	97
 VBN	negated	1
 VBN	neglected	6
 VBN	negotiated	25
@@ -56832,7 +56771,7 @@ VBN	numbered	2
 VBN	nurtured	1
 VBN	objected	1
 VBN	obligated	5
-VBN	obliged	4
+VBN	obliged	5
 VBN	obliterated	1
 VBN	observed	3
 VBN	obsessed	1
@@ -56846,7 +56785,7 @@ VBN	offset	51
 VBN	omitted	14
 VBN	opened	40
 VBN	openended	1
-VBN	operated	12
+VBN	operated	13
 VBN	opposed	46
 VBN	opted	1
 VBN	orchestrated	1
@@ -56906,7 +56845,7 @@ VBN	owned	107
 VBN	paced	1
 VBN	packaged	10
 VBN	packed	5
-VBN	paid	192
+VBN	paid	193
 VBN	painted	9
 VBN	paired	4
 VBN	panned	1
@@ -57268,7 +57207,7 @@ VBN	revved	1
 VBN	rewarded	5
 VBN	reworked	1
 VBN	rewritten	2
-VBN	rid	1
+VBN	rid	2
 VBN	ridiculed	1
 VBN	rigged	1
 VBN	righted	1
@@ -57305,7 +57244,7 @@ VBN	sandwiched	1
 VBN	sanitized	1
 VBN	sapped	2
 VBN	sat	5
-VBN	satisfied	10
+VBN	satisfied	11
 VBN	saturated	1
 VBN	saved	11
 VBN	scaled	8
@@ -57528,7 +57467,7 @@ VBN	surged	7
 VBN	surpassed	1
 VBN	surprised	25
 VBN	surrendered	2
-VBN	surrounded	6
+VBN	surrounded	7
 VBN	surveyed	27
 VBN	survived	4
 VBN	suspected	5
@@ -57612,7 +57551,7 @@ VBN	touched	5
 VBN	touted	2
 VBN	traced	2
 VBN	tracked	10
-VBN	traded	101
+VBN	traded	102
 VBN	traduced	1
 VBN	trailed	2
 VBN	trained	9
@@ -58538,7 +58477,7 @@ VBP	purchase	3
 VBP	purport	1
 VBP	pursue	1
 VBP	push	3
-VBP	put	20
+VBP	put	21
 VBP	qualify	4
 VBP	question	18
 VBP	quit	3
@@ -58552,7 +58491,7 @@ VBP	re-emphasize	1
 VBP	re-evaluate	1
 VBP	reach	12
 VBP	react	4
-VBP	read	14
+VBP	read	16
 VBP	realize	14
 VBP	reapportion	1
 VBP	reason	1
@@ -58939,7 +58878,7 @@ VBZ	Lives	1
 VBZ	Loves	1
 VBZ	MOVES	1
 VBZ	Masks	1
-VBZ	Matters	1
+VBZ	Matters	2
 VBZ	Means	2
 VBZ	PAYS	1
 VBZ	PLANS	1
