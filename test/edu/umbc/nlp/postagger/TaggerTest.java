@@ -15,14 +15,16 @@ import org.apache.log4j.Logger;
  */
 public class TaggerTest extends TestCase {
 	private static final Logger log = Logger.getLogger(TaggerTest.class);
-	private String aMatrixFilename = "/bigram-dummy-data.txt";
-	// private String aMatrixFilename = "/prev_tag_prob.txt";
-	private String bMatrixFilename = "/tag-word-prob-dummy-data.txt";
-	// private String bMatrixFilename = "/tagWordProbs.txt";
+	// private String aMatrixFilename = "/bigram-dummy-data.txt";
+	private String aMatrixFilename = "/prev_tag_prob.dat";
+	// private String bMatrixFilename = "/tag-word-prob-dummy-data.txt";
+	private String bMatrixFilename = "/tag_word_prob.dat";
+	private String testFilename = "/wsj/evaluation.pos";
 	private File bMatrixFile = null;
 	private File aMatrixFile = null;
-	private List<String> linesOfFile = null;
-	private String[][] splitLinesOfFile = null;
+	private Tagger tagger = null;
+	private String[][] splitLinesOfTagWordProbFile = null;
+	private List<SimpleTaggedSentence> testSentences = null;
 
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#setUp()
@@ -32,13 +34,18 @@ public class TaggerTest extends TestCase {
 		super.setUp();
 		bMatrixFile = new File(getClass().getResource(bMatrixFilename).getFile());
 		aMatrixFile = new File(getClass().getResource(aMatrixFilename).getFile());
-		linesOfFile = FileUtils.readLines(bMatrixFile);
-		splitLinesOfFile = new String[linesOfFile.size()][];
+
+		List<String> linesOfFile = FileUtils.readLines(bMatrixFile);
+		splitLinesOfTagWordProbFile = new String[linesOfFile.size()][];
+		tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
+
 		int i = 0;
 		for(String line : linesOfFile) {
-			splitLinesOfFile[i] = TaggerHelper.parseWordProbabilityLineFromFile(line);
+			splitLinesOfTagWordProbFile[i] = TaggerHelper.parseWordProbabilityLineFromFile(line);
 			i++;
 		}
+
+		addSomeTestSentences();
 	}
 
 	/* (non-Javadoc)
@@ -46,6 +53,21 @@ public class TaggerTest extends TestCase {
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
+	}
+
+	/**
+	 *
+	 */
+	private void addSomeTestSentences() {
+		testSentences = new ArrayList<SimpleTaggedSentence>();
+		String ts = "I/PRP love/VBP to/TO eat/VB pizza/NN !/.";
+		testSentences.add(new SimpleTaggedSentence(ts));
+		ts = "I/PRP am/VBP stark/JJ raving/JJ mad/JJ !/.";
+		testSentences.add(new SimpleTaggedSentence(ts));
+		ts = "Please/RB take/VB out/RP the/DT trash/NN ./.";
+		testSentences.add(new SimpleTaggedSentence(ts));
+		ts = "Natural/NNP language/NN processing/NN is/VBZ fun/NN ./.";
+		testSentences.add(new SimpleTaggedSentence(ts));
 	}
 
 	/**
@@ -69,25 +91,40 @@ public class TaggerTest extends TestCase {
 		assertEquals("NGram probability is correct", ngram.getProbability().doubleValue(), ngramProb.doubleValue());
 	}
 
+	/**
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public void testViterbiOnTestCorpus() throws Exception {
+		List<String> linesOfTestFile = FileUtils.readLines(new File(getClass().getResource(testFilename).getFile()));
+		for(String line : linesOfTestFile) {
+			SimpleTaggedSentence sts = new SimpleTaggedSentence(line);
+			doTestOfSentence(tagger, sts);
+		}
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testViterbi() throws Exception {
-		Tagger tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
-		List<PartOfSpeech>expected = new ArrayList<PartOfSpeech>();
-		// expected.add(tagger.getPartOfSpeech("PPSS"));
-		expected.add(tagger.getPartOfSpeech("PRP"));
-		expected.add(tagger.getPartOfSpeech("VB"));
-		expected.add(tagger.getPartOfSpeech("TO"));
-		expected.add(tagger.getPartOfSpeech("VB"));
-		List<String> sentence = new ArrayList<String>();
-		sentence.add("I");
-		sentence.add("want");
-		sentence.add("to");
-		sentence.add("race");
-		List<TaggedWord>tagged = tagger.tagPartsOfSpeech(sentence);
-		assertEquals("Tagged word sequence same size as expected", expected.size(), tagged.size());
+		for(int i = 0; i < this.testSentences.size(); i++) {
+			SimpleTaggedSentence testSentence = this.testSentences.get(i);
+			this.doTestOfSentence(tagger, testSentence);
+		}
+	}
+
+	/**
+	 * @param tagger
+	 * @param sts
+	 */
+	private void doTestOfSentence(Tagger tagger, SimpleTaggedSentence sts) {
+		List<TaggedWord>tagged = tagger.tagPartsOfSpeech(sts.getBaseSentenceList());
+		List<TaggedWord>expected = sts.getListOfTaggedWords();
 		for(int i = 0; i < expected.size(); i++) {
 			TaggedWord actualTW = tagged.get(i);
+			TaggedWord expectedTW = expected.get(i);
 			PartOfSpeech actualTag = actualTW.getPos();
-			PartOfSpeech expectedTag = expected.get(i);
+			PartOfSpeech expectedTag = expectedTW.getPos();
 			assertEquals("Expected: " + expectedTag + ", actual: " + actualTag, expectedTag, actualTag);
 		}
 	}
@@ -100,7 +137,7 @@ public class TaggerTest extends TestCase {
 	 */
 	@SuppressWarnings("unchecked")
 	private double findProbabilityFromFile(String word, String partOfSpeech) {
-		for(String[] lineParts : splitLinesOfFile) {
+		for(String[] lineParts : splitLinesOfTagWordProbFile) {
 			if(partOfSpeech.equals(lineParts[0]) && word.equals(lineParts[1])) {
 				return Double.parseDouble(lineParts[2]);
 			}
