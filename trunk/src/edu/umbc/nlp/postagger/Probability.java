@@ -16,8 +16,11 @@ public class Probability {
 	 * @return the probability
 	 */
 	public double doubleValue() {
-		return probability;
+		if(TaggerGlobals.USE_LOG_FOR_PROBABILITY_CALC)
+			return Math.log(this.probability);
+		return this.probability;
 	}
+
 	/**
 	 * @return
 	 */

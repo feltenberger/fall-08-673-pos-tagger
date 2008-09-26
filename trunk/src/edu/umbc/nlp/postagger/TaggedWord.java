@@ -20,6 +20,11 @@ public class TaggedWord {
 		this.word = word;
 		this.pos = partOfSpeech;
 	}
+	public TaggedWord(String word, String partOfSpeech) {
+		this.word = word;
+		this.pos = new PartOfSpeech(partOfSpeech);
+		this.prob = new Probability(-1.0);
+	}
 	/**
 	 *
 	 */
@@ -65,7 +70,7 @@ public class TaggedWord {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		DecimalFormat df = new DecimalFormat("0.0000000000000");
-		return "viterbi[" + this.pos.getPartOfSpeech() + "][" + this.getWord() + "] = " + df.format(this.getProb().doubleValue());
+		DecimalFormat df = new DecimalFormat("0.00000000000000000");
+		return "v[" + this.pos.getPartOfSpeech() + "][" + this.getWord() + "] = " + df.format(this.getProb().doubleValue());
 	}
 }
