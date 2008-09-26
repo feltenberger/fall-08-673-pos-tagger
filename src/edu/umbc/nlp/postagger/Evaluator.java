@@ -79,11 +79,12 @@ public class Evaluator
 	public static void main(String[] args) throws Exception
 	{
 		//create a new tagger
-		BaselineTagger myBaselineTagger = new BaselineTagger("/tagWordProb.txt");
-		//convert the corpus to nice sentences
-		List<Sentence> sentences = myBaselineTagger.parseCorpus("/wsj/combined.pos");
+		BaselineTagger myBaselineTagger = new BaselineTagger("/tag_word_prob.dat");
+		List<Sentence> sentences = myBaselineTagger.parseEvalCorpus("/wsj/evaluation.pos");
 				
-		//myBaselineTagger.splitCorpus("/wsj/training1.pos", "/wsj/evaluation1.pos", sentences);
+		//THIS IS TO SPLIT THE ORIGINAL WSJ CORPUS
+		//List<Sentence> sentences = myBaselineTagger.parseCorpus("/wsj/combined.pos");
+		//myBaselineTagger.splitCorpus("/wsj/training.pos", "/wsj/evaluation.pos", sentences);
 		
 		
 		List<TaggedSentence> tagged_sentences = new ArrayList<TaggedSentence>();
@@ -92,8 +93,7 @@ public class Evaluator
 		{						
 			//tag the sentence
 			//THIS EVENTUALLY NEED TO BE THE tagSentenceImproved METHOD
-			TaggedSentence new_s = myBaselineTagger.tagSentence(s);
-			
+			TaggedSentence new_s = myBaselineTagger.tagSentence(s);			
 			tagged_sentences.add( new_s );
 			/*
 			System.out.println("Control:");
@@ -109,7 +109,7 @@ public class Evaluator
 						+ "/" + new_s.getHypothesisedTags().get(i) + " ");							
 			}
 			System.out.println("\n------------------------------------------");
-			*/	
+			*/
 		}
 		
 		Evaluator myEvaluator = new Evaluator(tagged_sentences);
@@ -117,7 +117,8 @@ public class Evaluator
 		System.out.println("------------------------------------------");		
 		System.out.println("Word Error Rate = " + myEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myEvaluator.getKnownWord_WordErrorRate());
-		System.out.println("Unknown Word WER = " + myEvaluator.getUnknownWord_WordErrorRate());			
+		System.out.println("Unknown Word WER = " + myEvaluator.getUnknownWord_WordErrorRate());
+		
 	}
 	
 }

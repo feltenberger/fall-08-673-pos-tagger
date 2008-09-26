@@ -34,7 +34,7 @@ public class BaselineTagger {
 	 */
 	public BaselineTagger(String trainingFile)throws IOException
 	{
-		this.trainingFile = trainingFile;		
+		this.trainingFile = trainingFile;	
 		word_pos_map = new HashMap<String, MostFrequentTag>();
 		this.train();
 	}
@@ -134,6 +134,7 @@ public class BaselineTagger {
 			}
 			else
 			{
+				System.out.println(sentence.getSentence().get(i));
 				new_sentence.add(sentence.getSentence().get(i),
 						sentence.getTags().get(i), "NN", false);				
 			}
@@ -181,11 +182,11 @@ public class BaselineTagger {
 	 * @param String filename - the name of the WSJ format file	 * 
 	 * @return List<Sentence> - the sentences of the corpus in a list.
 	 */
-	public List<Sentence> parseCorpus(String evaluationFile)throws IOException
+	public List<Sentence> parseCorpus(String corpusFile)throws IOException
 	{
 		List<Sentence> sentences = new ArrayList<Sentence>();
 		
-		File file = new File(Tagger.class.getResource(evaluationFile).getFile());
+		File file = new File(Tagger.class.getResource(corpusFile).getFile());
 		List<String> lines = FileUtils.readLines(file);
 		
 		Sentence s = new Sentence();
@@ -193,22 +194,8 @@ public class BaselineTagger {
 		for(String line : lines)
 		{
 			String test = line.trim();
-			if (line.startsWith("=") || test.contains("/."))
-			{
-				if (test.contains("/."))
-				{
-					String[] splitline = line.split(" ");
-					for (int i =0; i < splitline.length; i++)
-					{
-						if (splitline[i].contains("/"))
-						{						
-							String[] wordtag = splitline[i].split("/");
-							String word = wordtag[0].trim();
-							String tag = wordtag[1].trim();
-							s.addWordAndTag(word, tag);						
-						}
-					}
-				}
+			if (line.startsWith("="))
+			{				
 				if (s.getSentence().size() > 0) //if we actually have a sentence
 				{
 					sentences.add(s); // add the current sentence
@@ -217,23 +204,42 @@ public class BaselineTagger {
 				s = new Sentence(); //create a new sentence
 			}
 			else
-			{
-				
-				String[] splitline = line.split(" ");
-				for (int i =0; i < splitline.length; i++)
-				{
-					if (splitline[i].contains("/"))
-					{						
-						String[] wordtag = splitline[i].split("/");
-						String word = wordtag[0].trim();
-						String tag = wordtag[1].trim();
-						s.addWordAndTag(word, tag);						
-					}
-				}
+			{				
+				s = corpus_line_parse(s, line);
 			}			
 		}	
 	
 		return sentences;
+	}
+	private Sentence corpus_line_parse(Sentence sentence, String line)
+	{
+		String[] splitline = line.split(" ");
+		for (int i = 0; i < splitline.length; i++)
+		{		
+			String[] wordtag = corpus_item_split(splitline[i]);
+			if (wordtag.length == 2)
+			{
+				String word = wordtag[0].trim();
+				String tag = wordtag[1].trim();
+				sentence.addWordAndTag(word, tag);
+			}			
+		}
+		return sentence;
+	}
+	
+	private String[] corpus_item_split(String item)
+	{
+		if (item.contains("\\/"))
+		{						
+			//  3\/4/CD
+			String[] return_item = new String[2];
+			return_item[0] = item.substring(0, item.lastIndexOf('/'));
+			return_item[1] = item.substring(item.lastIndexOf('/')+1);
+			
+			return return_item;
+								
+		}		
+		return item.split("/");
 	}
 	
 	public void splitCorpus(String training_filename, String testing_filename, List<Sentence> sentences) throws IOException
@@ -268,5 +274,42 @@ public class BaselineTagger {
 		}
 		FileUtils.writeLines(training, train, "\n");
 		FileUtils.writeLines(testing, test, "\n");
+	}
+
+	private Sentence trainingCorpus_line_parse(String line)
+	{
+		Sentence sentence = new Sentence();
+		String[] splitline = line.split(" ");
+		for (int i = 0; i < splitline.length; i++)
+		{		
+			String[] wordtag = corpus_item_split(splitline[i]);
+			if (wordtag.length == 2)
+			{
+				String word = wordtag[0].trim();
+				String tag = wordtag[1].trim();
+				sentence.addWordAndTag(word, tag);
+			}			
+		}
+		return sentence;
+	}
+	
+	public List<Sentence> parseEvalCorpus(String evaluationFile)throws IOException
+	{
+		List<Sentence> sentences = new ArrayList<Sentence>();
+		
+		File file = new File(Tagger.class.getResource(evaluationFile).getFile());
+		List<String> lines = FileUtils.readLines(file);
+		
+		for(String line : lines)
+		{
+			Sentence s = trainingCorpus_line_parse(line);
+			if (s.getSentence().size() > 0) //if we actually have a sentence
+			{
+				sentences.add(s); // add the current sentence
+			}
+						
+		}	
+	
+		return sentences;
 	}
 }
