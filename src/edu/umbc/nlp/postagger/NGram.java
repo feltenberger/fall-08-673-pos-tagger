@@ -1,6 +1,3 @@
-/**
- *
- */
 package edu.umbc.nlp.postagger;
 
 import java.util.ArrayList;

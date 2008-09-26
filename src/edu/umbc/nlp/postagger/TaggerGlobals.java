@@ -16,4 +16,5 @@ public class TaggerGlobals {
 	public static final String DEFAULT_STRING_FOR_ZERO_PROB = "<DEFAULT>";
 	public static final String FILE_PARSING_FIELD_DELIMETER = "	";
 	public static final boolean USE_DEFAULT_PROBABILITIES = true;
+	public static final boolean USE_LOG_FOR_PROBABILITY_CALC = false;
 }

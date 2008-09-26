@@ -38,7 +38,8 @@ public class Tagger {
 	/**
 	 * Given an array of parts of speech in historical order,
 	 * i.e. the trigram "my name is" would be passed in as:
-	 * { "my", "name", "is" }.
+	 * { "my", "name", "is" }, return the NGram for that
+	 * sequence.
 	 * @param partsOfSpeech
 	 * @return
 	 */
@@ -238,14 +239,15 @@ public class Tagger {
 	 * @param backpointer
 	 */
 	private void dumpBackpointers(int backpointer[][]) {
+		String rs = "";
 		for(int row = 0; row < backpointer.length; row++) {
-			String rs = "";
 			for(int col = 0; col < backpointer[row].length; col++) {
-				rs += "	" + "bp[" + row + "][" + col + "] = " + backpointer[row][col];
+				if(col > 0) rs += "	";
+				rs += "bp[" + row + "][" + col + "] = " + backpointer[row][col];
 			}
-			rs += "";
-			log.info(rs);
+			rs += "\n";
 		}
+		log.info("\n" + rs);
 	}
 
 	/**
@@ -253,14 +255,16 @@ public class Tagger {
 	 * @param viterbi
 	 */
 	private void dumpViterbiMatrix(List<String> sortedPartsOfSpeech, TaggedWord[][] viterbi) {
-		for(TaggedWord[] row : viterbi) {
-			String rs = "";
-			for(TaggedWord cell : row) {
-				rs += "	" + cell;
+		String rs = "";
+		for(int row = 0; row < viterbi.length; row++) {
+			for(int col = 0; col < viterbi[0].length; col++) {
+				TaggedWord cell = viterbi[row][col];
+				if(col > 0) rs += "	";
+				rs += "(" + row + "," + col + ")-" + cell;
 			}
-			rs += "";
-			log.info(rs);
+			rs += "\n";
 		}
+		log.info("\n" + rs);
 	}
 
 	/**
