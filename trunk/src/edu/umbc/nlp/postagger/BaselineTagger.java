@@ -11,6 +11,8 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import java.util.Random;
+
 
 /**
  * Class BaselineTagger implements a PoS-tagger that is capable of tagging the words
@@ -190,8 +192,23 @@ public class BaselineTagger {
 		
 		for(String line : lines)
 		{
-			if (line.startsWith("="))
-			{				
+			String test = line.trim();
+			if (line.startsWith("=") || test.contains("/."))
+			{
+				if (test.contains("/."))
+				{
+					String[] splitline = line.split(" ");
+					for (int i =0; i < splitline.length; i++)
+					{
+						if (splitline[i].contains("/"))
+						{						
+							String[] wordtag = splitline[i].split("/");
+							String word = wordtag[0].trim();
+							String tag = wordtag[1].trim();
+							s.addWordAndTag(word, tag);						
+						}
+					}
+				}
 				if (s.getSentence().size() > 0) //if we actually have a sentence
 				{
 					sentences.add(s); // add the current sentence
@@ -219,5 +236,37 @@ public class BaselineTagger {
 		return sentences;
 	}
 	
-
+	public void splitCorpus(String training_filename, String testing_filename, List<Sentence> sentences) throws IOException
+	{
+		File training = new File(Tagger.class.getResource(training_filename).getFile());
+		File testing = new File(Tagger.class.getResource(testing_filename).getFile());
+		Random generator = new Random();
+		
+		List<String> train = new ArrayList<String>();
+		List<String> test = new ArrayList<String>();
+		
+		for (int i = 0; i < sentences.size(); i++)
+		{		
+			List<String> words = sentences.get(i).getSentence();
+			List<String> tags = sentences.get(i).getTags();
+			String to_write = "";
+			for (int j = 0; j < words.size(); j++)
+			{
+				to_write += words.get(j) + "/" + tags.get(j) + " ";
+			}
+			to_write = to_write.trim();			
+			double r = generator.nextDouble();
+			
+			if (r < 0.8)
+			{
+				train.add(to_write);				
+			}
+			else
+			{
+				test.add(to_write);				
+			}
+		}
+		FileUtils.writeLines(training, train, "\n");
+		FileUtils.writeLines(testing, test, "\n");
+	}
 }

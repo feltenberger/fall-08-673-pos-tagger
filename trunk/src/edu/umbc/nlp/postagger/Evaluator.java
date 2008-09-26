@@ -81,7 +81,10 @@ public class Evaluator
 		//create a new tagger
 		BaselineTagger myBaselineTagger = new BaselineTagger("/tagWordProb.txt");
 		//convert the corpus to nice sentences
-		List<Sentence> sentences = myBaselineTagger.parseCorpus("/wsj/01/wsj_0101.pos");
+		List<Sentence> sentences = myBaselineTagger.parseCorpus("/wsj/combined.pos");
+				
+		//myBaselineTagger.splitCorpus("/wsj/training1.pos", "/wsj/evaluation1.pos", sentences);
+		
 		
 		List<TaggedSentence> tagged_sentences = new ArrayList<TaggedSentence>();
 		
@@ -92,6 +95,7 @@ public class Evaluator
 			TaggedSentence new_s = myBaselineTagger.tagSentence(s);
 			
 			tagged_sentences.add( new_s );
+			/*
 			System.out.println("Control:");
 			for (int i = 0; i < new_s.getSentence().size(); i++)
 			{
@@ -104,15 +108,16 @@ public class Evaluator
 				System.out.print(new_s.getSentence().get(i) 
 						+ "/" + new_s.getHypothesisedTags().get(i) + " ");							
 			}
-			System.out.println("\n------------------------------------------");	
+			System.out.println("\n------------------------------------------");
+			*/	
 		}
 		
 		Evaluator myEvaluator = new Evaluator(tagged_sentences);
-		
+				
 		System.out.println("------------------------------------------");		
 		System.out.println("Word Error Rate = " + myEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myEvaluator.getUnknownWord_WordErrorRate());			
 	}
-
+	
 }
