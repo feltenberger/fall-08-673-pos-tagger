@@ -3,6 +3,7 @@ package edu.umbc.nlp.postagger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class Tagger {
 	 * This map combined with the PartOfSpeech's word probabilities makes the bMatrix.
 	 */
 	private Map<String, PartOfSpeech> allPartsOfSpeech = new HashMap<String, PartOfSpeech>();
+	private Set<String>allWords = new HashSet<String>();
 	private PartOfSpeech startState = new PartOfSpeech(TaggerGlobals.START_TAG);
 	private PartOfSpeech defaultState = new PartOfSpeech(TaggerGlobals.DEFAULT_TAG);
 	//private PartOfSpeech endState = new PartOfSpeech("<e>");
@@ -96,6 +98,21 @@ public class Tagger {
 	}
 
 	/**
+	 * @param word
+	 */
+	public void addToKnownWords(String word) {
+		this.allWords.add(word);
+	}
+
+	/**
+	 * @param word
+	 * @return
+	 */
+	public boolean isKnownWord(String word) {
+		return this.allWords.contains(word);
+	}
+
+	/**
 	 * Adds the part of speech if it doesn't exist.  Will throw an error
 	 * if a different instance of the same part of speech is added.
 	 * @param pos
@@ -160,13 +177,10 @@ public class Tagger {
 	private void viterbiStartTransition(String firstWord, List<String>sortedPartsOfSpeech, TaggedWord[][]viterbi, int[][]backpointer) {
 		for(int s = 0; s < sortedPartsOfSpeech.size(); s++) {
 			String partOfSpeechStr = sortedPartsOfSpeech.get(s);
-			//log.info("Part of speech: " + partOfSpeechStr);
 			TaggedWord tw = new TaggedWord();
+			tw.setKnownWord(this.isKnownWord(firstWord));
 			Double likelihood = this.getLikelihoodProbability(firstWord, partOfSpeechStr);
-			//log.info("Likelihood: P(" + firstWord + "|" + partOfSpeechStr + ") = " + likelihood.doubleValue());
-
 			Double prior = this.getPriorProbability(partOfSpeechStr, new String[] {startState.getPartOfSpeech()});
-			//log.info("Prior: P(" + partOfSpeechStr + "|" + startStateStr + ") = " + prior.doubleValue());
 			tw.setProb(likelihood + prior);
 			tw.setPos(this.getPartOfSpeech(partOfSpeechStr));
 			tw.setWord(firstWord);
@@ -198,10 +212,7 @@ public class Tagger {
 				for(int sp = 1; sp < viterbi.length; sp++) {
 					TaggedWord priorColState = viterbi[sp][priorCol];
 
-					// NGram transToThisColNgram = this.getNGram(state, new String[] { tmpVit.getPos().getPartOfSpeech() } );
-					// Probability tmpProb = transToThisColNgram.getProbability();
 					Double transToThisColProb = this.getPriorProbability(state, new String[] { priorColState.getPos().getPartOfSpeech() });
-					//log.info(transToThisColNgram);
 					transToThisColProb = transToThisColProb + priorColState.getProb();
 					if(transToThisColProb > maxPriorProb) {
 						maxPriorProb = transToThisColProb;
@@ -209,9 +220,8 @@ public class Tagger {
 					}
 				}
 				double maxProbability = maxPriorProb + likelihood;
-				viterbi[s][t] = new TaggedWord(maxProbability, word, this.getPartOfSpeech(state));
+				viterbi[s][t] = new TaggedWord(maxProbability, word, this.getPartOfSpeech(state), this.isKnownWord(word));
 				backpointer[s][t] = backpointerRow;
-				// log.info("max1-N( viterbi[s'][" + s + "] * P(" + state + "|" + "s') ) * P(" + word + "|" + state + ") = " + viterbi[s][t].getProb().doubleValue());
 			}
 		}
 	}
@@ -247,7 +257,6 @@ public class Tagger {
 	 */
 	private List<TaggedWord> traceBackpointerForMaxProbSentence(int startRow, TaggedWord[][]viterbi, int[][]backpointer) {
 		List<TaggedWord> tagged = new ArrayList<TaggedWord>();
-		//log.info("Backpointer to last row in viterbi: " + bpRowFromFinalState);
 		int currBpRow = startRow;
 		//solution.add(viterbi[currBpRow][viterbi[0].length-1]);
 		for(int col = backpointer[0].length-1; col > 0; col--) {
