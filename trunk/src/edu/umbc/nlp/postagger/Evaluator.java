@@ -1,7 +1,16 @@
 package edu.umbc.nlp.postagger;
 
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 public class Evaluator
 {
@@ -76,49 +85,6 @@ public class Evaluator
 		UnknownWER = (double)mismatch_unknown / (double) unknown_word_count;		
 	}
 	
-	public static void main(String[] args) throws Exception
-	{
-		//create a new tagger
-		BaselineTagger myBaselineTagger = new BaselineTagger("/tag_word_prob.dat");
-		List<Sentence> sentences = myBaselineTagger.parseEvalCorpus("/wsj/evaluation.pos");
-				
-		//THIS IS TO SPLIT THE ORIGINAL WSJ CORPUS
-		//List<Sentence> sentences = myBaselineTagger.parseCorpus("/wsj/combined.pos");
-		//myBaselineTagger.splitCorpus("/wsj/training.pos", "/wsj/evaluation.pos", sentences);
-		
-		
-		List<TaggedSentence> tagged_sentences = new ArrayList<TaggedSentence>();
-		
-		for (Sentence s : sentences)
-		{						
-			//tag the sentence
-			//THIS EVENTUALLY NEED TO BE THE tagSentenceImproved METHOD
-			TaggedSentence new_s = myBaselineTagger.tagSentence(s);			
-			tagged_sentences.add( new_s );
-			/*
-			System.out.println("Control:");
-			for (int i = 0; i < new_s.getSentence().size(); i++)
-			{
-				System.out.print(new_s.getSentence().get(i) 
-						+ "/" + new_s.getTags().get(i) + " ");							
-			}
-			System.out.println("\nTagger Output:");
-			for (int i = 0; i < new_s.getSentence().size(); i++)
-			{
-				System.out.print(new_s.getSentence().get(i) 
-						+ "/" + new_s.getHypothesisedTags().get(i) + " ");							
-			}
-			System.out.println("\n------------------------------------------");
-			*/
-		}
-		
-		Evaluator myEvaluator = new Evaluator(tagged_sentences);
-				
-		System.out.println("------------------------------------------");		
-		System.out.println("Word Error Rate = " + myEvaluator.getWordErrorRate());
-		System.out.println("Known Word WER = " + myEvaluator.getKnownWord_WordErrorRate());
-		System.out.println("Unknown Word WER = " + myEvaluator.getUnknownWord_WordErrorRate());
-		
-	}
+	
 	
 }
