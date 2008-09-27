@@ -62,7 +62,6 @@ public class HMMTagger
 		}
 	}
 	
-	
 	private void readEmissionFile(String filename) throws IOException
 	{
 		File file = new File(TaggerHelper.class.getResource(filename).getFile());
@@ -123,10 +122,10 @@ public class HMMTagger
 		{
 			//check if the transition exists
 			Double trans_prob;
-			if (!transition_probs.containsKey(state + "|" + current_state))
-				trans_prob = transition_probs.get(DEFAULT + "|" + current_state);
+			if (!transition_probs.containsKey(current_state + "|" + state))
+				trans_prob = transition_probs.get(DEFAULT + "|" + current_state );
 			else
-				trans_prob = transition_probs.get(state + "|" + current_state);
+				trans_prob = transition_probs.get(current_state + "|" + state);
 			
 			//check if the emission exists
 			Double emiss_prob;
@@ -181,10 +180,10 @@ public class HMMTagger
 		{
 			//check if the transition exists
 			Double trans_prob;
-			if (!transition_probs.containsKey(state + "|" + current_state))
+			if (!transition_probs.containsKey(current_state + "|" + state))
 				trans_prob = transition_probs.get(DEFAULT + "|" + current_state);
 			else
-				trans_prob = transition_probs.get(state + "|" + current_state);
+				trans_prob = transition_probs.get(current_state + "|" + state);
 			
 			Double tval = viterbi.get(state + "|" + (timestep - 1)) + trans_prob; 		  
 			
@@ -265,8 +264,7 @@ public class HMMTagger
         {
         	for (String state : states)
         	{
-        		String key = state + "|" + i;
-        		//STOP PROBABILITIES NEED TO BE ADDED HERE
+        		String key = state + "|" + i;        		
         		Double value = max_viterbi(viterbi, i, state, observations[i]);  		
         		viterbi.put(key, value);
         		String bPointer = argmax_viterbi(viterbi, i, state);
@@ -277,7 +275,7 @@ public class HMMTagger
         //termination step
         int T = observations.length;
         String key = "STOP" + "|" + T;
-        
+        //STOP PROBABILITIES NEED TO BE ADDED HERE
         Double value = max_final_viterbi(viterbi, T);
         viterbi.put(key, value);
         

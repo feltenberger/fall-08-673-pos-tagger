@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 public class Driver {
@@ -25,21 +26,28 @@ public class Driver {
 	/**
 	 * @param args
 	 */
-	private static void print_stats(TaggedSentence new_s)
-	{		
+	private static void print_control(Sentence new_s)
+	{
+		System.out.println("\n------------------------------------------");	
 		System.out.println("Control:");
 		for (int i = 0; i < new_s.getSentence().size(); i++)
 		{
-			System.out.print(new_s.getSentence().get(i) 
+			System.out.print("" + new_s.getSentence().get(i) 
 					+ "/" + new_s.getTags().get(i) + " ");							
 		}
-		System.out.println("\nTagger Output:");
+		System.out.println();
+	}
+	
+	
+	private static void print_stats(TaggedSentence new_s, String info)
+	{		
+		System.out.println(info + " Tagger Output:");
 		for (int i = 0; i < new_s.getSentence().size(); i++)
 		{
 			System.out.print(new_s.getSentence().get(i) 
 					+ "/" + new_s.getHypothesisedTags().get(i) + " ");							
 		}
-		System.out.println("\n------------------------------------------");	
+		System.out.println();
 	}
 
 	
@@ -49,41 +57,70 @@ public class Driver {
 		BaselineTagger myBaselineTagger = new BaselineTagger(bMatrixFilename);
 		HMMTagger hmmTagger = new HMMTagger(bMatrixFilename, aMatrixFilename, startMatrixFilename);
 			
-				
 		TaggerHelper helper = new TaggerHelper();
 		List<Sentence> sentences = helper.parseEvalCorpus(testSetFilename);
 		//THIS IS TO SPLIT THE ORIGINAL WSJ CORPUS
 		//List<Sentence> sentences = helper.parseCorpus(corpusFilename);
 		//helper.splitCorpus(trainingFilename, testFilename, sentences);
 
+		bMatrixFile = new File(Driver.class.getResource(bMatrixFilename).getFile());
+		aMatrixFile = new File(Driver.class.getResource(aMatrixFilename).getFile());
+
+		Tagger tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
 		
+				
 		List<TaggedSentence> baselineTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmTaggedSentences = new ArrayList<TaggedSentence>();
+		List<TaggedSentence> hmmDaveTaggedSentences = new ArrayList<TaggedSentence>();
 		
 		for (Sentence s : sentences)
-		{		
+		{	
+			print_control(s);
+			
 			//THIS EVENTUALLY NEED TO BE THE tagSentenceImproved METHOD
 			TaggedSentence baselineTS = myBaselineTagger.tagSentence(s);			
 			baselineTaggedSentences.add( baselineTS );
-			//print_stats(baselineTS);
+			print_stats(baselineTS, "BASELINE");
 			
 			TaggedSentence hmmTS = hmmTagger.tagSentence(s);
 			hmmTaggedSentences.add( hmmTS );
-			print_stats(hmmTS);
+			print_stats(hmmTS, "NIELS");
+			
+			List<TaggedWord> tw = tagger.tagPartsOfSpeech(s.getSentence());
+			List<String> tags  = new ArrayList<String>();
+			for (TaggedWord word : tw)
+			{
+				PartOfSpeech pos = word.getPos();
+				tags.add(pos.toString());				
+			}
+			TaggedSentence taggerTS = new TaggedSentence(s.getSentence(), s.getTags(), tags, hmmTS.getKnownWordFlag());
+			hmmDaveTaggedSentences.add(taggerTS);
+			print_stats(taggerTS, "DAVE");
+			
 			
 		}
 		
 		Evaluator myBaselineEvaluator = new Evaluator(baselineTaggedSentences);				
 		System.out.println("------------------------------------------");		
+		System.out.println("BaseLine:");
 		System.out.println("Word Error Rate = " + myBaselineEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myBaselineEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myBaselineEvaluator.getUnknownWord_WordErrorRate());
 		
-		Evaluator myHMMEvaluator = new Evaluator(hmmTaggedSentences);				
-		System.out.println("------------------------------------------");		
+		Evaluator myHMMEvaluator = new Evaluator(hmmTaggedSentences);		
+		System.out.println("------------------------------------------");
+		System.out.println("Niels:");		
 		System.out.println("Word Error Rate = " + myHMMEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myHMMEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myHMMEvaluator.getUnknownWord_WordErrorRate());		
+		
+		
+		Evaluator myTaggerEvaluator = new Evaluator(hmmDaveTaggedSentences);				
+		System.out.println("------------------------------------------");		
+		System.out.println("Dave:");
+		System.out.println("Word Error Rate = " + myTaggerEvaluator.getWordErrorRate());
+		System.out.println("Known Word WER = " + myTaggerEvaluator.getKnownWord_WordErrorRate());
+		System.out.println("Unknown Word WER = " + myTaggerEvaluator.getUnknownWord_WordErrorRate());	
 	}
 
 }
