@@ -104,7 +104,7 @@ public class Driver {
 			print_stats(taggerTS, "DAVE", (end-start));
 
 			numIterations++;
-			if(numIterations == 1000) break;
+			//if(numIterations == 1000) break;
 		}
 
 		Evaluator myBaselineEvaluator = new Evaluator(baselineTaggedSentences);
