@@ -25,6 +25,8 @@ public class BaselineTagger {
 	//the file to use for training
 	private String trainingFile;
 	
+	private List<String> unknownWordList = new ArrayList<String>();
+	
 	//hashtable that contains each words most probable tag
 	private Map<String, MostFrequentTag> word_pos_map;
 	
@@ -166,13 +168,51 @@ public class BaselineTagger {
 			}
 			else
 			{
-				//NEED MORE RULES TO TAG UNKNOWN WORDS
+				//RULES TO IMPROVE ON UNKNOWN WORDS
+				String tag = do_some_analysis(sentence.getSentence().get(i));
 				
 				new_sentence.add(sentence.getSentence().get(i),
-						sentence.getTags().get(i), "NN", false);				
+						sentence.getTags().get(i), tag, false);
+				
+				unknownWordList.add(sentence.getSentence().get(i));
 			}
 		}
 		
 		return new_sentence;
+	}
+	
+	private String do_some_analysis(String s)
+	{
+		String tag = "NN";
+		
+		//the first letter is capitalized and the last letter is an s
+		if (Character.isUpperCase(s.charAt(0)) && s.charAt(s.length()-1) == 's')
+			tag = "NNPS";
+		//ends with -ing
+		else if (s.endsWith("ing"))
+			tag = "VBG";
+		//ends with -en
+		else if (s.endsWith("en"))
+			tag = "VBN";
+		//the word is all upper case
+		else if (s.compareTo(s.toUpperCase()) == 0)
+			tag = "NNP";
+		//ends with -ly
+		else if (s.endsWith("ly"))
+			tag = "RB";
+		//ends with -est
+		else if (s.endsWith("est"))
+			tag = "RBS";
+			
+		
+		return tag;
+	}
+	
+	public void printUnknownWordList()
+	{
+		for (int i = 0; i < unknownWordList.size(); i++)
+		{
+			System.out.println(unknownWordList.get(i));
+		}
 	}
 }

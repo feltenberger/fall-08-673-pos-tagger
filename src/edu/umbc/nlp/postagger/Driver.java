@@ -14,7 +14,7 @@ public class Driver {
 	private static String bMatrixFilename = "/tag_word_prob.dat";
 	private static String startMatrixFilename = "/start_tags_prob.txt";
 
-	private static String testSetFilename = "/wsj/evaluation.pos";
+	private static String testSetFilename = "/wsj/eval_temp.pos";
 	private static String trainingSetFilename = "/wsj/training.pos";
 	private static String corpusFilename = "/wsj/combined.pos";
 	private static File bMatrixFile = null;
@@ -67,22 +67,29 @@ public class Driver {
 		Tagger tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
 
 		List<TaggedSentence> baselineTaggedSentences = new ArrayList<TaggedSentence>();
+		List<TaggedSentence> baselineImprovedTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmDaveTaggedSentences = new ArrayList<TaggedSentence>();
 
 		long start;
 		long end;
 		int numIterations = 0;
+		int total = sentences.size();
 		for (Sentence s : sentences)
 		{
+			System.out.println("#############################################");
+			System.out.println("Processing: " + numIterations +"/" + total);
 			print_control(s);
 
 			//THIS EVENTUALLY NEED TO BE THE tagSentenceImproved METHOD
 			start = System.currentTimeMillis();
 			TaggedSentence baselineTS = myBaselineTagger.tagSentence(s);
+			TaggedSentence baselineImprovedTS = myBaselineTagger.tagSentenceImproved(s);
 			end = System.currentTimeMillis();
 			baselineTaggedSentences.add( baselineTS );
+			baselineImprovedTaggedSentences.add( baselineImprovedTS );
 			print_stats(baselineTS, "BASELINE", (end-start));
+			print_stats(baselineImprovedTS, "BASELINE IMPROVED", (end-start));
 
 			start = System.currentTimeMillis();
 			TaggedSentence hmmTS = hmmTagger.tagSentence(s);
@@ -107,12 +114,22 @@ public class Driver {
 			//if(numIterations == 1000) break;
 		}
 
-		Evaluator myBaselineEvaluator = new Evaluator(baselineTaggedSentences);
+		Evaluator myBaselineEvaluator = new Evaluator(baselineTaggedSentences);		
 		System.out.println("------------------------------------------");
 		System.out.println("BaseLine:");
 		System.out.println("Word Error Rate = " + myBaselineEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myBaselineEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myBaselineEvaluator.getUnknownWord_WordErrorRate());
+		myBaselineEvaluator.printConfusionMatrix();
+		
+		Evaluator myBaselineImprovedEvaluator = new Evaluator(baselineImprovedTaggedSentences);
+		myBaselineTagger.printUnknownWordList();
+		System.out.println("------------------------------------------");
+		System.out.println("BaseLine Improved:");
+		System.out.println("Word Error Rate = " + myBaselineImprovedEvaluator.getWordErrorRate());
+		System.out.println("Known Word WER = " + myBaselineImprovedEvaluator.getKnownWord_WordErrorRate());
+		System.out.println("Unknown Word WER = " + myBaselineImprovedEvaluator.getUnknownWord_WordErrorRate());
+		myBaselineImprovedEvaluator.printConfusionMatrix();
 
 		Evaluator myHMMEvaluator = new Evaluator(hmmTaggedSentences);
 		System.out.println("------------------------------------------");
@@ -120,6 +137,7 @@ public class Driver {
 		System.out.println("Word Error Rate = " + myHMMEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myHMMEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myHMMEvaluator.getUnknownWord_WordErrorRate());
+		myHMMEvaluator.printConfusionMatrix();
 
 		Evaluator myTaggerEvaluator = new Evaluator(hmmDaveTaggedSentences);
 		System.out.println("------------------------------------------");
@@ -127,6 +145,7 @@ public class Driver {
 		System.out.println("Word Error Rate = " + myTaggerEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myTaggerEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myTaggerEvaluator.getUnknownWord_WordErrorRate());
+		myTaggerEvaluator.printConfusionMatrix();
 	}
 
 }

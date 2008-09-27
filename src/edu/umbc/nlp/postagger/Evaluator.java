@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -19,16 +20,59 @@ public class Evaluator
 	private double WER;
 	private double UnknownWER;
 	private double KnownWER;
-	
+	private HashMap<String, Integer> confusionMatrix = new HashMap<String, Integer>();
+	private List<String> correctTags = new ArrayList<String>();
+	private List<String> incorrectTags = new ArrayList<String>();
+		
 	public Evaluator(List<TaggedSentence> sentences)
 	{
 		this.sentences = sentences;
 		computeWordErrorRates();
+			
 	}
 	
 	public double getWordErrorRate() { return 100 * WER; }
 	public double getKnownWord_WordErrorRate() { return 100 * KnownWER; }
 	public double getUnknownWord_WordErrorRate() { return 100 * UnknownWER; }	
+	
+	
+	
+	public HashMap<String, Integer> getConfusionMatrix()
+	{
+		return this.confusionMatrix;
+	}
+	
+	public void printConfusionMatrix()
+	{
+		Set<String> keys = this.confusionMatrix.keySet();
+		Iterator<String> iter = keys.iterator();
+		
+		for (String incorrect : incorrectTags)
+		{
+			System.out.print("\t" + incorrect);
+		}
+		System.out.println();
+		
+		for (String correct : correctTags)
+		{
+			System.out.print(correct);
+			for (String incorrect : incorrectTags)
+			{
+				
+				if (confusionMatrix.containsKey(correct + "|" + incorrect))
+				{
+					Integer val = confusionMatrix.get(correct + "|" + incorrect);				
+					System.out.print("\t" + val);
+				}
+				else
+				{
+					System.out.print("\t-");
+				}
+			}
+			System.out.println();
+		}		
+		
+	}
 	
 	/**
 	 * Computes the Word Error Rate (WER) of a TaggedSentence.
@@ -56,6 +100,25 @@ public class Evaluator
 				if (!s.getTags().get(i).equalsIgnoreCase(s.getHypothesisedTags().get(i)))
 				{
 					mismatch++;
+					if (!confusionMatrix.containsKey(s.getTags().get(i)+"|"+ s.getHypothesisedTags().get(i)))
+					{
+						confusionMatrix.put(s.getTags().get(i)+"|"+s.getHypothesisedTags().get(i), 1);
+					}
+					else
+					{
+						Integer value = confusionMatrix.get(s.getTags().get(i)+"|"+ s.getHypothesisedTags().get(i));
+						confusionMatrix.remove(s.getTags().get(i)+"|"+ s.getHypothesisedTags().get(i));						
+						confusionMatrix.put(s.getTags().get(i)+"|"+ s.getHypothesisedTags().get(i), value + 1);
+					}
+					if (!correctTags.contains(s.getTags().get(i)))
+					{
+						correctTags.add(s.getTags().get(i));
+					}
+					if (!incorrectTags.contains(s.getHypothesisedTags().get(i)))
+					{
+						incorrectTags.add(s.getHypothesisedTags().get(i));
+					}
+					
 				}				
 				//if the flag is true, i.e. the word is known otherwise unknown
 				if(s.getKnownWordFlag().get(i) == true) 
