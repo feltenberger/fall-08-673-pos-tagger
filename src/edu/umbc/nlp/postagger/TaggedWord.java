@@ -10,15 +10,17 @@ public class TaggedWord {
 	private Double prob = null;
 	private String word;
 	private PartOfSpeech pos;
+	private boolean knownWord = false;
 	/**
 	 * @param prob
 	 * @param word
 	 * @param partOfSpeech
 	 */
-	public TaggedWord(Double prob, String word, PartOfSpeech partOfSpeech) {
+	public TaggedWord(Double prob, String word, PartOfSpeech partOfSpeech, boolean knownWord) {
 		this.prob = prob;
 		this.word = word;
 		this.pos = partOfSpeech;
+		this.knownWord = knownWord;
 	}
 	public TaggedWord(String word, String partOfSpeech) {
 		this.word = word;
@@ -72,5 +74,17 @@ public class TaggedWord {
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.00000000000000000");
 		return "v[" + this.pos.getPartOfSpeech() + "][" + this.getWord() + "] = " + df.format(this.getProb().doubleValue());
+	}
+	/**
+	 * @return the knownWord
+	 */
+	public boolean isKnownWord() {
+		return knownWord;
+	}
+	/**
+	 * @param knownWord the knownWord to set
+	 */
+	public void setKnownWord(boolean knownWord) {
+		this.knownWord = knownWord;
 	}
 }

@@ -23,8 +23,8 @@ public class TaggerHelper {
 	 */
 	@SuppressWarnings("unchecked")
 	public static Tagger readMatrices(File nGramsFile, File observationsFile) throws IOException {
-		log.info("Reading ngrams file " + nGramsFile.getAbsolutePath());
-		log.info("Reading observations file " + observationsFile.getAbsolutePath());
+		log.debug("Reading ngrams file " + nGramsFile.getAbsolutePath());
+		log.debug("Reading observations file " + observationsFile.getAbsolutePath());
 		Tagger tagger = new Tagger();
 		// b-matrix
 		parseObservationProbabilities(tagger, observationsFile);
