@@ -10,12 +10,12 @@ import java.util.List;
 public class NGram {
 	private int size = TaggerGlobals.N_GRAM_SIZE;
 	private List<PartOfSpeech> nGramPartsOfSpeech = new ArrayList<PartOfSpeech>();
-	private Probability probability = null;
+	private Double probability = null;
 	/**
 	 * @param probability
 	 * @param partsOfSpeech
 	 */
-	public NGram(Probability probability, PartOfSpeech...partsOfSpeech) {
+	public NGram(Double probability, PartOfSpeech...partsOfSpeech) {
 		if(partsOfSpeech == null) throw new IllegalArgumentException("partsOfSpeech can't be null.");
 		if(partsOfSpeech.length != TaggerGlobals.N_GRAM_SIZE)
 			throw new IllegalStateException("NGram is a different size than expected.  Got " + partsOfSpeech.length + " and expected " + TaggerGlobals.N_GRAM_SIZE);
@@ -68,13 +68,13 @@ public class NGram {
 	/**
 	 * @return the probability
 	 */
-	public Probability getProbability() {
+	public Double getProbability() {
 		return probability;
 	}
 	/**
 	 * @param probability the probability to set
 	 */
-	public void setProbability(Probability probability) {
+	public void setProbability(Double probability) {
 		this.probability = probability;
 	}
 	/**

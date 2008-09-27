@@ -1,6 +1,5 @@
 package edu.umbc.nlp.postagger;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +19,8 @@ public class Tagger {
 	 * This map combined with the PartOfSpeech's word probabilities makes the bMatrix.
 	 */
 	private Map<String, PartOfSpeech> allPartsOfSpeech = new HashMap<String, PartOfSpeech>();
-	private PartOfSpeech startState = new PartOfSpeech("<s>");
+	private PartOfSpeech startState = new PartOfSpeech(TaggerGlobals.START_TAG);
+	private PartOfSpeech defaultState = new PartOfSpeech(TaggerGlobals.DEFAULT_TAG);
 	//private PartOfSpeech endState = new PartOfSpeech("<e>");
 	/**
 	 * This is the aMatrix.
@@ -51,6 +51,14 @@ public class Tagger {
 	}
 
 	/**
+	 * @param nGramHashCode
+	 * @return
+	 */
+	public NGram getNGram(String nGramHashCode) {
+		return this.allNGrams.get(nGramHashCode);
+	}
+
+	/**
 	 * @param hypothesis
 	 * @param given
 	 * @return
@@ -64,7 +72,7 @@ public class Tagger {
 	 * @param partsOfSpeech
 	 * @param probability
 	 */
-	public void addNGram(String[] partsOfSpeech, double probability) {
+	public void addNGram(String[] partsOfSpeech, Double probability) {
 		String ng = NGram.getHashCodeFromStringArray(partsOfSpeech);
 		if(this.allNGrams.get(ng) != null) {
 			throw new IllegalArgumentException("Trying to add NGram " + ng + " but it already exists!");
@@ -72,9 +80,17 @@ public class Tagger {
 		else {
 			PartOfSpeech[] pos = new PartOfSpeech[partsOfSpeech.length];
 			for(int i = 0; i < pos.length; i++) {
-				pos[i] = this.getPartOfSpeech(partsOfSpeech[i]);
+				if(TaggerGlobals.DEFAULT_TAG.equals(partsOfSpeech[i])) {
+					pos[i] = new PartOfSpeech(TaggerGlobals.DEFAULT_TAG);
+				}
+				else if(TaggerGlobals.START_TAG.equals(partsOfSpeech[i])) {
+					pos[i] = new PartOfSpeech(TaggerGlobals.START_TAG);
+				}
+				else {
+					pos[i] = this.getPartOfSpeech(partsOfSpeech[i]);
+				}
 			}
-			NGram ngram = new NGram(new Probability(probability), pos);
+			NGram ngram = new NGram(probability, pos);
 			this.allNGrams.put(ng, ngram);
 		}
 	}
@@ -114,16 +130,15 @@ public class Tagger {
 	 * @param partOfSpeech
 	 * @return
 	 */
-	public Probability getLikelihoodProbability(String word, String partOfSpeech) {
+	public Double getLikelihoodProbability(String word, String partOfSpeech) {
 		PartOfSpeech pos = this.allPartsOfSpeech.get(partOfSpeech);
 		if(pos == null)
 			throw new IllegalArgumentException("The part of speech " + partOfSpeech + " does not exist in this corpus!");
 			//return new Probability(TaggerGlobals.DEFAULT_PROBABILITY);
 
-		Probability probability = pos.getProbabilityOfWord(word);
+		Double probability = pos.getProbabilityOfWord(word);
 		if(probability == null && TaggerGlobals.USE_DEFAULT_PROBABILITIES) {
-			probability = pos.getProbabilityOfWord(TaggerGlobals.DEFAULT_STRING_FOR_ZERO_PROB);
-			//return new Probability(TaggerGlobals.DEFAULT_PROBABILITY);
+			probability = pos.getProbabilityOfWord(TaggerGlobals.DEFAULT_TAG);
 		}
 
 		if(probability == null)
@@ -134,42 +149,39 @@ public class Tagger {
 	}
 
 	/**
-	 * Implementation of Viterbi algorithm. Equivalent to the pseudo code on page 147 of the book.
-	 * @param sentenceOfWords
-	 * @return
+	 * initialize first column of probabilities, i.e. probability of each state given <s> state
+	 * prior (aMatrix)			likelihood (bMatrix)
+	 * P([each-state] | <s>) * 	P(firstWord | [each-state])
+	 * start at position 1 instead of 0 b/c <s> is at position 0, which we're transitioning from.
+	 * @param sortedPartsOfSpeech
+	 * @param viterbi
+	 * @param backpointer
 	 */
-	public List<TaggedWord> tagPartsOfSpeech(List<String> sentenceOfWords) {
-		List<TaggedWord> tagged = new ArrayList<TaggedWord>();
-		List<String>sortedPartsOfSpeech = sortSet(this.allPartsOfSpeech.keySet());
-
-		TaggedWord[][] viterbi = new TaggedWord[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
-		int[][] backpointer = new int[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
-		for(int i = 0; i < backpointer.length; i++)
-			for(int j = 0; j < backpointer[i].length; j++)
-				backpointer[i][j] = -1;
-		String firstWord = sentenceOfWords.get(0);
-		String startStateStr = startState.getPartOfSpeech();
-
-		// initialize first column of probabilities, i.e. probability of each state given <s> state
-		// prior (aMatrix)			likelihood (bMatrix)
-		// P([each-state] | <s>) * 	P(firstWord | [each-state])
-		// start at position 1 instead of 0 b/c <s> is at position 0, which we're transitioning from.
+	private void viterbiStartTransition(String firstWord, List<String>sortedPartsOfSpeech, TaggedWord[][]viterbi, int[][]backpointer) {
 		for(int s = 0; s < sortedPartsOfSpeech.size(); s++) {
 			String partOfSpeechStr = sortedPartsOfSpeech.get(s);
 			//log.info("Part of speech: " + partOfSpeechStr);
 			TaggedWord tw = new TaggedWord();
-			Probability likelihood = this.getLikelihoodProbability(firstWord, partOfSpeechStr);
+			Double likelihood = this.getLikelihoodProbability(firstWord, partOfSpeechStr);
 			//log.info("Likelihood: P(" + firstWord + "|" + partOfSpeechStr + ") = " + likelihood.doubleValue());
 
-			Probability prior = this.getPriorProbability(partOfSpeechStr, new String[] {startStateStr});
+			Double prior = this.getPriorProbability(partOfSpeechStr, new String[] {startState.getPartOfSpeech()});
 			//log.info("Prior: P(" + partOfSpeechStr + "|" + startStateStr + ") = " + prior.doubleValue());
-			tw.setProb(new Probability(likelihood.doubleValue() * prior.doubleValue()));
+			tw.setProb(likelihood + prior);
 			tw.setPos(this.getPartOfSpeech(partOfSpeechStr));
 			tw.setWord(firstWord);
 			viterbi[s][0] = tw;
 			backpointer[s][0] = -999; // should never reference this, but it indicates a pointer to <s>
 		}
+	}
 
+	/**
+	 * @param sentenceOfWords
+	 * @param sortedPartsOfSpeech
+	 * @param viterbi
+	 * @param backpointer
+	 */
+	private void viterbiSentenceTransitions(List<String>sentenceOfWords, List<String>sortedPartsOfSpeech, TaggedWord[][]viterbi, int[][]backpointer) {
 		// for each word after the first one (since we calculated likelihood probs for first word above)
 		for(int t = 1; t < sentenceOfWords.size(); t++) {
 			String word = sentenceOfWords.get(t);
@@ -177,53 +189,66 @@ public class Tagger {
 			// skip start state <s> by starting at index 1 - we don't need any transitions to/from it.
 			for(int s = 0; s < sortedPartsOfSpeech.size(); s++) {
 				String state = sortedPartsOfSpeech.get(s);
-				Probability likelihood = this.getLikelihoodProbability(word, state);
-				Probability maxPriorProb = new Probability(-1.0);
+				Double likelihood = this.getLikelihoodProbability(word, state);
+				Double maxPriorProb = (-1)*Double.MAX_VALUE;
 				int priorCol = t-1;
 				int backpointerRow = -1;
 				// find the max value from the prior column transitioning to this column.
 				// i.e. max (viterbi[s'][t-1] * P(s|s'))
 				for(int sp = 1; sp < viterbi.length; sp++) {
-					TaggedWord tmpVit = viterbi[sp][priorCol];
-					//log.info("Transitioning from " + tmpVit.getPos().getPartOfSpeech() + " to " + state);
-					//log.info("viterbi[" + sp + "][" + priorCol + "]: " + tmpVit);
+					TaggedWord priorColState = viterbi[sp][priorCol];
 
 					// NGram transToThisColNgram = this.getNGram(state, new String[] { tmpVit.getPos().getPartOfSpeech() } );
 					// Probability tmpProb = transToThisColNgram.getProbability();
-					Probability tmpProb = this.getPriorProbability(state, new String[] { tmpVit.getPos().getPartOfSpeech() });
+					Double transToThisColProb = this.getPriorProbability(state, new String[] { priorColState.getPos().getPartOfSpeech() });
 					//log.info(transToThisColNgram);
-					tmpProb = new Probability(tmpProb.doubleValue() * tmpVit.getProb().doubleValue());
-					if(tmpProb.doubleValue() > maxPriorProb.doubleValue()) {
-						maxPriorProb = tmpProb;
+					transToThisColProb = transToThisColProb + priorColState.getProb();
+					if(transToThisColProb > maxPriorProb) {
+						maxPriorProb = transToThisColProb;
 						backpointerRow = sp;
 					}
 				}
-				Probability maxProbability = new Probability(maxPriorProb.doubleValue() * likelihood.doubleValue());
+				double maxProbability = maxPriorProb + likelihood;
 				viterbi[s][t] = new TaggedWord(maxProbability, word, this.getPartOfSpeech(state));
 				backpointer[s][t] = backpointerRow;
 				// log.info("max1-N( viterbi[s'][" + s + "] * P(" + state + "|" + "s') ) * P(" + word + "|" + state + ") = " + viterbi[s][t].getProb().doubleValue());
 			}
 		}
+	}
 
-		dumpViterbiMatrix(sortedPartsOfSpeech, viterbi);
-		dumpBackpointers(backpointer);
-
-		Probability maxEndStateProb = new Probability(-1.0);
+	/**
+	 * @param sortedPartsOfSpeech
+	 * @param sentenceOfWords
+	 * @param viterbi
+	 * @param backpointer
+	 * @return
+	 */
+	private int viterbiFinalTransition(List<String>sentenceOfWords, List<String>sortedPartsOfSpeech, TaggedWord[][]viterbi, int[][]backpointer) {
+		Double maxEndStateProb = (-1)*Double.MAX_VALUE;
 		int bpRowFromFinalState = -1;
 		// transition from last state to "end" state
 		for(int s = 0; s < sortedPartsOfSpeech.size(); s++) {
 			TaggedWord tmpVit = viterbi[s][sentenceOfWords.size()-1];
-			// Probability prior = this.getPriorProbability(this.endState.getPartOfSpeech(), new String[] { tmpVit.getPos().getPartOfSpeech() });
-			// double tmp = prior.doubleValue() * tmpVit.getProb().doubleValue();
-			double tmp = tmpVit.getProb().doubleValue();
+			double tmp = tmpVit.getProb();
 			if(tmp > maxEndStateProb.doubleValue()) {
-				maxEndStateProb = new Probability(tmp);
+				maxEndStateProb = tmp;
 				bpRowFromFinalState = s;
 			}
 		}
+		return bpRowFromFinalState;
+	}
 
-		log.info("Backpointer to last row in viterbi: " + bpRowFromFinalState);
-		int currBpRow = bpRowFromFinalState;
+	/**
+	 * Traces the backpointer from the given startRow to get the "correct" tagged word sequence.
+	 * @param startRow
+	 * @param viterbi
+	 * @param backpointer
+	 * @return
+	 */
+	private List<TaggedWord> traceBackpointerForMaxProbSentence(int startRow, TaggedWord[][]viterbi, int[][]backpointer) {
+		List<TaggedWord> tagged = new ArrayList<TaggedWord>();
+		//log.info("Backpointer to last row in viterbi: " + bpRowFromFinalState);
+		int currBpRow = startRow;
 		//solution.add(viterbi[currBpRow][viterbi[0].length-1]);
 		for(int col = backpointer[0].length-1; col > 0; col--) {
 			tagged.add(viterbi[currBpRow][col]);
@@ -231,8 +256,38 @@ public class Tagger {
 		}
 		tagged.add(viterbi[currBpRow][0]);
 		Collections.reverse(tagged);
-		log.info(tagged);
 		return tagged;
+	}
+
+	/**
+	 * Implementation of Viterbi algorithm. Equivalent to the pseudo code on page 147 of the book.
+	 * @param sentenceOfWords
+	 * @return
+	 */
+	public List<TaggedWord> tagPartsOfSpeech(List<String> sentenceOfWords) {
+		List<String>sortedPartsOfSpeech = sortSet(this.allPartsOfSpeech.keySet());
+
+		TaggedWord[][] viterbi = new TaggedWord[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
+		int[][] backpointer = new int[this.allPartsOfSpeech.size()][sentenceOfWords.size()];
+		for(int i = 0; i < backpointer.length; i++)
+			for(int j = 0; j < backpointer[i].length; j++)
+				backpointer[i][j] = -1;
+
+		// initialization step
+		viterbiStartTransition(sentenceOfWords.get(0), sortedPartsOfSpeech, viterbi, backpointer);
+
+		// recursion step
+		viterbiSentenceTransitions(sentenceOfWords, sortedPartsOfSpeech, viterbi, backpointer);
+
+		// termination step
+		int bpRowFromFinalState = viterbiFinalTransition(sentenceOfWords, sortedPartsOfSpeech, viterbi, backpointer);
+
+		if(log.isInfoEnabled()) {
+			dumpViterbiMatrix(sortedPartsOfSpeech, viterbi);
+			dumpBackpointers(backpointer);
+		}
+
+		return traceBackpointerForMaxProbSentence(bpRowFromFinalState, viterbi, backpointer);
 	}
 
 	/**
@@ -274,7 +329,7 @@ public class Tagger {
 	 * @param given
 	 * @return
 	 */
-	public Probability getPriorProbability(String hypothesis, String[] given) {
+	public Double getPriorProbability(String hypothesis, String[] given) {
 		return this.getPriorProbability(hypothesis, given, TaggerGlobals.USE_DEFAULT_PROBABILITIES);
 	}
 
@@ -284,18 +339,18 @@ public class Tagger {
 	 * @param useDefaultIfNoneExist
 	 * @return
 	 */
-	public Probability getPriorProbability(String hypothesis, String[] given, boolean useDefaultIfNoneExist) {
-		NGram ng = this.getNGram(this.getNGramArrayFromHypothesisAndGiven(hypothesis, given));
+	public Double getPriorProbability(String hypothesis, String[] given, boolean useDefaultIfNoneExist) {
+		String nGramHashCode = NGram.getHashCodeFromStringArray(this.getNGramArrayFromHypothesisAndGiven(hypothesis, given));
+		NGram ng = this.getNGram(nGramHashCode);
 		//this.getNGram(new String[] { "#", "<DEFAULT>" });
 		//this.getPartOfSpeech("$");
 		if(ng == null) {
 			if(useDefaultIfNoneExist) {
-				ng = this.getNGram(this.getNGramArrayFromHypothesisAndGiven(TaggerGlobals.DEFAULT_STRING_FOR_ZERO_PROB, given));
-				//return new Probability(TaggerGlobals.DEFAULT_PROBABILITY);
+				ng = this.getNGram(this.getNGramArrayFromHypothesisAndGiven(TaggerGlobals.DEFAULT_TAG, given));
 			}
 			// if ngram is still null, throw an exception.
 			if(ng == null)
-				throw new IllegalArgumentException("The NGram " + ng + " doesn't exist!");
+				throw new IllegalArgumentException("The NGram " + nGramHashCode + " doesn't exist!");
 		}
 		return ng.getProbability();
 	}
@@ -328,24 +383,6 @@ public class Tagger {
 		}
 		Collections.sort(toSortList);
 		return toSortList;
-	}
-
-	/**
-	 * Entry point to the program.
-	 * @param args
-	 */
-	public static void main(String[] args) throws Exception {
-		String bMatrixFilename = "/tag-word-prob-dummy-data.txt";
-		String aMatrixFilename = "/bigram-dummy-data.txt";
-		log.info("Using file " + aMatrixFilename + " to get a-matrix ngram probabilities.");
-		log.info("Using file " + bMatrixFilename + " to get b-matrix observation probabilities.");
-		File aMatrixFile = new File(Tagger.class.getResource(aMatrixFilename).getFile());
-		File bMatrixFile = new File(Tagger.class.getResource(bMatrixFilename).getFile());
-		Tagger partsOfSpeech = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
-		String testWord = "to";
-		String testPos = "TO";
-		Probability prob = partsOfSpeech.getLikelihoodProbability(testWord, testPos);
-		log.info("P(" + testWord + "|" + testPos + ") = " + prob.doubleValue());
 	}
 
 	/**

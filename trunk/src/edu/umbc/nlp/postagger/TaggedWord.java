@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
  *
  */
 public class TaggedWord {
-	private Probability prob = null;
+	private Double prob = null;
 	private String word;
 	private PartOfSpeech pos;
 	/**
@@ -15,7 +15,7 @@ public class TaggedWord {
 	 * @param word
 	 * @param partOfSpeech
 	 */
-	public TaggedWord(Probability prob, String word, PartOfSpeech partOfSpeech) {
+	public TaggedWord(Double prob, String word, PartOfSpeech partOfSpeech) {
 		this.prob = prob;
 		this.word = word;
 		this.pos = partOfSpeech;
@@ -23,7 +23,7 @@ public class TaggedWord {
 	public TaggedWord(String word, String partOfSpeech) {
 		this.word = word;
 		this.pos = new PartOfSpeech(partOfSpeech);
-		this.prob = new Probability(-1.0);
+		this.prob = new Double(-1.0);
 	}
 	/**
 	 *
@@ -32,13 +32,13 @@ public class TaggedWord {
 	/**
 	 * @return the prob
 	 */
-	public Probability getProb() {
+	public Double getProb() {
 		return prob;
 	}
 	/**
 	 * @param prob the prob to set
 	 */
-	public void setProb(Probability prob) {
+	public void setProb(Double prob) {
 		this.prob = prob;
 	}
 	/**
