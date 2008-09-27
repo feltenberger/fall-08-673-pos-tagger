@@ -16,12 +16,13 @@ import org.apache.log4j.Logger;
 public class TaggerTest extends TestCase {
 	private static final Logger log = Logger.getLogger(TaggerTest.class);
 	// private String aMatrixFilename = "/bigram-dummy-data.txt";
-	private String aMatrixFilename = "/prev_tag_prob.dat";
+	private String nGramsFilename = "/prev_tag_prob.dat";
 	// private String bMatrixFilename = "/tag-word-prob-dummy-data.txt";
-	private String bMatrixFilename = "/tag_word_prob.dat";
+	private String observationsFilename = "/tag_word_prob.dat";
 	private String testFilename = "/wsj/evaluation.pos";
-	private File bMatrixFile = null;
-	private File aMatrixFile = null;
+	private File startMatrixFile = null;
+	private File observationsFile = null;
+	private File nGramsFile = null;
 	private Tagger tagger = null;
 	private String[][] splitLinesOfTagWordProbFile = null;
 	private List<SimpleTaggedSentence> testSentences = null;
@@ -32,12 +33,12 @@ public class TaggerTest extends TestCase {
 	@SuppressWarnings("unchecked")
 	protected void setUp() throws Exception {
 		super.setUp();
-		bMatrixFile = new File(getClass().getResource(bMatrixFilename).getFile());
-		aMatrixFile = new File(getClass().getResource(aMatrixFilename).getFile());
+		observationsFile = new File(getClass().getResource(observationsFilename).getFile());
+		nGramsFile = new File(getClass().getResource(nGramsFilename).getFile());
 
-		List<String> linesOfFile = FileUtils.readLines(bMatrixFile);
+		List<String> linesOfFile = FileUtils.readLines(observationsFile);
 		splitLinesOfTagWordProbFile = new String[linesOfFile.size()][];
-		tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
+		tagger = TaggerHelper.readMatrices(nGramsFile, observationsFile);
 
 		int i = 0;
 		for(String line : linesOfFile) {
@@ -60,13 +61,13 @@ public class TaggerTest extends TestCase {
 	 */
 	private void addSomeTestSentences() {
 		testSentences = new ArrayList<SimpleTaggedSentence>();
-		String ts = "I/PRP love/VBP to/TO eat/VB pizza/NN !/.";
+		String ts = "I/PRP love/VB to/TO eat/VBP pizza/NN !/.";
 		testSentences.add(new SimpleTaggedSentence(ts));
-		ts = "I/PRP am/VBP stark/JJ raving/JJ mad/JJ !/.";
+		ts = "I/PRP am/VBP stark/NNS raving/JJ mad/JJ !/.";
 		testSentences.add(new SimpleTaggedSentence(ts));
-		ts = "Please/RB take/VB out/RP the/DT trash/NN ./.";
+		ts = "Please/RB take/VB out/RB the/DT trash/VB ./.";
 		testSentences.add(new SimpleTaggedSentence(ts));
-		ts = "Natural/NNP language/NN processing/NN is/VBZ fun/NN ./.";
+		ts = "Natural/NNP language/NN processing/VBG is/VBZ fun/NN ./.";
 		testSentences.add(new SimpleTaggedSentence(ts));
 	}
 
@@ -76,17 +77,17 @@ public class TaggerTest extends TestCase {
 	 */
 	@SuppressWarnings("unchecked")
 	public void testReadObservationProbabilityFromFile() throws Exception {
-		Tagger pos = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
+		Tagger pos = TaggerHelper.readMatrices(nGramsFile, observationsFile);
 		String testWord = "to";
 		String testPos = "TO";
 		String testHypothesis = "TO";
 		String[] testGiven = new String[] { "<s>" };
 		double expected = findProbabilityFromFile(testWord, testPos);
-		Probability actual = pos.getLikelihoodProbability(testWord, testPos);
+		Double actual = pos.getLikelihoodProbability(testWord, testPos);
 		assertEquals("expected and actual equal each other", expected, actual.doubleValue());
 		log.info("P(" + testWord + "|" + testPos + ") = " + actual.doubleValue());
 		NGram ngram = pos.getNGram(new String[] { testGiven[0], testHypothesis });
-		Probability ngramProb = pos.getPriorProbability(testHypothesis, testGiven);
+		Double ngramProb = pos.getPriorProbability(testHypothesis, testGiven);
 		log.info("Probability of NGram " + ngram.asDashedString() + " is " + ngram.getProbability().doubleValue());
 		assertEquals("NGram probability is correct", ngram.getProbability().doubleValue(), ngramProb.doubleValue());
 	}
@@ -101,6 +102,14 @@ public class TaggerTest extends TestCase {
 			SimpleTaggedSentence sts = new SimpleTaggedSentence(line);
 			doTestOfSentence(tagger, sts);
 		}
+	}
+
+	/**
+	 * Kickoff Niels' Driver from a unit test...
+	 * @throws Exception
+	 */
+	public void testDriver() throws Exception {
+		Driver.main(new String[] { });
 	}
 
 	/**

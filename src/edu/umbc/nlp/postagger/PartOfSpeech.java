@@ -14,7 +14,7 @@ public class PartOfSpeech {
 	/**
 	 * The b matrix contains the probability of a word, given <code>this</code> <type>PartOfSpeech</type>.
 	 */
-	private Map<String, Probability> bMatrix = new HashMap<String, Probability>();
+	private Map<String, Double> bMatrix = new HashMap<String, Double>();
 
 	public PartOfSpeech(String partOfSpeech) {
 		this.partOfSpeech = partOfSpeech;
@@ -65,7 +65,7 @@ public class PartOfSpeech {
 	 * @param word
 	 * @param probabilityOfWordGivenThisPOS
 	 */
-	public void addWordAndProbabilityToBMatrix(String word, Probability probabilityOfWordGivenThisPOS) {
+	public void addWordAndProbabilityToBMatrix(String word, double probabilityOfWordGivenThisPOS) {
 		if(this.bMatrix.containsKey(word))
 			throw new IllegalArgumentException("The bMatrix for " + this.partOfSpeech + " already has the word " + word + "!");
 		this.bMatrix.put(word, probabilityOfWordGivenThisPOS);
@@ -77,7 +77,7 @@ public class PartOfSpeech {
 	 * @param word
 	 * @return
 	 */
-	public Probability getProbabilityOfWord(String word) {
+	public Double getProbabilityOfWord(String word) {
 		return this.bMatrix.get(word);
 	}
 

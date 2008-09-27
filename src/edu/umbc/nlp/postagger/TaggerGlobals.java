@@ -13,8 +13,9 @@ public class TaggerGlobals {
 	 */
 	public static final boolean SUM_DUPLICATE_WORDS = false;
 	//public static double DEFAULT_PROBABILITY = 0.0;
-	public static final String DEFAULT_STRING_FOR_ZERO_PROB = "<DEFAULT>";
-	public static final String FILE_PARSING_FIELD_DELIMETER = "	";
+	public static final String DEFAULT_TAG = "<DEFAULT>";
+	public static final String FILE_PARSING_FIELD_DELIMETER = "\t";
 	public static final boolean USE_DEFAULT_PROBABILITIES = true;
 	public static final boolean USE_LOG_FOR_PROBABILITY_CALC = false;
+	public static final String START_TAG = "<s>";
 }
