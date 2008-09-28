@@ -205,10 +205,11 @@ public class TaggerHelper {
 		return item.split("/");
 	}
 
-	public void splitCorpus(String training_filename, String testing_filename, List<Sentence> sentences) throws IOException
+	public void splitCorpus(String training_filename, String testing_filename, List<Sentence> sentences, double percentage) throws IOException
 	{
-		File training = new File(TaggerHelper.class.getResource(training_filename).getFile());
-		File testing = new File(TaggerHelper.class.getResource(testing_filename).getFile());
+		File training = new File("/home/niels/workspace2/corpus/"+training_filename);
+		//File testing = new File(TaggerHelper.class.getResource(testing_filename).getFile());
+		File testing = new File("/home/niels/workspace2/corpus/"+testing_filename);
 		Random generator = new Random();
 
 		List<String> train = new ArrayList<String>();
@@ -226,7 +227,7 @@ public class TaggerHelper {
 			to_write = to_write.trim();
 			double r = generator.nextDouble();
 
-			if (r < 0.8)
+			if (r < percentage)
 			{
 				train.add(to_write);
 			}
