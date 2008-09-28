@@ -14,7 +14,7 @@ public class Driver {
 	private static String bMatrixFilename = "/tag_word_prob.dat";
 	private static String startMatrixFilename = "/start_tags_prob.txt";
 
-	private static String testSetFilename = "/wsj/eval_temp.pos";
+	private static String testSetFilename = "/wsj/evaluation.pos";
 	private static String trainingSetFilename = "/wsj/training.pos";
 	private static String corpusFilename = "/wsj/combined.pos";
 	private static File bMatrixFile = null;
@@ -51,25 +51,33 @@ public class Driver {
 
 	public static void main(String[] args) throws Exception
 	{
-		//create a new tagger
+		//THIS IS TO SPLIT THE ORIGINAL WSJ CORPUS into Training and Test sets
+		/*TaggerHelper helper = new TaggerHelper();
+		System.out.println("Analyzing WSJ Corpus.");
+		List<Sentence> sentences = helper.parseCorpus(corpusFilename);
+		for (int i = 1; i <= 10; i ++)
+		{
+			System.out.println("Processing: " + i + " of 10" );
+			helper.splitCorpus("80training" + i+".pos", "80evaluation" + i+".pos", sentences, 0.8);
+		}*/
+		
+		
+		//create the taggers
 		BaselineTagger myBaselineTagger = new BaselineTagger(bMatrixFilename);
 		HMMTagger hmmTagger = new HMMTagger(bMatrixFilename, aMatrixFilename, startMatrixFilename);
-
-		TaggerHelper helper = new TaggerHelper();
-		List<Sentence> sentences = helper.parseEvalCorpus(testSetFilename);
-		//THIS IS TO SPLIT THE ORIGINAL WSJ CORPUS
-		//List<Sentence> sentences = helper.parseCorpus(corpusFilename);
-		//helper.splitCorpus(trainingFilename, testFilename, sentences);
-
 		bMatrixFile = new File(Driver.class.getResource(bMatrixFilename).getFile());
 		aMatrixFile = new File(Driver.class.getResource(aMatrixFilename).getFile());
+		Tagger tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);	
 
-		Tagger tagger = TaggerHelper.readMatrices(aMatrixFile, bMatrixFile);
-
+		//The arrays that will contain the tagged sentences for each tagger
 		List<TaggedSentence> baselineTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> baselineImprovedTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmDaveTaggedSentences = new ArrayList<TaggedSentence>();
+		
+		//read the test set and convert it to a list of sentences
+		TaggerHelper helper = new TaggerHelper();
+		List<Sentence> sentences = helper.parseEvalCorpus(testSetFilename);
 
 		long start;
 		long end;
@@ -81,22 +89,28 @@ public class Driver {
 			System.out.println("Processing: " + numIterations +"/" + total);
 			print_control(s);
 
-			//THIS EVENTUALLY NEED TO BE THE tagSentenceImproved METHOD
+			//The plain baseline
 			start = System.currentTimeMillis();
 			TaggedSentence baselineTS = myBaselineTagger.tagSentence(s);
-			TaggedSentence baselineImprovedTS = myBaselineTagger.tagSentenceImproved(s);
 			end = System.currentTimeMillis();
 			baselineTaggedSentences.add( baselineTS );
-			baselineImprovedTaggedSentences.add( baselineImprovedTS );
 			print_stats(baselineTS, "BASELINE", (end-start));
+			
+			//The improved baseline
+			start = System.currentTimeMillis();
+			TaggedSentence baselineImprovedTS = myBaselineTagger.tagSentenceImproved(s);
+			baselineImprovedTaggedSentences.add( baselineImprovedTS );
+			end = System.currentTimeMillis();			
 			print_stats(baselineImprovedTS, "BASELINE IMPROVED", (end-start));
 
+			//Niels' Bi-gram HMM Tagger
 			start = System.currentTimeMillis();
 			TaggedSentence hmmTS = hmmTagger.tagSentence(s);
 			end = System.currentTimeMillis();
 			hmmTaggedSentences.add( hmmTS );
 			print_stats(hmmTS, "NIELS", (end-start));
 
+			//Dave's Bi-gram HMM Tagger
 			start = System.currentTimeMillis();
 			List<TaggedWord> tw = tagger.tagPartsOfSpeech(s.getSentence());
 			end = System.currentTimeMillis();
@@ -106,7 +120,8 @@ public class Driver {
 				PartOfSpeech pos = word.getPos();
 				tags.add(pos.toString());
 			}
-			TaggedSentence taggerTS = new TaggedSentence(s.getSentence(), s.getTags(), tags, hmmTS.getKnownWordFlag());
+			//currently getting an incorrect known_word list (i.e. from the baseline)
+			TaggedSentence taggerTS = new TaggedSentence(s.getSentence(), s.getTags(), tags, baselineTS.getKnownWordFlag());
 			hmmDaveTaggedSentences.add(taggerTS);
 			print_stats(taggerTS, "DAVE", (end-start));
 
@@ -133,7 +148,7 @@ public class Driver {
 
 		Evaluator myHMMEvaluator = new Evaluator(hmmTaggedSentences);
 		System.out.println("------------------------------------------");
-		System.out.println("Niels:");
+		System.out.println("Niels' Bi-gram Tagger:");
 		System.out.println("Word Error Rate = " + myHMMEvaluator.getWordErrorRate());
 		System.out.println("Known Word WER = " + myHMMEvaluator.getKnownWord_WordErrorRate());
 		System.out.println("Unknown Word WER = " + myHMMEvaluator.getUnknownWord_WordErrorRate());
@@ -141,11 +156,12 @@ public class Driver {
 
 		Evaluator myTaggerEvaluator = new Evaluator(hmmDaveTaggedSentences);
 		System.out.println("------------------------------------------");
-		System.out.println("Dave:");
+		System.out.println("Dave's Bi-gram Tagger:");
 		System.out.println("Word Error Rate = " + myTaggerEvaluator.getWordErrorRate());
-		System.out.println("Known Word WER = " + myTaggerEvaluator.getKnownWord_WordErrorRate());
-		System.out.println("Unknown Word WER = " + myTaggerEvaluator.getUnknownWord_WordErrorRate());
-		myTaggerEvaluator.printConfusionMatrix();
+		
+		//System.out.println("Known Word WER = " + myTaggerEvaluator.getKnownWord_WordErrorRate());
+		//System.out.println("Unknown Word WER = " + myTaggerEvaluator.getUnknownWord_WordErrorRate());
+		myTaggerEvaluator.printConfusionMatrix();		
 	}
 
 }
