@@ -15,7 +15,6 @@ while($line = <INFILE>){
       		$frequencies{$1}{$word}++;
       		$frequencies{$2}{$word}++;
       		$frequencies{$3}{$word}++;
-      		print "THREE: $1 $2 $3\n";
       	}
       	elsif($tag =~ /(\w{2,3})\|(\w{2,3})/)
       	{
@@ -36,8 +35,7 @@ while($line = <INFILE>){
   }
 }
 
-print scalar keys %words;
-print "\n$totalWords \n";
+print "\nTotal Words: $totalWords \n";
 foreach $tag (sort keys %frequencies) {
 	
 	$total = 0;
