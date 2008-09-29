@@ -20,6 +20,7 @@ public class Evaluator
 	private double WER;
 	private double UnknownWER;
 	private double KnownWER;
+	private int mismatch_count;
 	private HashMap<String, Integer> confusionMatrix = new HashMap<String, Integer>();
 	private List<String> correctTags = new ArrayList<String>();
 	private List<String> incorrectTags = new ArrayList<String>();
@@ -60,9 +61,12 @@ public class Evaluator
 			{
 				
 				if (confusionMatrix.containsKey(correct + "|" + incorrect))
-				{
+				{					
 					Integer val = confusionMatrix.get(correct + "|" + incorrect);				
-					System.out.print("\t" + val);
+					String result = Double.toString(100 * (double)val/ (double) mismatch_count);
+					result = result.substring(0, result.indexOf(".") + 3);
+					
+					System.out.print("\t" + result);
 				}
 				else
 				{
@@ -143,6 +147,7 @@ public class Evaluator
 			}
 		}
 		
+		mismatch_count = mismatch;
 		WER = (double)mismatch / (double) total_words;
 		KnownWER = (double)mismatch_known / (double) known_word_count;
 		UnknownWER = (double)mismatch_unknown / (double) unknown_word_count;		
