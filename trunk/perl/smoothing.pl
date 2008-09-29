@@ -1,12 +1,12 @@
 #!/usr/bin/perl
 use Statistics::LineFit;
 
-#open( INFILE, "../resources/start_tag_prevtag.dat" );
-open( INFILE, "../resources/tag_word_count.dat" );
+open( INFILE, "../resources/start_tag_prevtag.dat" );
+#open( INFILE, "../resources/tag_word_count.dat" );
 
 #Total number of words or tags
-$numSpecies = 51457;
-#numSpecies = 81;
+#$numSpecies = 51457;
+$numSpecies = 81;
 
 sub log2 {
 	my $num = $_[0];
@@ -102,10 +102,10 @@ foreach $tag ( sort keys %count ) {
 
 }
 
-#open( INFILE, "../resources/start_tag_prevtag.dat");
-#open( PROBS, " > ../resources/prev_tag_prob.dat");
-open( INFILE, "../resources/tag_word_count.dat" );
-open( PROBS, " > ../resources/tag_word_prob.dat");
+open( INFILE, "../resources/start_tag_prevtag.dat");
+open( PROBS, " > ../resources/prev_tag_prob.dat");
+#open( INFILE, "../resources/tag_word_count.dat" );
+#open( PROBS, " > ../resources/tag_word_prob.dat");
 
 while ( $line = <INFILE> ) {
 	@words = split( /\s/, $line );
