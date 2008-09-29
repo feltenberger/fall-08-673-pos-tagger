@@ -40,16 +40,12 @@ while (<>)
       			$tags_matrix{$p_tag}{$2}++;
       			$tags_matrix{$p_tag}{$3}++;
       			}
-      			else
-      			{
-      				print "$p_tag $1 $2 $3\n";
-      			}
+      		
       		}
       		@previous_tag = ();
       		$previous_tag[0] = $1;	
       		$previous_tag[1] = $2;	
       		$previous_tag[2] = $3;	
-      		print "THREE: $1 $2 $3\n";
       	}
       	elsif($tag =~ /(\w{2,3})\|(\w{2,3})/)
       	{
