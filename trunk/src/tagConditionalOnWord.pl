@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-open(INFILE,"../resources/wsj/combined.pos");
-open(OUTFILE, "> ../resources/tag_word_count.dat");
+open(INFILE,"../resources/wsj/90training6.pos");
+open(OUTFILE, "> ../resources/90tag_word_count6.dat");
 
 $totalWords= 0; 
 while($line = <INFILE>){
