@@ -1,11 +1,34 @@
 #!/usr/bin/perl
 use Statistics::LineFit;
+use Getopt::Std;
 
+getopt('cio', \%opts);
+
+print $opts{'i'} . "\n";
+print $opts{'o'} . "\n";
+print $opts{'c'} . "\n";
+
+if(defined $opts{'i'})
+{
+$inFile = $opts{'i'};
+open(INFILE, $inFile);	
+}
+else
+{
 open( INFILE, "../resources/90start_tag_prevtag6.dat" );
+}
 #open( INFILE, "../resources/90tag_word_count6.dat" );
-
+if(defined $opts{'c'})
+{
+	$numSpecies = $opts{'c'};
+}
+else
+{
+$numSpecies = 45;
+}
 #Total number of words or tags
 #$numSpecies = 49080;
+
 $numSpecies = 45;
 
 sub log2 {
@@ -102,8 +125,26 @@ foreach $tag ( sort keys %count ) {
 
 }
 
-open( INFILE, "../resources/90start_tag_prevtag6.dat");
+if(defined $opts{'i'})
+{
+$inFile = $opts{'i'};
+open(INFILE, $inFile);	
+}
+else
+{
+open( INFILE, "../resources/90start_tag_prevtag6.dat" );
+}
+if(defined $opts{'o'})
+{
+$probsFile = $opts{'o'};
+open( PROBS, " > $probsFile");
+}
+else
+{
 open( PROBS, " > ../resources/90prev_tag_prob6.dat");
+}
+
+
 #open( INFILE, "../resources/90tag_word_count6.dat" );
 #open( PROBS, " > ../resources/90tag_word_prob6.dat");
 

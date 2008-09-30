@@ -1,7 +1,26 @@
 #!/usr/bin/perl
+use Getopt::Std;
+getopt('io', \%opts);
 
-open(INFILE,"../resources/wsj/90training6.pos");
-open(OUTFILE, "> ../resources/90tag_word_count6.dat");
+if(defined $opts{'i'})
+{
+$inFile = $opts{'i'};
+open(INFILE, $inFile);	
+}
+else
+{
+open( INFILE, "../resources/90start_tag_prevtag6.dat" );
+}
+if(defined $opts{'o'})
+{
+$probsFile = $opts{'o'};
+open( OUTFILE, " > $probsFile");
+}
+else
+{
+open( OUTFILE, " > ../resources/$inFile_count.dat");
+}
+
 
 $totalWords= 0; 
 while($line = <INFILE>){
