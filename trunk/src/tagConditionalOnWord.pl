@@ -9,7 +9,7 @@ open(INFILE, $inFile);
 }
 else
 {
-open( INFILE, "../resources/90start_tag_prevtag6.dat" );
+open(INFILE,"../resources/wsj/90training6.pos");
 }
 if(defined $opts{'o'})
 {
@@ -20,7 +20,6 @@ else
 {
 open( OUTFILE, " > ../resources/$inFile_count.dat");
 }
-
 
 $totalWords= 0; 
 while($line = <INFILE>){
