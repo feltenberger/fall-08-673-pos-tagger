@@ -96,7 +96,10 @@ public class HMMTagger
 				String prev_tag = elements[0].trim();
 				String tag = elements[1].trim();
 				String probability = elements[2].trim();
+					
+				
 				transition_probs.put(tag + "|" + prev_tag, convert_to_ln(Double.parseDouble(probability)));
+				
 				if (!tag_list.containsKey(tag))
 				{
 					if (tag.compareToIgnoreCase(DEFAULT) != 0)
@@ -122,7 +125,7 @@ public class HMMTagger
 			//check if the transition exists
 			Double trans_prob;
 			if (!transition_probs.containsKey(current_state + "|" + state))
-				trans_prob = transition_probs.get(DEFAULT + "|" + current_state );
+				trans_prob = transition_probs.get(DEFAULT + "|" + state );
 			else
 				trans_prob = transition_probs.get(current_state + "|" + state);
 			
@@ -180,7 +183,7 @@ public class HMMTagger
 			//check if the transition exists
 			Double trans_prob;
 			if (!transition_probs.containsKey(current_state + "|" + state))
-				trans_prob = transition_probs.get(DEFAULT + "|" + current_state);
+				trans_prob = transition_probs.get(DEFAULT + "|" + state);
 			else
 				trans_prob = transition_probs.get(current_state + "|" + state);
 			
@@ -240,32 +243,28 @@ public class HMMTagger
         //initialization step
         for (String state : states)
         {        	
-        	Double value = null;
+        	Double emission = null;
+        	Double transition = null;
         	        	
         	if (!emission_probs.containsKey(observations[0] + "|" + state))
         	{
-        		value = emission_probs.get(DEFAULT + "|" + state);
+        		emission = emission_probs.get(DEFAULT + "|" + state);
         		known_words.add(false);
         	}
-        	else 
+        	else
         	{
-        		if(!transition_probs.containsKey(state + "|" + STARTSYMBOL))
-        		{
-        		value = transition_probs.get(DEFAULT + "|" + STARTSYMBOL)
-        				+ emission_probs.get(observations[0] + "|" + state);
+        		emission = emission_probs.get(observations[0] + "|" + state);
         		known_words.add(true);
-        		}
-        		else
-        		{
-        			value = transition_probs.get(state + "|" + STARTSYMBOL)
-    				+ emission_probs.get(observations[0] + "|" + state);
-        			known_words.add(true);
-        		}
         	}
         	
+        	if(!transition_probs.containsKey(state + "|" + STARTSYMBOL))
+        		transition = transition_probs.get(DEFAULT + "|" + STARTSYMBOL);
+        	else
+        		transition = transition_probs.get(state + "|" + STARTSYMBOL);
+        	        	
         	String key = state + "|" + "0";
-        	viterbi.put(key, value);
-        	backpointer.put(key, "0");
+        	viterbi.put(key, emission + transition);
+        	backpointer.put(key, "0");        	
         }
         //recursion step
         for (int i = 1; i < observations.length; i++)
