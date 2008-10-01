@@ -27,7 +27,7 @@ public class TaggedSentence extends Sentence
 						  List<String> hypothesised_tags, List<Boolean> word_is_known) throws Exception
 	{
 		super(sentence,tags);
-		if (sentence.size()!=hypothesised_tags.size() && sentence.size()!= word_is_known.size())
+		if (sentence.size()!=hypothesised_tags.size() || sentence.size()!= word_is_known.size())
 		{
 			throw new Exception("Each word must have a corresponding tag, hypotesized tag and out-of-vocabulary indicator.");
 		}

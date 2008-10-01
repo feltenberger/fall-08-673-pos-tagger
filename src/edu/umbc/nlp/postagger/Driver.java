@@ -83,13 +83,17 @@ public class Driver {
 		
 		for (int i = 1; i <=10; i++)
 		{
-				
-		String aMatrixFilename = "/90prev_tag_prob"+ i + ".dat";   //should be modified
-		String bMatrixFilename = "/90tag_word_prob"+ i +".dat";    //should be modified
-		String testSetFilename = "/home/niels/workspace2/corpus/90evaluation"
-								  + i + ".pos"; //should be modified
-		//String testSetFilename = "/home/niels/workspace2/fall-08-673-pos-tagger/resources/wsj/eval_temp.pos"; //should be modified
-		String outFile = "/home/niels/workspace2/corpus/90results"+ i +".txt"; //should be modified
+		
+		//should be modified
+		String aMatrixFilename = "/90prev_tag_prob"+ i + ".dat";
+		//should be modified
+		String bMatrixFilename = "/90tag_word_prob"+ i +".dat";
+		//should be modified	
+		String testSetFilename = 
+		"/home/niels/workspace2/corpus/90evaluation" + i + ".pos";
+		//should be modified
+		String outFile = "/home/niels/workspace2/corpus/output/90results"+ i +".csv";
+		
 		Boolean printing = true; //print screen output
 		
 		File oFile = new File(outFile);
@@ -149,13 +153,15 @@ public class Driver {
 			List<TaggedWord> tw = tagger.tagPartsOfSpeech(s.getSentence());
 			end = System.currentTimeMillis();
 			List<String> tags  = new ArrayList<String>();
+			List<Boolean> known_word  = new ArrayList<Boolean>();
 			for (TaggedWord word : tw)
 			{
 				PartOfSpeech pos = word.getPos();
 				tags.add(pos.toString());
+				known_word.add(word.isKnownWord());
 			}
 			//currently getting an incorrect known_word list (i.e. from the baseline)
-			TaggedSentence taggerTS = new TaggedSentence(s.getSentence(), s.getTags(), tags, baselineTS.getKnownWordFlag());
+			TaggedSentence taggerTS = new TaggedSentence(s.getSentence(), s.getTags(), tags, known_word);
 			hmmDaveTaggedSentences.add(taggerTS);
 			if (printing) print_stats(taggerTS, "DAVE", (end-start));
 
