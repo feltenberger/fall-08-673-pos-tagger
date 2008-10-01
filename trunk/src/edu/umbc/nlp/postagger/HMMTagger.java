@@ -28,9 +28,8 @@ public class HMMTagger
 	
 	private Boolean is_word_known;
 		
-	public HMMTagger(String emission_filename, String transition_filename, String start_filename) throws IOException
-	{
-		readStartFile(start_filename);
+	public HMMTagger(String emission_filename, String transition_filename) throws IOException
+	{		
 		readEmissionFile(emission_filename);
 		readTransitionFile(transition_filename);	
 	}
@@ -250,9 +249,18 @@ public class HMMTagger
         	}
         	else 
         	{
-        		value = transition_probs.get(state + "|" + STARTSYMBOL)
+        		if(!transition_probs.containsKey(state + "|" + STARTSYMBOL))
+        		{
+        		value = transition_probs.get(DEFAULT + "|" + STARTSYMBOL)
         				+ emission_probs.get(observations[0] + "|" + state);
         		known_words.add(true);
+        		}
+        		else
+        		{
+        			value = transition_probs.get(state + "|" + STARTSYMBOL)
+    				+ emission_probs.get(observations[0] + "|" + state);
+        			known_words.add(true);
+        		}
         	}
         	
         	String key = state + "|" + "0";
