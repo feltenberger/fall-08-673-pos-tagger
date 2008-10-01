@@ -61,7 +61,10 @@ public class TaggerTest extends TestCase {
 	 */
 	private void addSomeTestSentences() {
 		testSentences = new ArrayList<SimpleTaggedSentence>();
-		String ts = "I/PRP love/VBP to/TO eat/VB pizza/NN !/.";
+		String ts = "";
+		ts = "He/PRP likes/VBP to/TO jantz/VB ./.";
+		testSentences.add(new SimpleTaggedSentence(ts));
+		ts = "I/PRP love/VBP to/TO eat/VB pizza/NN !/.";
 		testSentences.add(new SimpleTaggedSentence(ts));
 		ts = "I/PRP am/VBP stark/JJ raving/JJ mad/JJ !/.";
 		testSentences.add(new SimpleTaggedSentence(ts));
@@ -164,7 +167,7 @@ public class TaggerTest extends TestCase {
 			PartOfSpeech expectedTag = expectedTW.getPos();
 			if(actualTag.equals(expectedTag))
 				results.totalCorrectWords++;
-			if(actualTW.isKnownWord())
+			if(!actualTW.isKnownWord())
 				results.totalUnknownWords++;
 			//assertEquals("Expected: " + expectedTag + ", actual: " + actualTag, expectedTag, actualTag);
 		}
