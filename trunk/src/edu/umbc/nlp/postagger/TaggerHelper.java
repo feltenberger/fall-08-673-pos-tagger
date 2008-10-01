@@ -45,11 +45,12 @@ public class TaggerHelper {
 		List<String>lines = FileUtils.readLines(aMatrix);
 		int i = 0;
 		for(String line : lines) {
-			if(i == 0) {
+			if(i == 0 && line.startsWith("NGram size")) {
 				String lp[] = line.split(" ");
 				TaggerGlobals.N_GRAM_SIZE = Integer.parseInt(lp[lp.length-1]);
 			}
 			else {
+				TaggerGlobals.N_GRAM_SIZE = 2;
 				String[] lineParts = line.split(TaggerGlobals.FILE_PARSING_FIELD_DELIMETER);
 				addNGram(tagger, lineParts);
 			}

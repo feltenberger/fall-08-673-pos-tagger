@@ -86,8 +86,10 @@ public class Driver {
 				
 		String aMatrixFilename = "/90prev_tag_prob"+ i + ".dat";   //should be modified
 		String bMatrixFilename = "/90tag_word_prob"+ i +".dat";    //should be modified
-		String testSetFilename = "/home/niels/workspace/corpus/stuff/90evaluation1.pos"; //should be modified
-		String outFile = "/home/niels/workspace/corpus/90results"+ i +".txt"; //should be modified
+		String testSetFilename = "/home/niels/workspace2/corpus/90evaluation"
+								  + i + ".pos"; //should be modified
+		//String testSetFilename = "/home/niels/workspace2/fall-08-673-pos-tagger/resources/wsj/eval_temp.pos"; //should be modified
+		String outFile = "/home/niels/workspace2/corpus/90results"+ i +".txt"; //should be modified
 		Boolean printing = true; //print screen output
 		
 		File oFile = new File(outFile);
