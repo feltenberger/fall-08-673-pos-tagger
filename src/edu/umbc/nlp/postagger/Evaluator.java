@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.Iterator;
 
@@ -43,19 +44,25 @@ public class Evaluator
 		return this.confusionMatrix;
 	}
 	
-	public void printConfusionMatrix()
+	public List<String> printConfusionMatrix()
 	{
+		List<String> output = new ArrayList<String>();
+			
 		Set<String> keys = this.confusionMatrix.keySet();
 		Iterator<String> iter = keys.iterator();
 		
+		String line = "";
 		for (String incorrect : incorrectTags)
 		{
 			System.out.print("\t" + incorrect);
+			line +="\t" + incorrect;
 		}
 		System.out.println();
+		output.add(line);
 		
 		for (String correct : correctTags)
 		{
+			String nline = correct;
 			System.out.print(correct);
 			for (String incorrect : incorrectTags)
 			{
@@ -64,18 +71,25 @@ public class Evaluator
 				{					
 					Integer val = confusionMatrix.get(correct + "|" + incorrect);				
 					String result = Double.toString(100 * (double)val/ (double) mismatch_count);
-					result = result.substring(0, result.indexOf(".") + 3);
-					
+					if (result.length() > 4)
+					{
+						result = result.substring(0, result.indexOf(".") + 3);
+					}
+									
 					System.out.print("\t" + result);
+					nline += "\t" + result;					
 				}
 				else
 				{
 					System.out.print("\t-");
+					nline += "\t-";
 				}
 			}
 			System.out.println();
-		}		
-		
+			output.add(nline);
+			
+		}
+		return output;
 	}
 	
 	/**
