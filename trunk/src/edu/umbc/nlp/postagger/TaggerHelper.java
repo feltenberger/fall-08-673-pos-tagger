@@ -92,6 +92,7 @@ public class TaggerHelper {
 		Double probability = Math.log(Double.parseDouble(probabilityString));
 		//Double probability = Double.parseDouble(probabilityString);
 		partOfSpeech.addWordAndProbabilityToBMatrix(word, probability);
+		tagger.addToKnownWords(word);
 		tagger.addPartOfSpeech(partOfSpeech);
 	}
 

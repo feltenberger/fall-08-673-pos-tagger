@@ -22,7 +22,6 @@ public class Tagger {
 	private Map<String, PartOfSpeech> allPartsOfSpeech = new HashMap<String, PartOfSpeech>();
 	private Set<String>allWords = new HashSet<String>();
 	private PartOfSpeech startState = new PartOfSpeech(TaggerGlobals.START_TAG);
-	private PartOfSpeech defaultState = new PartOfSpeech(TaggerGlobals.DEFAULT_TAG);
 	//private PartOfSpeech endState = new PartOfSpeech("<e>");
 	/**
 	 * This is the aMatrix.
