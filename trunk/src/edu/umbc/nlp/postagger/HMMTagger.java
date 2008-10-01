@@ -119,6 +119,7 @@ public class HMMTagger
 	{
 		Collection<String> states = tag_list.values();
 		Double max = neg_infinity;
+		Boolean known = false;
 		
 		for (String state : states)
 		{
@@ -134,12 +135,12 @@ public class HMMTagger
 			if (!emission_probs.containsKey(observation + "|" + current_state))
 			{
 				emiss_prob = emission_probs.get(DEFAULT + "|" + current_state);
-				is_word_known = false;
+				//is_word_known = false;
 			}
 			else
 			{
 				emiss_prob = emission_probs.get(observation + "|" + current_state);
-				is_word_known = true;
+				known = true;
 			}
 				
 			//calculate
@@ -149,6 +150,7 @@ public class HMMTagger
 			{
 				max = tval;
 			}
+			is_word_known = known;
 		}
 		
 		return max;
@@ -241,20 +243,23 @@ public class HMMTagger
         Collection<String> states = tag_list.values();
 
         //initialization step
+        Boolean known = false;
         for (String state : states)
         {        	
         	Double emission = null;
         	Double transition = null;
+        	
         	        	
         	if (!emission_probs.containsKey(observations[0] + "|" + state))
         	{
         		emission = emission_probs.get(DEFAULT + "|" + state);
-        		known_words.add(false);
+        		//known_words.add(false);
         	}
         	else
         	{
         		emission = emission_probs.get(observations[0] + "|" + state);
-        		known_words.add(true);
+        		known = true;
+        		
         	}
         	
         	if(!transition_probs.containsKey(state + "|" + STARTSYMBOL))
@@ -264,20 +269,29 @@ public class HMMTagger
         	        	
         	String key = state + "|" + "0";
         	viterbi.put(key, emission + transition);
-        	backpointer.put(key, "0");        	
+        	backpointer.put(key, "0");
+        	
         }
+        known_words.add(known);
         //recursion step
         for (int i = 1; i < observations.length; i++)
         {
+        	Boolean known2 = false;
         	for (String state : states)
         	{
         		String key = state + "|" + i;        		
         		Double value = max_viterbi(viterbi, i, state, observations[i]);  		
         		viterbi.put(key, value);
         		String bPointer = argmax_viterbi(viterbi, i, state);
-        		backpointer.put(key, bPointer);
-        		known_words.add(get_known_word_value());
+        		backpointer.put(key, bPointer); 
+        		if (get_known_word_value() == true)
+        		{
+        			known2 = true;
+        		}
         	}
+        	
+        	known_words.add(known2);
+        	
         }
         //termination step
         int T = observations.length;
