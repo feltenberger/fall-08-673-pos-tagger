@@ -268,7 +268,8 @@ public class TaggerHelper {
 	{
 		List<Sentence> sentences = new ArrayList<Sentence>();
 
-		File file = new File(evaluationFile);
+
+		File file = new File(getClass().getResource(evaluationFile).getFile());
 		List<String> lines = FileUtils.readLines(file);
 
 		for(String line : lines)
