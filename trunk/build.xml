@@ -5,6 +5,7 @@
   <property name="dist"  location="dist"/>
   <property name="lib" value="lib" />
   <property name="resources" value="resources" />
+  <property name="training" value="training" />
   <property name="dist-name" value="pos-tagger.jar" />
   <path id="classpath">
     <fileset dir="${lib}">
@@ -16,6 +17,7 @@
   <target name="setup">
     <mkdir dir="${bin}"/>
     <mkdir dir="${dist}"/>
+    <mkdir dir="${dist}/resources"/>
   </target>
 
   <target name="clean" description="remove intermediate files">
@@ -43,6 +45,33 @@
         <attribute name="Classpath" value="${toString:classpath}"/>
       </manifest>
     </jar>
+  </target>
+
+  <target name="deploy" depends="jar">
+    <copy todir="${dist}/resources">
+	<fileset dir="${resources}" includes="**/*.dat" />
+	<fileset dir="${resources}" includes="**/*eval*.pos" />
+	<fileset dir="${training}" includes="**/*eval*.pos" />
+    </copy>
+    <copy todir="${dist}">
+	<fileset dir="${src}" includes="run.sh" />
+	<fileset dir="${lib}" includes="**/*.jar" />
+    </copy>
+  </target>
+
+  <target name="run" depends="deploy">
+     <java classname="edu.umbc.nlp.postagger.Driver">
+       <arg value="-h"/>
+       <classpath>
+         <path id="classpath">
+           <pathelement location="${dist}" />
+           <pathelement location="${dist}/${resources}" />
+           <fileset dir="${dist}">
+             <include name="**/*.jar"/>
+           </fileset>
+         </path>
+       </classpath>
+     </java>
   </target>
 </project>
 
