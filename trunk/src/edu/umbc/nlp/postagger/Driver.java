@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 public class Driver {
 
-	private static final Logger log = Logger.getLogger(TaggerTest.class);
+	private static final Logger log = Logger.getLogger(Driver.class);
 
 	//private String aMatrixFilename;
 	//private String bMatrixFilename;
@@ -79,25 +79,26 @@ public class Driver {
 		{
 			System.out.println("Processing: " + i + " of 10" );
 			helper.splitCorpus("80training" + i+".pos", "80evaluation" + i+".pos", sentences, 0.8);
-		}*/		
-		
+		}*/
+
 		for (int i = 1; i <=10; i++)
 		{
-		
+
 		//should be modified
 		String aMatrixFilename = "/90prev_tag_prob"+ i + ".dat";
 		//should be modified
 		String bMatrixFilename = "/90tag_word_prob"+ i +".dat";
-		//should be modified	
-		String testSetFilename = 
-		"/home/niels/workspace2/corpus/90evaluation" + i + ".pos";
 		//should be modified
-		String outFile = "/home/niels/workspace2/corpus/output/90results"+ i +".csv";
-		
+		//String testSetFilename =  "/home/niels/workspace2/corpus/90evaluation" + i + ".pos";
+		String testSetFilename = "/resources/90evaluation" + i + ".pos";
+		//should be modified
+		//String outFile = "/home/niels/workspace2/corpus/output/90results"+ i +".csv";
+		String outFile = "./dist/out/90results"+ i +".csv";
+
 		Boolean printing = true; //print screen output
-		
+
 		File oFile = new File(outFile);
-		
+
 		//create the taggers
 		BaselineTagger myBaselineTagger = new BaselineTagger(bMatrixFilename);
 		HMMTagger hmmTagger = new HMMTagger(bMatrixFilename, aMatrixFilename);
@@ -110,16 +111,16 @@ public class Driver {
 		List<TaggedSentence> baselineImprovedTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmTaggedSentences = new ArrayList<TaggedSentence>();
 		List<TaggedSentence> hmmDaveTaggedSentences = new ArrayList<TaggedSentence>();
-		
+
 		//read the test set and convert it to a list of sentences
 		TaggerHelper helper = new TaggerHelper();
 		List<Sentence> sentences = helper.parseEvalCorpus(testSetFilename);
-		
+
 		List<String> output = new ArrayList<String>();
-		
+
 		long start;
 		long end;
-		int numIterations = 0;		
+		int numIterations = 0;
 		int total = sentences.size();
 		for (Sentence s : sentences)
 		{
@@ -133,12 +134,12 @@ public class Driver {
 			end = System.currentTimeMillis();
 			baselineTaggedSentences.add( baselineTS );
 			print_stats(baselineTS, "BASELINE", (end-start));
-			
+
 			//The improved baseline
 			start = System.currentTimeMillis();
 			TaggedSentence baselineImprovedTS = myBaselineTagger.tagSentenceImproved(s);
 			baselineImprovedTaggedSentences.add( baselineImprovedTS );
-			end = System.currentTimeMillis();			
+			end = System.currentTimeMillis();
 			if (printing) print_stats(baselineImprovedTS, "BASELINE IMPROVED", (end-start));
 
 			//Niels' Bi-gram HMM Tagger
@@ -169,26 +170,26 @@ public class Driver {
 			//if(numIterations == 1000) break;
 		}
 
-		Evaluator myBaselineEvaluator = new Evaluator(baselineTaggedSentences);		
-		output.addAll(print_results("Baseline", myBaselineEvaluator, printing));		
+		Evaluator myBaselineEvaluator = new Evaluator(baselineTaggedSentences);
+		output.addAll(print_results("Baseline", myBaselineEvaluator, printing));
 		output.addAll(myBaselineEvaluator.printConfusionMatrix());
-		
+
 		Evaluator myBaselineImprovedEvaluator = new Evaluator(baselineImprovedTaggedSentences);
-		//myBaselineTagger.printUnknownWordList();		
-		output.addAll(print_results("Baseline Improved", myBaselineImprovedEvaluator, printing));		
+		//myBaselineTagger.printUnknownWordList();
+		output.addAll(print_results("Baseline Improved", myBaselineImprovedEvaluator, printing));
 		output.addAll(myBaselineImprovedEvaluator.printConfusionMatrix());
-		
+
 		Evaluator myHMMEvaluator = new Evaluator(hmmTaggedSentences);
-		output.addAll(print_results("Niels' Bi-gram Tagger", myHMMEvaluator, printing));		
+		output.addAll(print_results("Niels' Bi-gram Tagger", myHMMEvaluator, printing));
 		output.addAll(myHMMEvaluator.printConfusionMatrix());
 
 		Evaluator myTaggerEvaluator = new Evaluator(hmmDaveTaggedSentences);
-		output.addAll(print_results("Dave's Bi-gram Tagger", myTaggerEvaluator, printing));		
+		output.addAll(print_results("Dave's Bi-gram Tagger", myTaggerEvaluator, printing));
 		output.addAll(myTaggerEvaluator.printConfusionMatrix());
-		
+
 		FileUtils.writeLines(oFile, output, "\n");
 		}
-		
+
 	}
 
 }
