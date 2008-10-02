@@ -93,7 +93,7 @@ public class Driver {
 		String testSetFilename = "/resources/90evaluation" + i + ".pos";
 		//should be modified
 		//String outFile = "/home/niels/workspace2/corpus/output/90results"+ i +".csv";
-		String outFile = "./dist/out/90results"+ i +".csv";
+		String outFile = "./dist/output/90results"+ i +".csv";
 
 		Boolean printing = true; //print screen output
 
