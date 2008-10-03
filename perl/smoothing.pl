@@ -29,8 +29,6 @@ $numSpecies = 45;
 #Total number of words or tags
 #$numSpecies = 49080;
 
-$numSpecies = 45;
-
 sub log2 {
 	my $num = $_[0];
 	if ( $num == 0 ) { return 0; }
