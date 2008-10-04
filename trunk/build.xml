@@ -18,6 +18,7 @@
     <mkdir dir="${bin}"/>
     <mkdir dir="${dist}"/>
     <mkdir dir="${dist}/resources"/>
+    <mkdir dir="${dist}/output"/>
   </target>
 
   <target name="clean" description="remove intermediate files">
