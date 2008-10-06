@@ -1,0 +1,21 @@
+===============================================================================
+Probabilities generator
+===============================================================================
+
+TO GENERATE 2-GRAM PROBABILITIES
+--------------------------------
+
+Copy all training files to ./IN directory
+    
+   For example:
+       
+      To generate probabilites for 80/20 and 50/50 training corpus 2-grams:
+        
+         * Place all 80training<n>.pos files inside 'IN' directory
+	 * Open ./generate-prob.sh and modify the SETS variable to 
+	   include whichever sets you want to generate.
+         * To generate 80/20 and 50/50 set SETS to "50 80"
+	 * run ./generate-probs.sh  
+	 
+      The generated files will reside in "OUT" directory.
+
